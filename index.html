@@ -13,8 +13,8 @@
         <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111111;
-            color: #ff7b00;
+            background-color: #0c0c0c;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -144,18 +144,19 @@
         </a>
     </div>
 
-    <h1>روابط الحزم و الاشياء الجميلة الاخرى</h1>
+    <h2>روابط الحزم و الاشياء الجميلة الاخرى</h>
 
-    <div class="card bg-base-100 image-full w-96 shadow-xl">
-        <figure>
+    <div class="card bg-base-100 w-96 shadow-xl">
+        <figure class="px-4">
           <img
             src="images/weaponsimg.png"
-            alt="Weapons" />
+            alt="Weapons"
+            class="rounded-xl" />
         </figure>
-        <div class="card-body">
+        <div class="card-body items-center text-center">
           <h2 class="card-title">Weapons</h2>
           <p>كل ما يتعلق بمودات الأسلحة</p>
-          <select id="weapons-dropdown" class="select select-bordered w-full max-w-xs" onchange="loadMarkdownFromDropdown('weapons-dropdown', 'markdown-preview')">
+          <select id="weapons-dropdown" class="select select-bordered select bg-primary" onchange="loadMarkdownFromDropdown('weapons-dropdown', 'markdown-preview')">
             <option value="" disabled selected>اختر الحزمة الي تبيها</option>
             <option value="Weapons/grpack.md">Golden Rose Pack</option>
             <option value="Weapons/uwr.md">Ultimate Weapons Retextures</option>
