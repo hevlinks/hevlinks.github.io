@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Hevilz Mods ™️</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/14.1.2/marked.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111111;
+            color: #ff7b00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgb(0, 0, 0);
+        }
+
+        select {
+            background-color: #333333;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        select:hover {
+            background-color: #444444;
+        }
+
+        .markdown-content {
+            border: 1px solid #ffffff;
+            background-color: #222222;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .markdown-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .markdown-content a {
+            color: #0088ff;
+            text-decoration: underline;
+        }
+
+        .markdown-content a:hover {
+            color: #00ffff;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-top: 1px solid #444;
+            width: 100%;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-links a {
+            margin: 0 15px;
+            color: #005500;
+            font-size: 26px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .social-links a:hover {
+            color: #00ff00;
+            transform: scale(1.1);
+        }
+
+        #loading-spinner {
+            display: none;
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        .error-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+            transition: opacity 0.5s ease-in-out;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="social-links">
+        <a href="https://www.twitch.tv/hevillz" title="Twitch" target="_blank" aria-label="Twitch">
+            <i class="fab fa-twitch"></i>
+        </a>
+        <a href="https://www.instagram.com/hevillz" title="Instagram" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/@Hevilz" title="YouTube" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://discord.gg/GE7vwg6Asq" title="Discord" target="_blank" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+        </a>
+    </div>
+
+    <h1>روابط الحزم و الاشياء الجميلة الاخرى</h1>
+
+    <div class="card bg-base-100 image-full w-96 shadow-xl">
+        <figure>
+          <img
+            src="images/weaponsimg.png"
+            alt="Weapons" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">Weapons</h2>
+          <p>كل ما يتعلق بمودات الأسلحة</p>
+          <select id="weapons-dropdown" class="select select-bordered w-full max-w-xs" onchange="loadMarkdownFromDropdown('weapons-dropdown', 'markdown-preview')">
+            <option value="" disabled selected>اختر الحزمة الي تبيها</option>
+            <option value="Weapons/grpack.md">Golden Rose Pack</option>
+            <option value="Weapons/uwr.md">Ultimate Weapons Retextures</option>
+            <option value="Weapons/rwep.md">Remodel All Weapons</option>
+            <option value="Weapons/deagle.md">Deagle</option>
+            <option value="Weapons/gwep.md">Golden Weapons</option>
+            <option value="Weapons/g18.md">Glock 18</option>
+            <option value="Weapons/art.md">Artillery</option>
+            <option value="Weapons/nwep.md">New Weapons</option>
+            <option value="Weapons/iwep.md">Invisible Weapons</option>
+            <option value="Weapons/relwep.md">Real Weapons</option>
+            <option value="Weapons/rended.md">Rended Pack</option>
+            <option value="Weapons/lastp.md">The Last Phase Pack</option>
+        </select>
+
+        <div id="markdown-preview" class="markdown-content"></div>
+
+        </div>
+        
+    <script>
+        function loadMarkdown(file, previewElementId) {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.style.display = 'block';
+
+            fetch(file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    const html = marked.parse(text);
+                    const previewElement = document.getElementById(previewElementId);
+                    previewElement.innerHTML = html;
+                    previewElement.classList.add('show');
+                })
+                .catch(error => {
+                    console.error('Error fetching the Markdown file:', error);
+                    alert(`Error loading content: ${error.message}`);
+                })
+                .finally(() => {
+                    spinner.style.display = 'none';
+                });
+        }
+
+        function loadMarkdownFromDropdown(dropdownId, previewElementId) {
+            const dropdown = document.getElementById(dropdownId);
+            const selectedValue = dropdown.value;
+
+            if (selectedValue) {
+                loadMarkdown(selectedValue, previewElementId);
+            } else {
+                alert("Please select a valid option.");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
