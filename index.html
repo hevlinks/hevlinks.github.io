@@ -12,15 +12,35 @@
     <style>
         body {
             background-image: url('src/img/bg.png');
-            background-size: cover; /* Make the image cover the entire screen */
-            background-position: center; /* Center the image */
-            background-attachment: fixed; /* Keep the background fixed while scrolling */
-            min-height: 100vh; /* Ensure the body takes up the full viewport height */
-            margin: 0; /* Remove default body margin */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
         .hero {
-            background: rgba(0, 0, 0, 0.5); /* Optional: Add a dark overlay to make text stand out */
+            z-index: 2;
+        }
+        
+        .footer {
+            z-index: 2;
+        }
+
+        .sections-container .card {
+            position: relative;
+            z-index: 2;
         }
     </style>
 
@@ -148,7 +168,7 @@
                         modalTutorial.style.display = 'none';
                     }
     
-                    modalExtrasContainer.innerHTML = ""; // Clear any previous extras
+                    modalExtrasContainer.innerHTML = ""; 
     
                     if (item.extratitle !== "no") {
                         const extrasTitle = document.createElement('h4');
@@ -192,6 +212,8 @@
     </script>
 </head>
 <body class="text-white flex flex-col min-h-screen">
+    <div class="overlay"></div>
+
     <div class="hero min-h-screen">
         <div class="hero-content text-center">
             <div class="max-w-md">
@@ -214,7 +236,6 @@
     </div>
 
     <div class="sections-container grid grid-cols-4 gap-6 p-6 flex-grow">
-        <!-- Cards will be injected here -->
     </div>
 
     <dialog id="data_modal" class="modal">
