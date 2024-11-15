@@ -9,6 +9,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+    <style>
+        body {
+            background-image: url('src/img/bg.png');
+            background-size: cover; /* Make the image cover the entire screen */
+            background-position: center; /* Center the image */
+            min-height: 100vh; /* Ensure the body takes up the full viewport height */
+            margin: 0; /* Remove default body margin */
+        }
+
+        .hero {
+            background: rgba(0, 0, 0, 0.5); /* Optional: Add a dark overlay to make text stand out */
+        }
+    </style>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             Promise.all([ 
@@ -135,7 +149,6 @@
     
                     modalExtrasContainer.innerHTML = ""; // Clear any previous extras
     
-                    // Show Extras title only if `extratitle` is not "no"
                     if (item.extratitle !== "no") {
                         const extrasTitle = document.createElement('h4');
                         extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
@@ -143,7 +156,6 @@
                         modalExtrasContainer.appendChild(extrasTitle);
                     }
     
-                    // Always show extras buttons if they exist
                     let extraIndex = 1;
                     while (item[`extra${extraIndex}`]) {
                         if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
@@ -181,22 +193,22 @@
 <body class="text-white flex flex-col min-h-screen">
     <div class="hero min-h-screen">
         <div class="hero-content text-center">
-          <div class="max-w-md">
-            <h1 class="text-3xl font-bold">Hevilz Mods ™</h1>
-            <p class="text text-center text-2xl">
-                حزم هفلز في مكان واحد
-                <br>
-                تم جمعها و ترتيبها بحيث يكون الوصول لها سهل
-                <br>
-                تم بناء و ادارة الموقع من قبل
-                <br>
-                <strong>S_صقر</strong>
-                <br>
-                الروابط من 
-                <br>
-                Hevilz
-            </p>
-          </div>
+            <div class="max-w-md">
+                <h1 class="text-3xl font-bold">Hevilz Mods ™</h1>
+                <p class="text text-center text-2xl">
+                    حزم هفلز في مكان واحد
+                    <br>
+                    تم جمعها و ترتيبها بحيث يكون الوصول لها سهل
+                    <br>
+                    تم بناء و ادارة الموقع من قبل
+                    <br>
+                    <strong>S_صقر</strong>
+                    <br>
+                    الروابط من 
+                    <br>
+                    Hevilz
+                </p>
+            </div>
         </div>
     </div>
 
