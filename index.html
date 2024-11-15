@@ -1,221 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="luxury">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <title>Hevilz Mods ™️</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/14.1.2/marked.min.js"></script>
+    <title>Hevilz Mods ™</title>
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0c0c0c;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0 20px;
-            text-align: center;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-        h1 {
-            font-size: 3rem;
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 5px rgb(0, 0, 0);
-        }
-
-        select {
-            background-color: #333333;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 15px;
-            transition: background-color 0.3s;
-        }
-
-        select:hover {
-            background-color: #444444;
-        }
-
-        .markdown-content {
-            border: 1px solid #ffffff;
-            background-color: #222222;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-            display: none;
-            text-align: left;
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-
-        .markdown-content.show {
-            display: block;
-            opacity: 1;
-        }
-
-        .markdown-content a {
-            color: #0088ff;
-            text-decoration: underline;
-        }
-
-        .markdown-content a:hover {
-            color: #00ffff;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 20px;
-            background-color: #1e1e1e;
-            border-top: 1px solid #444;
-            width: 100%;
-        }
-
-        .social-links {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .social-links a {
-            margin: 0 15px;
-            color: #005500;
-            font-size: 26px;
-            transition: color 0.3s, transform 0.2s;
-        }
-
-        .social-links a:hover {
-            color: #00ff00;
-            transform: scale(1.1);
-        }
-
-        #loading-spinner {
-            display: none;
-            color: #ff4757;
-            font-weight: bold;
-        }
-
-        .error-toast {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: rgba(255, 0, 0, 0.8);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: none;
-            z-index: 1000;
-            transition: opacity 0.5s ease-in-out;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Promise.all([ 
+                fetch('sections.json').then(response => response.json()), 
+                fetch('data.json').then(response => response.json())
+            ]).then(([sections, data]) => {
+                const preloadContainer = document.createElement('div');
+                document.head.appendChild(preloadContainer);
+    
+                sections.forEach(section => {
+                    if (section.imgheader) {
+                        const link = document.createElement('link');
+                        link.rel = 'preload';
+                        link.href = section.imgheader;
+                        link.as = 'image';
+                        preloadContainer.appendChild(link);
+                    }
+                });
+    
+                const sectionsContainer = document.querySelector('.sections-container');
+    
+                sections.forEach(section => {
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'p-4', 'rounded-lg', 'shadow-lg', 'hover:scale-105', 'transition-transform');
+    
+                    if (section.imgheader) {
+                        const img = document.createElement('img');
+                        img.src = section.imgheader;
+                        img.alt = section.title || 'Section Image';
+                        img.classList.add('w-full', 'h-40', 'object-cover', 'rounded-lg');
+                        card.appendChild(img);
+                    }
+    
+                    if (section.title) {
+                        const title = document.createElement('h3');
+                        title.classList.add('text-lg', 'font-semibold', 'text-outline');
+                        title.textContent = section.title;
+                        card.appendChild(title);
+                    }
+    
+                    if (section.desc) {
+                        const desc = document.createElement('p');
+                        desc.classList.add('text-sm', 'text-gray-300', 'mb-4');
+                        desc.textContent = section.desc;
+                        card.appendChild(desc);
+                    }
+    
+                    const selectMenu = document.createElement('div');
+                    selectMenu.classList.add('w-full', 'text-white', 'border', 'border-base-400', 'rounded-lg', 'mt-4');
+    
+                    const select = document.createElement('select');
+                    select.classList.add('select', 'select-bordered', 'w-full', 'max-w-xs');
+                    const defaultOption = document.createElement('option');
+                    defaultOption.textContent = `Select ${section.title || 'Item'}`;
+                    select.appendChild(defaultOption);
+    
+                    const sectionItems = data.filter(item => item.section === section.title);
+    
+                    sectionItems.forEach(item => {
+                        if (item.title) {
+                            const option = document.createElement('option');
+                            option.value = item.title;
+                            option.textContent = item.title;
+                            select.appendChild(option);
+                        }
+                    });
+    
+                    select.addEventListener('change', (e) => {
+                        const selectedTitle = e.target.value;
+                        const selectedItem = data.find(item => item.title === selectedTitle);
+    
+                        if (selectedItem) {
+                            openModal(selectedItem);
+                        }
+                    });
+    
+                    selectMenu.appendChild(select);
+                    card.appendChild(selectMenu);
+    
+                    sectionsContainer.appendChild(card);
+                });
+    
+                const modal = document.getElementById("data_modal");
+                const modalImg = document.getElementById("modal-img");
+                const modalTitle = document.getElementById("modal-title");
+                const modalDesc = document.getElementById("modal-desc");
+                const modalDownload = document.getElementById("modal-download");
+                const modalTutorial = document.getElementById("modal-tutorial");
+                const modalExtrasContainer = document.getElementById("modal-extras-container");
+    
+                function openModal(item) {
+                    if (item.img) {
+                        modalImg.src = item.img;
+                        modalImg.style.display = 'block';
+                    } else {
+                        modalImg.style.display = 'none';
+                    }
+    
+                    if (item.title) {
+                        modalTitle.textContent = item.title;
+                    } else {
+                        modalTitle.textContent = 'Untitled Item';
+                    }
+    
+                    if (item.desc) {
+                        modalDesc.innerHTML = item.desc.replace(/\n/g, "<br>");
+                    } else {
+                        modalDesc.textContent = 'No description available.';
+                    }
+    
+                    if (item.downloadlink) {
+                        modalDownload.href = item.downloadlink;
+                        modalDownload.style.display = 'inline-block';
+                    } else {
+                        modalDownload.style.display = 'none';
+                    }
+    
+                    if (item.tutlink) {
+                        modalTutorial.href = item.tutlink;
+                        modalTutorial.style.display = 'inline-block';
+                    } else {
+                        modalTutorial.style.display = 'none';
+                    }
+    
+                    modalExtrasContainer.innerHTML = ""; // Clear any previous extras
+    
+                    // Show Extras title only if `extratitle` is not "no"
+                    if (item.extratitle !== "no") {
+                        const extrasTitle = document.createElement('h4');
+                        extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
+                        extrasTitle.textContent = "Extras | ملحقات أضافية";
+                        modalExtrasContainer.appendChild(extrasTitle);
+                    }
+    
+                    // Always show extras buttons if they exist
+                    let extraIndex = 1;
+                    while (item[`extra${extraIndex}`]) {
+                        if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
+                            const extraButton = document.createElement('a');
+                            extraButton.href = item[`extralink${extraIndex}`];
+                            extraButton.textContent = item[`extra${extraIndex}`];
+                            extraButton.classList.add('btn', 'btn-outline', 'w-full', 'mb-2');
+                            extraButton.target = "_blank";
+                            modalExtrasContainer.appendChild(extraButton);
+                        }
+                        extraIndex++;
+                    }
+    
+                    modal.showModal();
+                }
+    
+                const closeModalButton = modal.querySelector("button");
+                closeModalButton.addEventListener('click', () => {
+                    modal.close();
+                    modalExtrasContainer.innerHTML = '';
+                });
+    
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        modal.close();
+                        modalExtrasContainer.innerHTML = '';
+                    }
+                });
+            }).catch(error => {
+                console.error('Error fetching JSON files:', error);
+            });
+        });
+    </script>
 </head>
-
-<body>
-
-    <div class="social-links">
-        <a href="https://www.twitch.tv/hevillz" title="Twitch" target="_blank" aria-label="Twitch">
-            <i class="fab fa-twitch"></i>
-        </a>
-        <a href="https://www.instagram.com/hevillz" title="Instagram" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/@Hevilz" title="YouTube" target="_blank" aria-label="YouTube">
-            <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://discord.gg/GE7vwg6Asq" title="Discord" target="_blank" aria-label="Discord">
-            <i class="fab fa-discord"></i>
-        </a>
+<body class="text-white flex flex-col min-h-screen">
+    <div class="hero min-h-screen">
+        <div class="hero-content text-center">
+          <div class="max-w-md">
+            <h1 class="text-3xl font-bold">Hevilz Mods ™</h1>
+            <p class="text text-center text-2xl">
+                حزم هفلز في مكان واحد
+                <br>
+                تم جمعها و ترتيبها بحيث يكون الوصول لها سهل
+                <br>
+                تم بناء و ادارة الموقع من قبل
+                <br>
+                <strong>S_صقر</strong>
+                <br>
+                الروابط من 
+                <br>
+                Hevilz
+            </p>
+          </div>
+        </div>
     </div>
 
-    <h2>روابط الحزم و الاشياء الجميلة الاخرى</h>
+    <div class="sections-container grid grid-cols-4 gap-6 p-6 flex-grow">
+        <!-- Cards will be injected here -->
+    </div>
 
-    <div class="card bg-base-100 w-96 shadow-xl">
-        <figure class="px-4">
-          <img
-            src="images/weaponsimg.png"
-            alt="Weapons"
-            class="rounded-xl" />
-        </figure>
-        <div class="card-body items-center text-center">
-          <h2 class="card-title">Weapons</h2>
-          <p>كل ما يتعلق بمودات الأسلحة</p>
-          <select id="weapons-dropdown" class="select select-bordered select bg-primary" onchange="loadMarkdownFromDropdown('weapons-dropdown', 'markdown-preview')">
-            <option value="" disabled selected>اختر الحزمة الي تبيها</option>
-            <option value="Weapons/grpack.md">Golden Rose Pack</option>
-            <option value="Weapons/uwr.md">Ultimate Weapons Retextures</option>
-            <option value="Weapons/rwep.md">Remodel All Weapons</option>
-            <option value="Weapons/deagle.md">Deagle</option>
-            <option value="Weapons/gwep.md">Golden Weapons</option>
-            <option value="Weapons/g18.md">Glock 18</option>
-            <option value="Weapons/art.md">Artillery</option>
-            <option value="Weapons/nwep.md">New Weapons</option>
-            <option value="Weapons/iwep.md">Invisible Weapons</option>
-            <option value="Weapons/relwep.md">Real Weapons</option>
-            <option value="Weapons/rended.md">Rended Pack</option>
-            <option value="Weapons/lastp.md">The Last Phase Pack</option>
-        </select>
-
-        <div id="loading-spinner">Loading...</div>
-        <div id="markdown-preview" class="markdown-content"></div>
-
+    <dialog id="data_modal" class="modal">
+        <div class="modal-box">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 id="modal-title" class="text-lg font-bold">Item Title</h3>
+            <p id="modal-desc" class="py-4">Item Description</p>
+            <img id="modal-img" src="" alt="Item Image" class="max-w-full h-auto mt-4 mb-4 rounded-xl">
+            <a id="modal-download" href="" target="_blank" class="btn btn-outline w-full mb-2 text-lg">Download | التنزيل </a>
+            <a id="modal-tutorial" href="" target="_blank" class="btn btn-outline w-full text-lg">YouTube | الشرح و التركيب </a>
+            <div id="modal-extras-container"></div>
         </div>
-        
-    <script>
-        function loadMarkdown(file, previewElementId) {
-            const spinner = document.getElementById('loading-spinner');
-            spinner.style.display = 'block';
+    </dialog>
 
-            fetch(file)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(text => {
-                    const html = marked.parse(text);
-                    const previewElement = document.getElementById(previewElementId);
-                    previewElement.innerHTML = html;
-                    previewElement.classList.add('show');
-                })
-                .catch(error => {
-                    console.error('Error fetching the Markdown file:', error);
-                    alert(`Error loading content: ${error.message}`);
-                })
-                .finally(() => {
-                    spinner.style.display = 'none';
-                });
-        }
-
-        function loadMarkdownFromDropdown(dropdownId, previewElementId) {
-            const dropdown = document.getElementById(dropdownId);
-            const selectedValue = dropdown.value;
-
-            if (selectedValue) {
-                loadMarkdown(selectedValue, previewElementId);
-            } else {
-                alert("Please select a valid option.");
-            }
-        }
-    </script>
-
+    <footer class="footer footer-center">
+        <aside>
+            <img src="src/img/favicon.png" alt="Hevilz" width="128" height="128">
+            <p class="text-center text-2xl">
+                Links by Hevilz
+                <br />
+                Website by BN_LOS
+            </p>
+        </aside>
+        <nav>
+            <h6 class="footer-title">Social</h6>
+            <div class="grid grid-flow-col gap-4">
+                <a href="https://www.twitch.tv/hevillz" target="_blank">
+                    <i class="fab fa-twitch text-white text-2xl"></i>
+                </a>
+                <a href="https://www.youtube.com/@Hevilz" target="_blank">
+                    <i class="fab fa-youtube text-white text-2xl"></i>
+                </a>
+                <a href="https://www.instagram.com/hevillz" target="_blank">
+                    <i class="fab fa-instagram text-white text-2xl"></i>
+                </a>
+                <a href="https://discord.gg/GE7vwg6Asq" target="_blank">
+                    <i class="fab fa-discord text-white text-2xl"></i>
+                </a>
+            </div>
+        </nav>
+    </footer>
 </body>
-
 </html>

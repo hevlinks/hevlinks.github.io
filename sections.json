@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Leon Skins",
+        "desc": "كل ما يتعلق بسكنات ليون",
+        "imgheader": "src/img/lskinimg.png"
+    },
+    {
+        "title": "Characters",
+        "desc": "كل ما يتعلق بسكنات الشخصيات الثانية",
+        "imgheader": "src/img/charimg.png"
+    },
+    {
+        "title": "Weapons",
+        "desc": "كل ما يتعلق بمودات الأسلحة",
+        "imgheader": "src/img/wepimg.png"
+    },
+    {
+        "title": "Packs",
+        "desc": "كل ما يتعلق بمودات الحزم",
+        "imgheader": "src/img/pimg.png"
+    },
+    {
+        "title": "Sounds",
+        "desc": "كل ما يتعلق بمودات الأصوات",
+        "imgheader": "src/img/simg.png"
+    },
+    {
+        "title": "Enemies",
+        "desc": "كل ما يتعلق بمودات الوحوش",
+        "imgheader": "src/img/eimg.png"
+    },
+    {
+        "title": "Maps",
+        "desc": "كل ما يتعلق بتعديل المابات",
+        "imgheader": "src/img/mimg.png"
+    },
+    {
+        "title": "Others",
+        "desc": "أي مودات ثانية ما تشملها القوائم السابقة",
+        "imgheader": "src/img/oimg.png"
+    },
+    {
+        "title": "Tutorials",
+        "desc": "شروحات كيف تنشئ مودك الخاص",
+        "imgheader": "src/img/tutimg.png"
+    },
+    {
+        "title": "Fixes",
+        "desc": "كل ما يتعلق بحل مشاكل المودات",
+        "imgheader": "src/img/fimg.png"
+    }
+]
