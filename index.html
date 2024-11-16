@@ -27,32 +27,31 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1; /* Ensure overlay is below content */
+            z-index: 1;
         }
 
         .hero, .sections-container, .footer {
             position: relative;
-            z-index: 2; /* Ensure these elements are above the overlay */
+            z-index: 2;
         }
 
         footer {
-            position: relative; /* Ensure footer is above overlay */
+            position: relative;
         }
 
         .sections-container .card {
             position: relative;
-            z-index: 2; /* Ensure cards stay above the overlay */
+            z-index: 2;
         }
 
         .text-container {
             position: relative;
-            z-index: 3; /* Ensures text elements appear above the overlay */
+            z-index: 3;
         }
     </style>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Ensure openModal is defined at the top of the script, outside the fetch block
             const openModal = (item) => {
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
@@ -120,77 +119,74 @@
                 modal.showModal();
             };
 
-            Promise.all([
-                fetch('sections.json').then(response => response.json()),
-                fetch('sections2.json').then(response => response.json()),
-                fetch('data.json').then(response => response.json())
-            ]).then(([sections1, sections2, data]) => {
-                const preloadContainer = document.createElement('div');
-                document.head.appendChild(preloadContainer);
+            Promise.all([fetch('sections.json').then(response => response.json()), fetch('sections2.json').then(response => response.json()), fetch('data.json').then(response => response.json())])
+                .then(([sections1, sections2, data]) => {
+                    const preloadContainer = document.createElement('div');
+                    document.head.appendChild(preloadContainer);
 
-                sections1.forEach(section => {
-                    if (section.imgheader) {
-                        const link = document.createElement('link');
-                        link.rel = 'preload';
-                        link.href = section.imgheader;
-                        link.as = 'image';
-                        preloadContainer.appendChild(link);
-                    }
-                });
+                    sections1.forEach(section => {
+                        if (section.imgheader) {
+                            const link = document.createElement('link');
+                            link.rel = 'preload';
+                            link.href = section.imgheader;
+                            link.as = 'image';
+                            preloadContainer.appendChild(link);
+                        }
+                    });
 
-                const sectionsContainer = document.querySelector('.sections-container');
+                    const sectionsContainer = document.querySelector('.sections-container');
 
-                const section1TitleBox = document.createElement('div');
-                section1TitleBox.classList.add('mb-8');
-                const section1Title = document.createElement('h2');
-                section1Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
-                section1Title.textContent = "Hevilz Mods | مودات هفلز";
-                section1TitleBox.appendChild(section1Title);
+                    const section1TitleBox = document.createElement('div');
+                    section1TitleBox.classList.add('mb-8');
+                    const section1Title = document.createElement('h2');
+                    section1Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
+                    section1Title.textContent = "Hevilz Mods | مودات هفلز";
+                    section1TitleBox.appendChild(section1Title);
 
-                const section1Grid = document.createElement('div');
-                section1Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
+                    const section1Grid = document.createElement('div');
+                    section1Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
 
-                sections1.forEach(section => {
-                    const card = createSectionCard(section, data);
-                    section1Grid.appendChild(card);
-                });
-                section1TitleBox.appendChild(section1Grid);
-                sectionsContainer.appendChild(section1TitleBox);
+                    sections1.forEach(section => {
+                        const card = createSectionCard(section, data);
+                        section1Grid.appendChild(card);
+                    });
+                    section1TitleBox.appendChild(section1Grid);
+                    sectionsContainer.appendChild(section1TitleBox);
 
-                const section2TitleBox = document.createElement('div');
-                section2TitleBox.classList.add('mb-8');
-                const section2Title = document.createElement('h2');
-                section2Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
-                section2Title.textContent = "مودات التختيم";
-                section2TitleBox.appendChild(section2Title);
+                    const section2TitleBox = document.createElement('div');
+                    section2TitleBox.classList.add('mb-8');
+                    const section2Title = document.createElement('h2');
+                    section2Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
+                    section2Title.textContent = "مودات التختيم";
+                    section2TitleBox.appendChild(section2Title);
 
-                const section2Grid = document.createElement('div');
-                section2Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
+                    const section2Grid = document.createElement('div');
+                    section2Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
 
-                sections2.forEach(section => {
-                    const card = createSectionCard(section, data);
-                    section2Grid.appendChild(card);
-                });
-                section2TitleBox.appendChild(section2Grid);
-                sectionsContainer.appendChild(section2TitleBox);
+                    sections2.forEach(section => {
+                        const card = createSectionCard(section, data);
+                        section2Grid.appendChild(card);
+                    });
+                    section2TitleBox.appendChild(section2Grid);
+                    sectionsContainer.appendChild(section2TitleBox);
 
-                const closeModalButton = document.querySelector("button");
-                closeModalButton.addEventListener('click', () => {
-                    const modal = document.getElementById("data_modal");
-                    modal.close();
-                });
-
-                window.addEventListener('click', (event) => {
-                    const modal = document.getElementById("data_modal");
-                    if (event.target === modal) {
+                    const closeModalButton = document.querySelector("button");
+                    closeModalButton.addEventListener('click', () => {
+                        const modal = document.getElementById("data_modal");
                         modal.close();
-                    }
-                });
-            }).catch(error => {
-                console.error('Error fetching JSON files:', error);
-            });
+                    });
 
-            // Helper function to create section cards
+                    window.addEventListener('click', (event) => {
+                        const modal = document.getElementById("data_modal");
+                        if (event.target === modal) {
+                            modal.close();
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON files:', error);
+                });
+
             function createSectionCard(section, data) {
                 const card = document.createElement('div');
                 card.classList.add('card', 'p-4', 'rounded-lg', 'shadow-lg', 'hover:scale-105', 'transition-transform');
