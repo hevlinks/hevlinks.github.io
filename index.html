@@ -27,33 +27,108 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            z-index: 1; /* Ensure overlay is below content */
         }
 
-        .hero {
-            z-index: 2;
+        .hero, .sections-container, .footer {
+            position: relative;
+            z-index: 2; /* Ensure these elements are above the overlay */
         }
-        
-        .footer {
-            z-index: 2;
+
+        footer {
+            position: relative; /* Ensure footer is above overlay */
         }
 
         .sections-container .card {
             position: relative;
-            z-index: 2;
+            z-index: 2; /* Ensure cards stay above the overlay */
+        }
+
+        .text-container {
+            position: relative;
+            z-index: 3; /* Ensures text elements appear above the overlay */
         }
     </style>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            Promise.all([ 
-                fetch('sections.json').then(response => response.json()), 
+            // Ensure openModal is defined at the top of the script, outside the fetch block
+            const openModal = (item) => {
+                const modal = document.getElementById("data_modal");
+                const modalImg = document.getElementById("modal-img");
+                const modalTitle = document.getElementById("modal-title");
+                const modalDesc = document.getElementById("modal-desc");
+                const modalDownload = document.getElementById("modal-download");
+                const modalTutorial = document.getElementById("modal-tutorial");
+                const modalExtrasContainer = document.getElementById("modal-extras-container");
+
+                if (item.img) {
+                    modalImg.src = item.img;
+                    modalImg.style.display = 'block';
+                } else {
+                    modalImg.style.display = 'none';
+                }
+
+                if (item.title) {
+                    modalTitle.textContent = item.title;
+                } else {
+                    modalTitle.textContent = 'Untitled Item';
+                }
+
+                if (item.desc) {
+                    modalDesc.innerHTML = item.desc.replace(/\n/g, "<br>");
+                } else {
+                    modalDesc.textContent = 'No description available.';
+                }
+
+                if (item.downloadlink) {
+                    modalDownload.href = item.downloadlink;
+                    modalDownload.style.display = 'inline-block';
+                } else {
+                    modalDownload.style.display = 'none';
+                }
+
+                if (item.tutlink) {
+                    modalTutorial.href = item.tutlink;
+                    modalTutorial.style.display = 'inline-block';
+                } else {
+                    modalTutorial.style.display = 'none';
+                }
+
+                modalExtrasContainer.innerHTML = "";
+
+                if (item.extratitle !== "no") {
+                    const extrasTitle = document.createElement('h4');
+                    extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
+                    extrasTitle.textContent = "Extras | ملحقات أضافية";
+                    modalExtrasContainer.appendChild(extrasTitle);
+                }
+
+                let extraIndex = 1;
+                while (item[`extra${extraIndex}`]) {
+                    if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
+                        const extraButton = document.createElement('a');
+                        extraButton.href = item[`extralink${extraIndex}`];
+                        extraButton.textContent = item[`extra${extraIndex}`];
+                        extraButton.classList.add('btn', 'btn-outline', 'w-full', 'mb-2');
+                        extraButton.target = "_blank";
+                        modalExtrasContainer.appendChild(extraButton);
+                    }
+                    extraIndex++;
+                }
+
+                modal.showModal();
+            };
+
+            Promise.all([
+                fetch('sections.json').then(response => response.json()),
+                fetch('sections2.json').then(response => response.json()),
                 fetch('data.json').then(response => response.json())
-            ]).then(([sections, data]) => {
+            ]).then(([sections1, sections2, data]) => {
                 const preloadContainer = document.createElement('div');
                 document.head.appendChild(preloadContainer);
-    
-                sections.forEach(section => {
+
+                sections1.forEach(section => {
                     if (section.imgheader) {
                         const link = document.createElement('link');
                         link.rel = 'preload';
@@ -62,152 +137,120 @@
                         preloadContainer.appendChild(link);
                     }
                 });
-    
+
                 const sectionsContainer = document.querySelector('.sections-container');
-    
-                sections.forEach(section => {
-                    const card = document.createElement('div');
-                    card.classList.add('card', 'p-4', 'rounded-lg', 'shadow-lg', 'hover:scale-105', 'transition-transform');
-    
-                    if (section.imgheader) {
-                        const img = document.createElement('img');
-                        img.src = section.imgheader;
-                        img.alt = section.title || 'Section Image';
-                        img.classList.add('w-full', 'h-40', 'object-cover', 'rounded-lg');
-                        card.appendChild(img);
-                    }
-    
-                    if (section.title) {
-                        const title = document.createElement('h3');
-                        title.classList.add('text-lg', 'font-semibold', 'text-outline');
-                        title.textContent = section.title;
-                        card.appendChild(title);
-                    }
-    
-                    if (section.desc) {
-                        const desc = document.createElement('p');
-                        desc.classList.add('text-sm', 'text-gray-300', 'mb-4');
-                        desc.textContent = section.desc;
-                        card.appendChild(desc);
-                    }
-    
-                    const selectMenu = document.createElement('div');
-                    selectMenu.classList.add('w-full', 'text-white', 'border', 'border-base-400', 'rounded-lg', 'mt-4');
-    
-                    const select = document.createElement('select');
-                    select.classList.add('select', 'select-bordered', 'w-full', 'max-w-xs');
-                    const defaultOption = document.createElement('option');
-                    defaultOption.textContent = `Select ${section.title || 'Item'}`;
-                    select.appendChild(defaultOption);
-    
-                    const sectionItems = data.filter(item => item.section === section.title);
-    
-                    sectionItems.forEach(item => {
-                        if (item.title) {
-                            const option = document.createElement('option');
-                            option.value = item.title;
-                            option.textContent = item.title;
-                            select.appendChild(option);
-                        }
-                    });
-    
-                    select.addEventListener('change', (e) => {
-                        const selectedTitle = e.target.value;
-                        const selectedItem = data.find(item => item.title === selectedTitle);
-    
-                        if (selectedItem) {
-                            openModal(selectedItem);
-                        }
-                    });
-    
-                    selectMenu.appendChild(select);
-                    card.appendChild(selectMenu);
-    
-                    sectionsContainer.appendChild(card);
+
+                const section1TitleBox = document.createElement('div');
+                section1TitleBox.classList.add('mb-8');
+                const section1Title = document.createElement('h2');
+                section1Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
+                section1Title.textContent = "Hevilz Mods | مودات هفلز";
+                section1TitleBox.appendChild(section1Title);
+
+                const section1Grid = document.createElement('div');
+                section1Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
+
+                sections1.forEach(section => {
+                    const card = createSectionCard(section, data);
+                    section1Grid.appendChild(card);
                 });
-    
-                const modal = document.getElementById("data_modal");
-                const modalImg = document.getElementById("modal-img");
-                const modalTitle = document.getElementById("modal-title");
-                const modalDesc = document.getElementById("modal-desc");
-                const modalDownload = document.getElementById("modal-download");
-                const modalTutorial = document.getElementById("modal-tutorial");
-                const modalExtrasContainer = document.getElementById("modal-extras-container");
-    
-                function openModal(item) {
-                    if (item.img) {
-                        modalImg.src = item.img;
-                        modalImg.style.display = 'block';
-                    } else {
-                        modalImg.style.display = 'none';
-                    }
-    
-                    if (item.title) {
-                        modalTitle.textContent = item.title;
-                    } else {
-                        modalTitle.textContent = 'Untitled Item';
-                    }
-    
-                    if (item.desc) {
-                        modalDesc.innerHTML = item.desc.replace(/\n/g, "<br>");
-                    } else {
-                        modalDesc.textContent = 'No description available.';
-                    }
-    
-                    if (item.downloadlink) {
-                        modalDownload.href = item.downloadlink;
-                        modalDownload.style.display = 'inline-block';
-                    } else {
-                        modalDownload.style.display = 'none';
-                    }
-    
-                    if (item.tutlink) {
-                        modalTutorial.href = item.tutlink;
-                        modalTutorial.style.display = 'inline-block';
-                    } else {
-                        modalTutorial.style.display = 'none';
-                    }
-    
-                    modalExtrasContainer.innerHTML = ""; 
-    
-                    if (item.extratitle !== "no") {
-                        const extrasTitle = document.createElement('h4');
-                        extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
-                        extrasTitle.textContent = "Extras | ملحقات أضافية";
-                        modalExtrasContainer.appendChild(extrasTitle);
-                    }
-    
-                    let extraIndex = 1;
-                    while (item[`extra${extraIndex}`]) {
-                        if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
-                            const extraButton = document.createElement('a');
-                            extraButton.href = item[`extralink${extraIndex}`];
-                            extraButton.textContent = item[`extra${extraIndex}`];
-                            extraButton.classList.add('btn', 'btn-outline', 'w-full', 'mb-2');
-                            extraButton.target = "_blank";
-                            modalExtrasContainer.appendChild(extraButton);
-                        }
-                        extraIndex++;
-                    }
-    
-                    modal.showModal();
-                }
-    
-                const closeModalButton = modal.querySelector("button");
+                section1TitleBox.appendChild(section1Grid);
+                sectionsContainer.appendChild(section1TitleBox);
+
+                const section2TitleBox = document.createElement('div');
+                section2TitleBox.classList.add('mb-8');
+                const section2Title = document.createElement('h2');
+                section2Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
+                section2Title.textContent = "Mods of Journey | مودات الرحلة";
+                section2TitleBox.appendChild(section2Title);
+
+                const section2Grid = document.createElement('div');
+                section2Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
+
+                sections2.forEach(section => {
+                    const card = createSectionCard(section, data);
+                    section2Grid.appendChild(card);
+                });
+                section2TitleBox.appendChild(section2Grid);
+                sectionsContainer.appendChild(section2TitleBox);
+
+                const closeModalButton = document.querySelector("button");
                 closeModalButton.addEventListener('click', () => {
+                    const modal = document.getElementById("data_modal");
                     modal.close();
-                    modalExtrasContainer.innerHTML = '';
                 });
-    
+
                 window.addEventListener('click', (event) => {
+                    const modal = document.getElementById("data_modal");
                     if (event.target === modal) {
                         modal.close();
-                        modalExtrasContainer.innerHTML = '';
                     }
                 });
             }).catch(error => {
                 console.error('Error fetching JSON files:', error);
             });
+
+            // Helper function to create section cards
+            function createSectionCard(section, data) {
+                const card = document.createElement('div');
+                card.classList.add('card', 'p-4', 'rounded-lg', 'shadow-lg', 'hover:scale-105', 'transition-transform');
+
+                if (section.imgheader) {
+                    const img = document.createElement('img');
+                    img.src = section.imgheader;
+                    img.alt = section.title || 'Section Image';
+                    img.classList.add('w-full', 'h-40', 'object-cover', 'rounded-lg');
+                    card.appendChild(img);
+                }
+
+                if (section.title) {
+                    const title = document.createElement('h3');
+                    title.classList.add('text-lg', 'font-semibold', 'text-outline');
+                    title.textContent = section.title;
+                    card.appendChild(title);
+                }
+
+                if (section.desc) {
+                    const desc = document.createElement('p');
+                    desc.classList.add('text-sm', 'text-gray-300', 'mb-4');
+                    desc.textContent = section.desc;
+                    card.appendChild(desc);
+                }
+
+                const selectMenu = document.createElement('div');
+                selectMenu.classList.add('w-full', 'text-white', 'border', 'border-base-400', 'rounded-lg', 'mt-4');
+
+                const select = document.createElement('select');
+                select.classList.add('select', 'select-bordered', 'w-full', 'max-w-xs');
+                const defaultOption = document.createElement('option');
+                defaultOption.textContent = `Select from  ${section.title || 'Item'}`;
+                select.appendChild(defaultOption);
+
+                const sectionItems = data.filter(item => item.section === section.title);
+
+                sectionItems.forEach(item => {
+                    if (item.title) {
+                        const option = document.createElement('option');
+                        option.value = item.title;
+                        option.textContent = item.title;
+                        select.appendChild(option);
+                    }
+                });
+
+                select.addEventListener('change', (e) => {
+                    const selectedTitle = e.target.value;
+                    const selectedItem = data.find(item => item.title === selectedTitle);
+
+                    if (selectedItem) {
+                        openModal(selectedItem);
+                    }
+                });
+
+                selectMenu.appendChild(select);
+                card.appendChild(selectMenu);
+
+                return card;
+            }
         });
     </script>
 </head>
@@ -215,7 +258,7 @@
     <div class="overlay"></div>
 
     <div class="hero min-h-screen">
-        <div class="hero-content text-center">
+        <div class="hero-content text-center text-container">
             <div class="max-w-md">
                 <h1 class="text-3xl font-bold">Hevilz Mods ™</h1>
                 <p class="text text-center text-2xl">
@@ -235,7 +278,7 @@
         </div>
     </div>
 
-    <div class="sections-container grid grid-cols-4 sm:grid-cols-1 lg:grid-cols-6 gap-6 p-6 flex-grow">
+    <div class="sections-container flex flex-col gap-8 p-6 flex-grow">
     </div>
 
     <dialog id="data_modal" class="modal">
