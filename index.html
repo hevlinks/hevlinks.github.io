@@ -52,7 +52,6 @@
             z-index: 2;
         }
 
-
         .text-container {
             position: relative;
             z-index: 3;
@@ -70,6 +69,7 @@
                 const modalTutorial = document.getElementById("modal-tutorial");
                 const modalExtrasContainer = document.getElementById("modal-extras-container");
 
+                // Update modal content
                 if (item.img) {
                     modalImg.src = item.img;
                     modalImg.style.display = 'block';
@@ -77,17 +77,8 @@
                     modalImg.style.display = 'none';
                 }
 
-                if (item.title) {
-                    modalTitle.textContent = item.title;
-                } else {
-                    modalTitle.textContent = 'Untitled Item';
-                }
-
-                if (item.desc) {
-                    modalDesc.innerHTML = item.desc.replace(/\n/g, "<br>");
-                } else {
-                    modalDesc.textContent = 'No description available.';
-                }
+                modalTitle.textContent = item.title || 'Untitled Item';
+                modalDesc.innerHTML = item.desc ? item.desc.replace(/\n/g, "<br>") : 'No description available.';
 
                 if (item.downloadlink) {
                     modalDownload.href = item.downloadlink;
@@ -105,6 +96,7 @@
 
                 modalExtrasContainer.innerHTML = "";
 
+                // Add extra items
                 if (item.extratitle !== "no") {
                     const extrasTitle = document.createElement('h4');
                     extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
@@ -128,21 +120,9 @@
                 modal.showModal();
             };
 
+            // Fetch JSON data for sections and items
             Promise.all([fetch('sections.json').then(response => response.json()), fetch('sections2.json').then(response => response.json()), fetch('data.json').then(response => response.json())])
                 .then(([sections1, sections2, data]) => {
-                    const preloadContainer = document.createElement('div');
-                    document.head.appendChild(preloadContainer);
-
-                    sections1.forEach(section => {
-                        if (section.imgheader) {
-                            const link = document.createElement('link');
-                            link.rel = 'preload';
-                            link.href = section.imgheader;
-                            link.as = 'image';
-                            preloadContainer.appendChild(link);
-                        }
-                    });
-
                     const sectionsContainer = document.querySelector('.sections-container');
 
                     const section1TitleBox = document.createElement('div');
@@ -179,16 +159,42 @@
                     section2TitleBox.appendChild(section2Grid);
                     sectionsContainer.appendChild(section2TitleBox);
 
+                    // Handle modal close
                     const closeModalButton = document.querySelector("button");
                     closeModalButton.addEventListener('click', () => {
                         const modal = document.getElementById("data_modal");
-                        modal.close();
+                        const select = modal.querySelector('select'); // Grab the select element from the modal
+
+                        // Reset modal content
+                        const modalImg = document.getElementById("modal-img");
+                        const modalTitle = document.getElementById("modal-title");
+                        const modalDesc = document.getElementById("modal-desc");
+                        const modalDownload = document.getElementById("modal-download");
+                        const modalTutorial = document.getElementById("modal-tutorial");
+                        const modalExtrasContainer = document.getElementById("modal-extras-container");
+
+                        // Clear modal content
+                        modalImg.src = '';
+                        modalImg.style.display = 'none';
+                        modalTitle.textContent = '';
+                        modalDesc.textContent = '';
+                        modalDownload.style.display = 'none';
+                        modalTutorial.style.display = 'none';
+                        modalExtrasContainer.innerHTML = '';
+
+                        // Reset dropdown to default option
+                        if (select) {
+                            select.selectedIndex = 0; // Reset to the default option
+                        }
+
+                        modal.close(); // Close the modal
                     });
 
+                    // Close modal when clicking outside
                     window.addEventListener('click', (event) => {
                         const modal = document.getElementById("data_modal");
                         if (event.target === modal) {
-                            modal.close();
+                            closeModalButton.click(); // Trigger close modal
                         }
                     });
                 })
@@ -227,12 +233,16 @@
 
                 const select = document.createElement('select');
                 select.classList.add('select', 'select-bordered', 'w-full', 'max-w-xs');
+                select.setAttribute('data-section-title', section.title || 'Item'); // Store the section title
+
+                // Default option prompting the user to select
                 const defaultOption = document.createElement('option');
-                defaultOption.textContent = `Select from  ${section.title || 'Item'}`;
+                defaultOption.textContent = `Select from ${section.title || 'Item'}`; // Default prompt
+                defaultOption.disabled = true; // Disable the default option to prevent selecting it
+                defaultOption.selected = true; // Make it the selected option initially
                 select.appendChild(defaultOption);
 
                 const sectionItems = data.filter(item => item.section === section.title);
-
                 sectionItems.forEach(item => {
                     if (item.title) {
                         const option = document.createElement('option');
@@ -245,9 +255,8 @@
                 select.addEventListener('change', (e) => {
                     const selectedTitle = e.target.value;
                     const selectedItem = data.find(item => item.title === selectedTitle);
-
                     if (selectedItem) {
-                        openModal(selectedItem);
+                        openModal(selectedItem); // Open modal with selected item
                     }
                 });
 
