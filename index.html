@@ -69,7 +69,6 @@
                 const modalTutorial = document.getElementById("modal-tutorial");
                 const modalExtrasContainer = document.getElementById("modal-extras-container");
 
-                // Update modal content
                 if (item.img) {
                     modalImg.src = item.img;
                     modalImg.style.display = 'block';
@@ -96,7 +95,6 @@
 
                 modalExtrasContainer.innerHTML = "";
 
-                // Add extra items
                 if (item.extratitle !== "no") {
                     const extrasTitle = document.createElement('h4');
                     extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
@@ -120,7 +118,6 @@
                 modal.showModal();
             };
 
-            // Fetch JSON data for sections and items
             Promise.all([fetch('sections.json').then(response => response.json()), fetch('sections2.json').then(response => response.json()), fetch('data.json').then(response => response.json())])
                 .then(([sections1, sections2, data]) => {
                     const sectionsContainer = document.querySelector('.sections-container');
@@ -159,13 +156,11 @@
                     section2TitleBox.appendChild(section2Grid);
                     sectionsContainer.appendChild(section2TitleBox);
 
-                    // Handle modal close
                     const closeModalButton = document.querySelector("button");
                     closeModalButton.addEventListener('click', () => {
                         const modal = document.getElementById("data_modal");
-                        const select = modal.querySelector('select'); // Grab the select element from the modal
+                        const select = modal.querySelector('select');
 
-                        // Reset modal content
                         const modalImg = document.getElementById("modal-img");
                         const modalTitle = document.getElementById("modal-title");
                         const modalDesc = document.getElementById("modal-desc");
@@ -173,7 +168,6 @@
                         const modalTutorial = document.getElementById("modal-tutorial");
                         const modalExtrasContainer = document.getElementById("modal-extras-container");
 
-                        // Clear modal content
                         modalImg.src = '';
                         modalImg.style.display = 'none';
                         modalTitle.textContent = '';
@@ -182,19 +176,17 @@
                         modalTutorial.style.display = 'none';
                         modalExtrasContainer.innerHTML = '';
 
-                        // Reset dropdown to default option
                         if (select) {
-                            select.selectedIndex = 0; // Reset to the default option
+                            select.selectedIndex = 0;
                         }
 
-                        modal.close(); // Close the modal
+                        modal.close();
                     });
 
-                    // Close modal when clicking outside
                     window.addEventListener('click', (event) => {
                         const modal = document.getElementById("data_modal");
                         if (event.target === modal) {
-                            closeModalButton.click(); // Trigger close modal
+                            closeModalButton.click();
                         }
                     });
                 })
@@ -233,13 +225,12 @@
 
                 const select = document.createElement('select');
                 select.classList.add('select', 'select-bordered', 'w-full', 'max-w-xs');
-                select.setAttribute('data-section-title', section.title || 'Item'); // Store the section title
+                select.setAttribute('data-section-title', section.title || 'Item');
 
-                // Default option prompting the user to select
                 const defaultOption = document.createElement('option');
-                defaultOption.textContent = `Select from ${section.title || 'Item'}`; // Default prompt
-                defaultOption.disabled = true; // Disable the default option to prevent selecting it
-                defaultOption.selected = true; // Make it the selected option initially
+                defaultOption.textContent = `Select from ${section.title || 'Item'}`;
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
                 select.appendChild(defaultOption);
 
                 const sectionItems = data.filter(item => item.section === section.title);
@@ -256,7 +247,7 @@
                     const selectedTitle = e.target.value;
                     const selectedItem = data.find(item => item.title === selectedTitle);
                     if (selectedItem) {
-                        openModal(selectedItem); // Open modal with selected item
+                        openModal(selectedItem);
                     }
                 });
 
@@ -303,7 +294,7 @@
             <h3 id="modal-title" class="text-lg font-bold">Item Title</h3>
             <p id="modal-desc" class="py-4">Item Description</p>
             <img id="modal-img" src="" alt="Item Image" class="max-w-full h-auto mt-4 mb-4 rounded-xl">
-            <a id="modal-download" href="" target="_blank" class="btn btn-outline w-full mb-2 text-lg">Download | التنزيل </a>
+            <a id="modal-download" href="" target="_blank" class="btn btn-outline w-full mb-2 text-lg">Download | التنزيل</a>
             <a id="modal-tutorial" href="" target="_blank" class="btn btn-outline w-full text-lg">YouTube | الشرح و التركيب </a>
             <div id="modal-extras-container"></div>
         </div>
