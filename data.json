@@ -463,15 +463,55 @@
     },
     {
         "title": "1 - Arrange",
-        "desc": "By: LuisWebber\n\nطريقة التركيب داخل المقطع\n\nPassword: luisfwebberarrange\n\nكلمة المرور : luisfwebberarrange",
-        "img": "https://i.ytimg.com/vi/Zl8PY5J9fCo/hqdefault.jpg",
+        "desc": "By: LuisWebber\n\nطريقة التركيب داخل المقطع\n\nPassword: luisfwebberarrange\nكلمة المرور: luisfwebberarrange",
+        "img": "",
         "downloadlink": "",
         "extratitle": "no",
         "extra1": "Link | الرابط",
         "extralink1": "https://www.mediafire.com/file/sytgxent9o9nwjp/ARRANGE_RE4_HD-NORMAL_EARLY_GIFT.rar/file",
         "extra2": "Patch | باتش اصلاح",
         "extralink2": "https://mega.nz/file/7yBRFQAY#gjp7yoSGEZ79T6fVifXzRELo8sggCkUyYFBqsUtIA5w",
-        "tutlink": "https://www.youtube.com/watch?v=Zl8PY5J9fCo",
+        "tutlink": "https://www.youtube.com/watch?v=hsTW2qfeLVg",
+        "section": "1-10"
+    },
+    {
+        "title": "1 - Arrange w/HD Project",
+        "desc": "By: LuisWebber\nHD Version By: kreed\n\nطريقة التركيب داخل المقطع\n\nPassword: kreed\nكلمة المرور: kreed",
+        "img": "",
+        "downloadlink": "https://www.nexusmods.com/residentevil4/mods/351?tab=files&file_id=900",
+        "extratitle": "no",
+        "tutlink": "https://www.youtube.com/watch?v=X2nOVQGoiWA",
+        "section": "1-10"
+    },
+    {
+        "title": "2 - Los Crackudos Chaotic",
+        "desc": "By: Futon\n\n|-| مايتوافق مع الاتش دي |-|\n\nطريقة التركيب داخل المقطع",
+        "img": "",
+        "downloadlink": "https://drive.google.com/file/d/137I8D8lx-cEVn89Kka-vdjQznMHGWygv/view",
+        "extratitle": "no",
+        "tutlink": "https://www.youtube.com/watch?v=I4GdLDKW0Pw",
+        "section": "1-10"
+    },
+    {
+        "title": "3 - Prepare To Die",
+        "desc": "By: leo lima\nPort By: kteo\n\nطريقة التركيب داخل المقطع\n\nPassword: LeoLimaEditor\nكلمة المرور: LeoLimaEditor",
+        "img": "",
+        "downloadlink": "https://www.mediafire.com/file/ta2takypgfte4y6/Prepare+to+Die+UHD+Lower+Version+(Original).rar/file",
+        "extratitle": "no",
+        "tutlink": "https://www.youtube.com/watch?v=gtApFwiL7lY",
+        "section": "1-10"
+    },
+    {
+        "title": "4 - Prison of The Evil",
+        "desc": "By: leo lima\n\n|-| يحتاج HDProject 2018 |-|\n\nطريقة التركيب داخل المقطع",
+        "img": "",
+        "downloadlink": "",
+        "extra1": "Normal | صعوبة النورمل",
+        "extralink1": "https://www.mediafire.com/file/w62g0v9wsl1l8vi/PRISON+OF+THE+EVIL+COM+AS+2+CORRE%C3%87%C3%95ES.rar/file",
+        "extra2": "Hard | صعوبة الهارد",
+        "extralink2": "https://www.mediafire.com/file/c6w12tmph3wvvti/RE4_UHD_(%2BHD_PROJECT)_-_PRISON_OF_THE_EVIL_-_MAIN_MOD_-_DEMO_VERSION.rar/file?fbclid=IwAR2nMi9zWoYDjS4Ct8DAARIdMgJVY9kFwLEvCMeeIwPox0tCTVt25tAP5Ko",
+        "extratitle": "no",
+        "tutlink": "",
         "section": "1-10"
     }
 ]

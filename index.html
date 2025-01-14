@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="luxury">
+<html lang="en" data-theme="black">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +14,13 @@
             background-image: url('src/img/bg.png');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             background-attachment: fixed;
             min-height: 100vh;
+            width: 100vw;
             margin: 0;
             position: relative;
+            overflow-x: hidden;
         }
 
         .overlay {
@@ -56,48 +59,112 @@
             position: relative;
             z-index: 3;
         }
+        .section-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title-bar {
+            flex: 1;
+            height: 5px;
+            background-color: white;
+            margin: 0 10px;
+        }
+        .section-title-text {
+          white-space: nowrap;
+            padding: 0 10px;
+            position: relative;
+        }
+        .section-title-text::before,
+        .section-title-text::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: white;
+        }
+        .section-title-text::before {
+            left: -10px;
+        }
+
+        .section-title-text::after {
+            right: -10px;
+        }
+         .modal-box > * {
+            margin-left: auto;
+            margin-right: auto;
+             display: block;
+
+          }
+          .modal-box a {
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          }
+        #modal-extras-container {
+            display: flex;
+            flex-direction: column;
+        }
+       #main-buttons {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const openModal = (item) => {
+             const openModal = (item) => {
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
                 const modalTitle = document.getElementById("modal-title");
                 const modalDesc = document.getElementById("modal-desc");
                 const modalDownload = document.getElementById("modal-download");
                 const modalTutorial = document.getElementById("modal-tutorial");
+                 const mainButtonsContainer = document.getElementById("main-buttons");
                 const modalExtrasContainer = document.getElementById("modal-extras-container");
 
+
+                 modalImg.src = '';
+                 modalImg.style.display = 'none';
+                 modalTitle.textContent = '';
+                 modalDesc.textContent = '';
+                   mainButtonsContainer.innerHTML = '';
+                 modalExtrasContainer.innerHTML = '';
                 if (item.img) {
                     modalImg.src = item.img;
                     modalImg.style.display = 'block';
-                } else {
-                    modalImg.style.display = 'none';
                 }
 
                 modalTitle.textContent = item.title || 'Untitled Item';
                 modalDesc.innerHTML = item.desc ? item.desc.replace(/\n/g, "<br>") : 'No description available.';
 
-                if (item.downloadlink) {
-                    modalDownload.href = item.downloadlink;
-                    modalDownload.style.display = 'inline-block';
-                } else {
-                    modalDownload.style.display = 'none';
-                }
-
                 if (item.tutlink) {
-                    modalTutorial.href = item.tutlink;
-                    modalTutorial.style.display = 'inline-block';
-                } else {
-                    modalTutorial.style.display = 'none';
+                     const tutorialButton = document.createElement('a');
+                    tutorialButton.href = item.tutlink;
+                    tutorialButton.textContent = 'YouTube | الشرح و التركيب';
+                     tutorialButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                    tutorialButton.target = "_blank";
+                     mainButtonsContainer.appendChild(tutorialButton);
+
                 }
 
-                modalExtrasContainer.innerHTML = "";
+                if (item.downloadlink) {
+                    const downloadButton = document.createElement('a');
+                    downloadButton.href = item.downloadlink;
+                    downloadButton.textContent = 'Download | التنزيل';
+                     downloadButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                    downloadButton.target = "_blank";
+                     mainButtonsContainer.appendChild(downloadButton);
+                }
+
+
 
                 if (item.extratitle !== "no") {
                     const extrasTitle = document.createElement('h4');
-                    extrasTitle.classList.add('text-xl', 'font-semibold', 'mt-6', 'mb-2');
+                    extrasTitle.classList.add('text-lg', 'font-semibold', 'mt-6', 'mb-2');
                     extrasTitle.textContent = "Extras | ملحقات أضافية";
                     modalExtrasContainer.appendChild(extrasTitle);
                 }
@@ -108,12 +175,13 @@
                         const extraButton = document.createElement('a');
                         extraButton.href = item[`extralink${extraIndex}`];
                         extraButton.textContent = item[`extra${extraIndex}`];
-                        extraButton.classList.add('btn', 'btn-outline', 'w-full', 'mb-2');
+                        extraButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
                         extraButton.target = "_blank";
-                        modalExtrasContainer.appendChild(extraButton);
+                         modalExtrasContainer.appendChild(extraButton);
                     }
                     extraIndex++;
                 }
+
 
                 modal.showModal();
             };
@@ -124,10 +192,20 @@
 
                     const section1TitleBox = document.createElement('div');
                     section1TitleBox.classList.add('mb-8');
+                    const section1TitleContainer = document.createElement('div');
+                    section1TitleContainer.classList.add('section-title-container');
+                    const section1TitleBarLeft = document.createElement('div');
+                    section1TitleBarLeft.classList.add('section-title-bar');
                     const section1Title = document.createElement('h2');
-                    section1Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
+                    section1Title.classList.add('text-3xl', 'font-semibold', 'section-title-text');
                     section1Title.textContent = "Hevilz Mods | مودات هفلز";
-                    section1TitleBox.appendChild(section1Title);
+                    const section1TitleBarRight = document.createElement('div');
+                    section1TitleBarRight.classList.add('section-title-bar');
+                    section1TitleContainer.appendChild(section1TitleBarLeft);
+                    section1TitleContainer.appendChild(section1Title);
+                    section1TitleContainer.appendChild(section1TitleBarRight);
+
+                    section1TitleBox.appendChild(section1TitleContainer);
 
                     const section1Grid = document.createElement('div');
                     section1Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
@@ -141,10 +219,19 @@
 
                     const section2TitleBox = document.createElement('div');
                     section2TitleBox.classList.add('mb-8');
-                    const section2Title = document.createElement('h2');
-                    section2Title.classList.add('text-3xl', 'font-semibold', 'mb-4');
+                    const section2TitleContainer = document.createElement('div');
+                    section2TitleContainer.classList.add('section-title-container');
+                    const section2TitleBarLeft = document.createElement('div');
+                    section2TitleBarLeft.classList.add('section-title-bar');
+                     const section2Title = document.createElement('h2');
+                    section2Title.classList.add('text-3xl', 'font-semibold', 'section-title-text');
                     section2Title.textContent = "مودات التختيم";
-                    section2TitleBox.appendChild(section2Title);
+                     const section2TitleBarRight = document.createElement('div');
+                    section2TitleBarRight.classList.add('section-title-bar');
+                    section2TitleContainer.appendChild(section2TitleBarLeft);
+                    section2TitleContainer.appendChild(section2Title);
+                     section2TitleContainer.appendChild(section2TitleBarRight);
+                    section2TitleBox.appendChild(section2TitleContainer);
 
                     const section2Grid = document.createElement('div');
                     section2Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
@@ -161,20 +248,6 @@
                         const modal = document.getElementById("data_modal");
                         const select = modal.querySelector('select');
 
-                        const modalImg = document.getElementById("modal-img");
-                        const modalTitle = document.getElementById("modal-title");
-                        const modalDesc = document.getElementById("modal-desc");
-                        const modalDownload = document.getElementById("modal-download");
-                        const modalTutorial = document.getElementById("modal-tutorial");
-                        const modalExtrasContainer = document.getElementById("modal-extras-container");
-
-                        modalImg.src = '';
-                        modalImg.style.display = 'none';
-                        modalTitle.textContent = '';
-                        modalDesc.textContent = '';
-                        modalDownload.style.display = 'none';
-                        modalTutorial.style.display = 'none';
-                        modalExtrasContainer.innerHTML = '';
 
                         if (select) {
                             select.selectedIndex = 0;
@@ -275,7 +348,7 @@
                     <br>
                     <strong>S_صقر</strong>
                     <br>
-                    الروابط من 
+                    الروابط من
                     <br>
                     <strong>Hevilz</strong>
                 </p>
@@ -294,8 +367,7 @@
             <h3 id="modal-title" class="text-lg font-bold">Item Title</h3>
             <p id="modal-desc" class="py-4">Item Description</p>
             <img id="modal-img" src="" alt="Item Image" class="max-w-full h-auto mt-4 mb-4 rounded-xl">
-            <a id="modal-download" href="" target="_blank" class="btn btn-outline w-full mb-2 text-lg">Download | التنزيل</a>
-            <a id="modal-tutorial" href="" target="_blank" class="btn btn-outline w-full text-lg">YouTube | الشرح و التركيب </a>
+            <div id="main-buttons"></div>
             <div id="modal-extras-container"></div>
         </div>
     </dialog>

@@ -3,5 +3,30 @@
         "title": "1-10",
         "desc": "مودات التختيم من 1 الى 10",
         "imgheader": "src/img2/1-10.png"
+    },
+    {
+        "title": "11-20",
+        "desc": "مودات التختيم من 11 الى 20-",
+        "imgheader": "src/img2/11-20.png"
+    },
+    {
+        "title": "21-30",
+        "desc": "مودات التختيم من 21 الى 30",
+        "imgheader": "src/img2/21-30.png"
+    },
+    {
+        "title": "31-40",
+        "desc": "مودات التختيم من 31 الى 40",
+        "imgheader": "src/img2/31-40.png"
+    },
+    {
+        "title": "41-50",
+        "desc": "مودات التختيم من 41 الى 50",
+        "imgheader": "src/img2/41-50.png"
+    },
+    {
+        "title": "51-60",
+        "desc": "مودات التختيم من 51 الى 60",
+        "imgheader": "src/img2/51-60.png"
     }
 ]

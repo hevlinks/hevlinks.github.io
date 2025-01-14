@@ -6,3 +6,5 @@ src/img/plaga.png
 /RealSRC
 /oldsrc
 *.psd
+src/img/bg.psd.old
+*.new
