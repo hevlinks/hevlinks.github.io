@@ -121,72 +121,107 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-             const openModal = (item) => {
+            const openModal = (item) => {
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
                 const modalTitle = document.getElementById("modal-title");
                 const modalDesc = document.getElementById("modal-desc");
-                const modalDownload = document.getElementById("modal-download");
-                const modalTutorial = document.getElementById("modal-tutorial");
-                 const mainButtonsContainer = document.getElementById("main-buttons");
+                const mainButtonsContainer = document.getElementById("main-buttons");
                 const modalExtrasContainer = document.getElementById("modal-extras-container");
 
+                modalImg.src = '';
+                modalImg.style.display = 'none';
+                modalTitle.textContent = '';
+                modalDesc.innerHTML = ''; // Use innerHTML
+                mainButtonsContainer.innerHTML = '';
+                modalExtrasContainer.innerHTML = '';
 
-                 modalImg.src = '';
-                 modalImg.style.display = 'none';
-                 modalTitle.textContent = '';
-                 modalDesc.textContent = '';
-                   mainButtonsContainer.innerHTML = '';
-                 modalExtrasContainer.innerHTML = '';
                 if (item.img) {
                     modalImg.src = item.img;
                     modalImg.style.display = 'block';
                 }
 
                 modalTitle.textContent = item.title || 'Untitled Item';
-                modalDesc.innerHTML = item.desc ? item.desc.replace(/\n/g, "<br>") : 'No description available.';
+                modalDesc.innerHTML = item.desc || 'No description available.';  // Setting directly to innerHTML
 
-                if (item.tutlink) {
-                     const tutorialButton = document.createElement('a');
-                    tutorialButton.href = item.tutlink;
-                    tutorialButton.textContent = 'YouTube | الشرح و التركيب';
-                     tutorialButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
-                    tutorialButton.target = "_blank";
-                     mainButtonsContainer.appendChild(tutorialButton);
-
+                const videoContainer = document.createElement('div');
+                videoContainer.classList.add('flex', 'flex-wrap', 'justify-center', 'mt-4', 'mb-4');
+                let videoIndex = 1;
+                while (item[`vidlink${videoIndex}`] && item[`vidimg${videoIndex}`]) {
+                    if (item[`vidtitle${videoIndex}`]) {
+                        const videoTitle = document.createElement('h3');
+                        videoTitle.textContent = item[`vidtitle${videoIndex}`];
+                        videoTitle.classList.add('text-lg','font-semibold', 'mt-2', 'mb-1');
+                        videoContainer.appendChild(videoTitle);
+                    }
+                    const videoLink = document.createElement('a');
+                    videoLink.href = item[`vidlink${videoIndex}`];
+                    videoLink.target = "_blank";
+                    const videoImg = document.createElement('img');
+                    videoImg.src = item[`vidimg${videoIndex}`];
+                    videoImg.alt = `Video ${videoIndex}`;
+                    videoImg.classList.add('max-h-32', 'object-cover', 'rounded-lg', 'm-2', 'cursor-pointer');
+                    videoLink.appendChild(videoImg);
+                    videoContainer.appendChild(videoLink);
+                    videoIndex++;
+                }
+                if (videoContainer.children.length > 0) {
+                    modalDesc.parentNode.insertBefore(videoContainer, modalDesc.nextSibling);
                 }
 
+                if (item.tutlink) {
+                    const tutorialButton = document.createElement('a');
+                    tutorialButton.href = item.tutlink;
+                    tutorialButton.textContent = 'YouTube | الشرح و التركيب';
+                    tutorialButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                    tutorialButton.target = "_blank";
+                    mainButtonsContainer.appendChild(tutorialButton);
+                }
                 if (item.downloadlink) {
                     const downloadButton = document.createElement('a');
                     downloadButton.href = item.downloadlink;
                     downloadButton.textContent = 'Download | التنزيل';
-                     downloadButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                    downloadButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
                     downloadButton.target = "_blank";
-                     mainButtonsContainer.appendChild(downloadButton);
+                    mainButtonsContainer.appendChild(downloadButton);
                 }
 
-
-
-                if (item.extratitle !== "no") {
-                    const extrasTitle = document.createElement('h4');
+                let extrasSectionIndex = 1;
+                while (item[`extrasectiontitle${extrasSectionIndex}`]) {
+                   const extrasTitle = document.createElement('h4');
                     extrasTitle.classList.add('text-lg', 'font-semibold', 'mt-6', 'mb-2');
-                    extrasTitle.textContent = "Extras | ملحقات أضافية";
-                    modalExtrasContainer.appendChild(extrasTitle);
+                     extrasTitle.textContent = item[`extrasectiontitle${extrasSectionIndex}`];
+                     modalExtrasContainer.appendChild(extrasTitle);
+                   let includedExtras = [];
+                    if (item[`extrasection${extrasSectionIndex}`]) {
+                         includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
+                         includedExtras.forEach(extraNum => {
+                            if (item[`extra${extraNum}`] && item[`extralink${extraNum}`]) {
+                               const extraButton = document.createElement('a');
+                                extraButton.href = item[`extralink${extraNum}`];
+                                extraButton.textContent = item[`extra${extraNum}`];
+                                 extraButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                                 extraButton.target = "_blank";
+                                  modalExtrasContainer.appendChild(extraButton);
+                            }
+                        });
+                     }
+                    extrasSectionIndex++;
                 }
-
-                let extraIndex = 1;
-                while (item[`extra${extraIndex}`]) {
-                    if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
-                        const extraButton = document.createElement('a');
-                        extraButton.href = item[`extralink${extraIndex}`];
-                        extraButton.textContent = item[`extra${extraIndex}`];
-                        extraButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
-                        extraButton.target = "_blank";
-                         modalExtrasContainer.appendChild(extraButton);
-                    }
-                    extraIndex++;
+                 if (extrasSectionIndex === 1) {
+                    let extraIndex = 1;
+                   while (item[`extra${extraIndex}`]) {
+                        if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
+                           const extraButton = document.createElement('a');
+                           extraButton.href = item[`extralink${extraIndex}`];
+                           extraButton.textContent = item[`extra${extraIndex}`];
+                            extraButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                            extraButton.target = "_blank";
+                            modalExtrasContainer.appendChild(extraButton);
+                        }
+                       extraIndex++;
+                   }
                 }
-
 
                 modal.showModal();
             };
@@ -201,7 +236,7 @@
                     section1TitleContainer.classList.add('section-title-container');
                     const section1TitleBarLeft = document.createElement('div');
                     section1TitleBarLeft.classList.add('section-title-bar');
-                      const hevilz4ModsText1 = document.createElement('span');
+                    const hevilz4ModsText1 = document.createElement('span');
                     hevilz4ModsText1.textContent = "";
                     hevilz4ModsText1.classList.add('text-2xl', 'font-semibold', 'mr-2', 'text-outline')
                     const hevilz4ModsImg1 = document.createElement('img');
@@ -237,23 +272,23 @@
                     section2TitleContainer.classList.add('section-title-container');
                     const section2TitleBarLeft = document.createElement('div');
                     section2TitleBarLeft.classList.add('section-title-bar');
-                     const hevilz4ModsText2 = document.createElement('span');
+                    const hevilz4ModsText2 = document.createElement('span');
                     hevilz4ModsText2.textContent = "";
                     hevilz4ModsText2.classList.add('text-2xl', 'font-semibold', 'mr-2', 'text-outline')
-                   const hevilz4ModsImg2 = document.createElement('img');
+                    const hevilz4ModsImg2 = document.createElement('img');
                     hevilz4ModsImg2.src = "src/img/4icon.png";
-                      hevilz4ModsImg2.alt = "hevilz 4 mods";
-                      hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline','mr-2', 'align-middle');
-                     const section2Title = document.createElement('h2');
+                    hevilz4ModsImg2.alt = "hevilz 4 mods";
+                    hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline','mr-2', 'align-middle');
+                    const section2Title = document.createElement('h2');
                     section2Title.classList.add('text-3xl', 'font-semibold', 'section-title-text');
                     section2Title.textContent = "مودات التختيم";
-                     const section2TitleBarRight = document.createElement('div');
+                    const section2TitleBarRight = document.createElement('div');
                     section2TitleBarRight.classList.add('section-title-bar');
                     section2TitleContainer.appendChild(hevilz4ModsText2);
-                      section2TitleContainer.appendChild(hevilz4ModsImg2);
+                    section2TitleContainer.appendChild(hevilz4ModsImg2);
                     section2TitleContainer.appendChild(section2TitleBarLeft);
                     section2TitleContainer.appendChild(section2Title);
-                     section2TitleContainer.appendChild(section2TitleBarRight);
+                    section2TitleContainer.appendChild(section2TitleBarRight);
                     section2TitleBox.appendChild(section2TitleContainer);
 
                     const section2Grid = document.createElement('div');
