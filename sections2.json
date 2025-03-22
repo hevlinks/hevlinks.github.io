@@ -27,6 +27,16 @@
     {
         "title": "51-55",
         "desc": "مودات التختيم من 51 الى 55",
-        "imgheader": "src/img2/51-60.png"
+        "imgheader": "src/img2/51-55.png"
+    },
+    {
+        "title": "56-60",
+        "desc": "مودات التختيم من 56 الى 60",
+        "imgheader": "src/img2/56-60.png"
+    },
+    {
+        "title": "61-70",
+        "desc": "مودات التختيم من 61 الى 70",
+        "imgheader": "src/img2/61-70.png"
     }
 ]
