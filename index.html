@@ -7,9 +7,9 @@
     <title>Hevilz Mods ™</title>
     <link rel="icon" type="image/x-icon" href="src/img/favicon.png">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         *,
@@ -267,10 +267,12 @@
         }
 
         .modal-dialog {
-             max-width: 50%;
-             margin: 1.75rem auto;
- 
-         }
+            max-width: 65%;
+            margin: 5vh auto;
+            transform: translateY(0);
+            overflow-y: auto;
+        }
+
 
         .modal-content {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
@@ -292,17 +294,32 @@
         }
 
         .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-image-container {
             padding: 1.75rem;
+            max-width: 50%;
         }
 
         .modal-body img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin-bottom: 1.2rem;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            max-height: 300px;
+        }
+
+        .modal-desc-container {
+            padding: 1.75rem;
+            width: 90%;
+            text-align: center;
         }
 
         .modal-desc {
-            font-size: x-large;
+            font-size: 1.5rem;
+            font-weight: bold;
             margin-bottom: 1.75rem;
             color: #ced4da;
         }
@@ -317,12 +334,14 @@
             display: flex;
             flex-direction: column;
             gap: 0.6rem;
+            align-items: center;
+            width: 100%;
         }
 
         .btn-outline-light {
             border: 2px solid #fff;
             border-radius: 10px;
-            padding: 0.9rem 1.75rem;
+            padding: 0.7rem 1.2rem;
             color: #fff;
             background-color: transparent;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -330,7 +349,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
+            width: 70%;
+            max-width: 300px;
+            margin: 0 auto;
+            text-decoration: none;
+
         }
 
         .btn-outline-light:hover {
@@ -529,7 +552,7 @@
                 }
 
                 if (videoContainer.children.length > 0) {
-                    modalDesc.parentNode.insertBefore(videoContainer, modalDesc.nextSibling);
+
                 }
 
 
@@ -553,7 +576,7 @@
                 let extrasSectionIndex = 1;
                 while (item[`extrasectiontitle${extrasSectionIndex}`]) {
                     const extrasTitle = document.createElement('h4');
-                    extrasTitle.style.fontSize = '1.1rem';
+                    extrasTitle.style.fontSize = '1.5rem';
                     extrasTitle.style.fontWeight = '600';
                     extrasTitle.style.marginTop = '1.5rem';
                     extrasTitle.style.marginBottom = '0.5rem';
@@ -782,19 +805,10 @@
     <div class="hero">
         <div>
             <h1>Hevilz Mods ™</h1>
-            <p>
-                حزم هفلز في مكان واحد
-                <br>
-                تم جمعها و ترتيبها بحيث يكون الوصول لها سهل
-                <br>
-                تم بناء و ادارة الموقع من قبل
-                <br>
-                <strong>S_صقر</strong>
-                <br>
-                الروابط من
-                <br>
-                <strong>Hevilz</strong>
-            </p>
+            <h2>موقع هفلز</h2>
+            <br>
+            <h3>جميع محتويات و روابط و شروحات سيرفرنا<br>في مكان واحد مرتبة و منظمة ليتم الوصول اليها بسهولة<br>تم بناء و ادارة الموقع من قبل<br>@Hevilz<br>@BN_LOS (S_صقر)
+            </h3>
         </div>
     </div>
 
@@ -808,11 +822,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img id="modal-img" src="" alt="Item Image" class="img-fluid rounded-3 mb-3"
-                        style="display: none; width: 100%; border-radius: 12px; margin-bottom: 1.2rem">
-                    <p id="modal-desc" class="modal-desc" style="margin-bottom: 1.75rem; color:#ced4da;"></p>
-                    <div id="main-buttons" style="display:flex; flex-direction: column; gap: 0.6rem;"></div>
-                    <div id="modal-extras-container" style="display:flex; flex-direction: column; gap: 0.6rem;"></div>
+                    <div class="modal-image-container">
+                        <img id="modal-img" src="" alt="Item Image" class="img-fluid rounded-3" style="display: none;">
+                    </div>
+
+                    <div class="modal-desc-container">
+                        <p id="modal-desc" class="modal-desc"></p>
+                        <div id="main-buttons"></div>
+                        <div id="modal-extras-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -839,7 +857,7 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
 
 </body>
 
