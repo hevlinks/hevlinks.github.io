@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="black">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hevilz Mods ™</title>
     <link rel="icon" type="image/x-icon" href="src/img/favicon.png">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
             background-image: url('src/img/bg.png');
             background-size: cover;
@@ -18,9 +29,10 @@
             background-attachment: fixed;
             min-height: 100vh;
             width: 100vw;
-            margin: 0;
-            position: relative;
             overflow-x: hidden;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
         }
 
         .overlay {
@@ -29,99 +41,444 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1;
         }
 
-        .hero, .sections-container, .footer {
+        .hero {
             position: relative;
             z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 4rem 2rem;
         }
 
-        .card img {
+        .hero h1 {
+            font-size: clamp(3.5rem, 9vw, 6rem);
+            font-weight: 900;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease-out;
+            color: #f8f9fa;
+        }
+
+        .hero p {
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+            color: #ced4da;
+        }
+
+        .sections-container {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
             width: 100%;
-            height: auto;
-            object-fit: cover;
-            max-height: 200px;
-            border-radius: 8px;
         }
 
-        footer {
-            position: relative;
-        }
-
-        .sections-container .card {
-            position: relative;
-            z-index: 2;
-        }
-
-        .text-container {
-            position: relative;
-            z-index: 3;
-        }
         .section-title-container {
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 3rem;
         }
 
         .section-title-bar {
             flex: 1;
-            height: 5px;
-            background-color: white;
-            margin: 0 10px;
+            height: 4px;
+            background: linear-gradient(to right, #d63384, #f8f9fa);
+            margin: 0 20px;
+            border-radius: 2px;
         }
+
         .section-title-text {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
             white-space: nowrap;
-            padding: 0 10px;
+            padding: 0 15px;
             position: relative;
-            font-size: 2em;
+            animation: glow 3s ease-in-out infinite alternate;
+            color: #f8f9fa;
         }
+
         .section-title-text::before,
         .section-title-text::after {
             content: '';
             position: absolute;
             top: 0;
             height: 100%;
-            width: 5px;
-            background-color: white;
+            width: 4px;
+            background: linear-gradient(to bottom, #d63384, #f8f9fa);
+            border-radius: 2px;
         }
+
         .section-title-text::before {
-            left: -10px;
+            left: -20px;
         }
 
         .section-title-text::after {
-            right: -10px;
+            right: -20px;
         }
-         .modal-box > * {
-            margin-left: auto;
-            margin-right: auto;
-             display: block;
 
-          }
-          .modal-box a {
-              text-align: center;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-          }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 15px #fff, 0 0 25px #fff, 0 0 35px #d63384
+            }
+
+            to {
+                text-shadow: 0 0 25px #fff, 0 0 35px #fff, 0 0 45px #d63384
+            }
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 1200px) {
+            .section-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .card img {
+                max-height: 120px;
+            }
+
+            .modal-dialog {
+                max-width: 98%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .section-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .card-container {
+            perspective: 1200px;
+            margin-bottom: 0;
+
+        }
+
+        .card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: rotateY(12deg) scale(1.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            max-height: 180px;
+            border-radius: 18px 18px 0 0;
+        }
+
+
+        .card-body {
+            padding: 1.75rem;
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: #f8f9fa;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-text {
+            font-size: 1.05rem;
+            color: #ced4da;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+
+        .form-select {
+            appearance: none;
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            padding: 0.9rem 1.1rem;
+            color: #fff;
+            width: 100%;
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff' width='20px' height='20px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.1rem center;
+            background-size: 20px;
+            margin-top: auto;
+
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #d63384;
+            box-shadow: 0 0 0 4px rgba(214, 51, 132, 0.3);
+        }
+
+        .form-select option {
+            background-color: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 0.6rem;
+        }
+
+
+        .modal {
+            z-index: 1055 !important;
+        }
+
+        .modal-dialog {
+             max-width: 50%;
+             margin: 1.75rem auto;
+ 
+         }
+
+        .modal-content {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 1.2rem 1.75rem;
+        }
+
+        .modal-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 1.75rem;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-desc {
+            font-size: x-large;
+            margin-bottom: 1.75rem;
+            color: #ced4da;
+        }
+
+        .modal-body h3,
+        .modal-body h4 {
+            color: #f8f9fa;
+        }
+
+        #main-buttons,
         #modal-extras-container {
             display: flex;
             flex-direction: column;
+            gap: 0.6rem;
         }
-       #main-buttons {
+
+        .btn-outline-light {
+            border: 2px solid #fff;
+            border-radius: 10px;
+            padding: 0.9rem 1.75rem;
+            color: #fff;
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            font-size: 1.1rem;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
-        @font-face {
-            font-family: 'BiohazardX';
-            src: url('src/font/Biohazard.otf') format('opentype');
+
+        .btn-outline-light:hover {
+            background-color: #fff;
+            color: #000;
+            transform: scale(1.07);
+        }
+
+        footer {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+
+        }
+
+
+        .credits {
+            text-align: left;
+            flex: 1 1 300px;
+            margin-right: 2.5rem;
+        }
+
+        .credit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .credit-item img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin-right: 1.2rem;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .credit-item.main-credit img {
+            width: 90px;
+            height: 90px;
+            border-width: 3px;
+        }
+
+        .credit-item span {
+            font-size: 1.1rem;
+            color: #ced4da;
+        }
+
+        .credit-item.main-credit span {
+            font-size: 1.4rem;
+            color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .social-links {
+            flex: 1 1 300px;
+            text-align: center;
+        }
+
+        .social-links h6 {
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+            color: #f8f9fa;
+        }
+
+        .social-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.9rem;
+            margin: 0 0.9rem;
+            transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
+            display: inline-block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-6px);
+            color: #d63384;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 767.98px) {
+
+            .credits,
+            .social-links {
+                flex: 1 1 100%;
+                margin-right: 0;
+                text-align: center;
+            }
+
+            .credit-item {
+                justify-content: center;
+            }
+
+            .section-title-text {
+                font-size: 1.6rem;
+            }
+        }
+
+        .max-h-32 {
+            max-height: 9rem;
+        }
+
+        .modal-open {
+            padding-right: 0 !important;
         }
     </style>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const openModal = (item) => {
+
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
                 const modalTitle = document.getElementById("modal-title");
@@ -132,7 +489,7 @@
                 modalImg.src = '';
                 modalImg.style.display = 'none';
                 modalTitle.textContent = '';
-                modalDesc.innerHTML = ''; // Use innerHTML
+                modalDesc.innerHTML = '';
                 mainButtonsContainer.innerHTML = '';
                 modalExtrasContainer.innerHTML = '';
 
@@ -142,18 +499,23 @@
                 }
 
                 modalTitle.textContent = item.title || 'Untitled Item';
-                modalDesc.innerHTML = item.desc || 'No description available.';  // Setting directly to innerHTML
+                modalDesc.innerHTML = item.desc || 'No description available.';
 
                 const videoContainer = document.createElement('div');
-                videoContainer.classList.add('flex', 'flex-wrap', 'justify-center', 'mt-4', 'mb-4');
+                videoContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center', 'mt-4', 'mb-4');
+
                 let videoIndex = 1;
                 while (item[`vidlink${videoIndex}`] && item[`vidimg${videoIndex}`]) {
                     if (item[`vidtitle${videoIndex}`]) {
                         const videoTitle = document.createElement('h3');
                         videoTitle.textContent = item[`vidtitle${videoIndex}`];
-                        videoTitle.classList.add('text-lg','font-semibold', 'mt-2', 'mb-1');
+                        videoTitle.style.fontSize = '1.25rem';
+                        videoTitle.style.fontWeight = '600';
+                        videoTitle.style.marginTop = '0.5rem';
+                        videoTitle.style.marginBottom = '0.25rem';
                         videoContainer.appendChild(videoTitle);
                     }
+
                     const videoLink = document.createElement('a');
                     videoLink.href = item[`vidlink${videoIndex}`];
                     videoLink.target = "_blank";
@@ -165,86 +527,174 @@
                     videoContainer.appendChild(videoLink);
                     videoIndex++;
                 }
+
                 if (videoContainer.children.length > 0) {
                     modalDesc.parentNode.insertBefore(videoContainer, modalDesc.nextSibling);
                 }
+
 
                 if (item.tutlink) {
                     const tutorialButton = document.createElement('a');
                     tutorialButton.href = item.tutlink;
                     tutorialButton.textContent = 'YouTube | الشرح و التركيب';
-                    tutorialButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                    tutorialButton.classList.add('btn-outline-light');
                     tutorialButton.target = "_blank";
                     mainButtonsContainer.appendChild(tutorialButton);
                 }
+
                 if (item.downloadlink) {
                     const downloadButton = document.createElement('a');
                     downloadButton.href = item.downloadlink;
                     downloadButton.textContent = 'Download | التنزيل';
-                    downloadButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                    downloadButton.classList.add('btn-outline-light');
                     downloadButton.target = "_blank";
                     mainButtonsContainer.appendChild(downloadButton);
                 }
-
                 let extrasSectionIndex = 1;
                 while (item[`extrasectiontitle${extrasSectionIndex}`]) {
-                   const extrasTitle = document.createElement('h4');
-                    extrasTitle.classList.add('text-lg', 'font-semibold', 'mt-6', 'mb-2');
-                     extrasTitle.textContent = item[`extrasectiontitle${extrasSectionIndex}`];
-                     modalExtrasContainer.appendChild(extrasTitle);
-                   let includedExtras = [];
+                    const extrasTitle = document.createElement('h4');
+                    extrasTitle.style.fontSize = '1.1rem';
+                    extrasTitle.style.fontWeight = '600';
+                    extrasTitle.style.marginTop = '1.5rem';
+                    extrasTitle.style.marginBottom = '0.5rem';
+                    extrasTitle.textContent = item[`extrasectiontitle${extrasSectionIndex}`];
+                    modalExtrasContainer.appendChild(extrasTitle);
+                    let includedExtras = [];
                     if (item[`extrasection${extrasSectionIndex}`]) {
-                         includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
-                         includedExtras.forEach(extraNum => {
+                        includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
+
+                        includedExtras.forEach(extraNum => {
+
                             if (item[`extra${extraNum}`] && item[`extralink${extraNum}`]) {
-                               const extraButton = document.createElement('a');
+                                const extraButton = document.createElement('a');
                                 extraButton.href = item[`extralink${extraNum}`];
                                 extraButton.textContent = item[`extra${extraNum}`];
-                                 extraButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
-                                 extraButton.target = "_blank";
-                                  modalExtrasContainer.appendChild(extraButton);
+                                extraButton.classList.add('btn-outline-light');
+                                extraButton.target = "_blank";
+                                modalExtrasContainer.appendChild(extraButton);
                             }
                         });
-                     }
+                    }
                     extrasSectionIndex++;
                 }
-                 if (extrasSectionIndex === 1) {
+
+                if (extrasSectionIndex === 1) {
                     let extraIndex = 1;
-                   while (item[`extra${extraIndex}`]) {
+                    while (item[`extra${extraIndex}`]) {
                         if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
-                           const extraButton = document.createElement('a');
-                           extraButton.href = item[`extralink${extraIndex}`];
-                           extraButton.textContent = item[`extra${extraIndex}`];
-                            extraButton.classList.add('btn', 'btn-outline', 'mb-3', 'text-lg');
+                            const extraButton = document.createElement('a');
+                            extraButton.href = item[`extralink${extraIndex}`];
+                            extraButton.textContent = item[`extra${extraIndex}`];
+                            extraButton.classList.add('btn-outline-light');
                             extraButton.target = "_blank";
                             modalExtrasContainer.appendChild(extraButton);
                         }
-                       extraIndex++;
-                   }
+                        extraIndex++;
+                    }
                 }
 
-                modal.showModal();
+                const modalElement = new bootstrap.Modal(modal);
+                modalElement.show();
             };
 
-            Promise.all([fetch('sections.json').then(response => response.json()), fetch('sections2.json').then(response => response.json()), fetch('data.json').then(response => response.json())])
+            function createSectionCard(section, data) {
+
+                const sectionData = data.filter(item => item.section === section.title);
+
+
+                if (sectionData.length === 0) {
+                    return null;
+                }
+
+
+                const cardContainer = document.createElement('div');
+                cardContainer.classList.add('card-container');
+                const card = document.createElement('div');
+                card.classList.add('card', 'h-100');
+
+                if (section.imgheader) {
+                    const img = document.createElement('img');
+                    img.src = section.imgheader;
+                    img.alt = section.title || 'Section Image';
+                    img.classList.add('card-img-top');
+                    card.appendChild(img);
+                }
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = section.title;
+                cardBody.appendChild(title);
+
+
+                if (section.desc) {
+                    const desc = document.createElement('p');
+                    desc.classList.add('card-text');
+                    desc.textContent = section.desc;
+                    cardBody.appendChild(desc);
+                }
+                const selectMenu = document.createElement('div');
+
+                const select = document.createElement('select');
+                select.classList.add('form-select');
+                select.setAttribute('data-section-title', section.title || 'Item');
+
+                const defaultOption = document.createElement('option');
+                defaultOption.textContent = `Select from ${section.title || 'Item'}`;
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                select.appendChild(defaultOption);
+
+
+                sectionData.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.title;
+                    option.textContent = item.title;
+                    select.appendChild(option);
+                });
+
+                select.addEventListener('change', (e) => {
+                    const selectedTitle = e.target.value;
+
+                    const selectedItem = sectionData.find(item => item.title === selectedTitle);
+                    if (selectedItem) {
+                        openModal(selectedItem);
+                    }
+                });
+                selectMenu.appendChild(select);
+                cardBody.appendChild(selectMenu);
+
+                card.appendChild(cardBody);
+                cardContainer.appendChild(card);
+                return cardContainer;
+            }
+
+            Promise.all([
+                fetch('sections.json').then(response => response.json()),
+                fetch('sections2.json').then(response => response.json()),
+                fetch('data.json').then(response => response.json())
+            ])
                 .then(([sections1, sections2, data]) => {
                     const sectionsContainer = document.querySelector('.sections-container');
 
                     const section1TitleBox = document.createElement('div');
-                    section1TitleBox.classList.add('mb-8');
+                    section1TitleBox.classList.add('mb-4');
                     const section1TitleContainer = document.createElement('div');
                     section1TitleContainer.classList.add('section-title-container');
+
                     const section1TitleBarLeft = document.createElement('div');
                     section1TitleBarLeft.classList.add('section-title-bar');
                     const hevilz4ModsText1 = document.createElement('span');
-                    hevilz4ModsText1.textContent = "";
-                    hevilz4ModsText1.classList.add('text-2xl', 'font-semibold', 'mr-2', 'text-outline')
+                    hevilz4ModsText1.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
                     const hevilz4ModsImg1 = document.createElement('img');
                     hevilz4ModsImg1.src = "src/img/4icon.png";
                     hevilz4ModsImg1.alt = "hevilz 4 mods";
-                    hevilz4ModsImg1.classList.add('h-12', 'w-auto', 'inline','mr-2', 'align-middle');
+                    hevilz4ModsImg1.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
+
                     const section1Title = document.createElement('h2');
-                    section1Title.classList.add('text-3xl', 'font-semibold', 'section-title-text');
+                    section1Title.classList.add('section-title-text');
                     section1Title.textContent = "Hevilz Mods | مودات هفلز";
                     const section1TitleBarRight = document.createElement('div');
                     section1TitleBarRight.classList.add('section-title-bar');
@@ -257,207 +707,140 @@
                     section1TitleBox.appendChild(section1TitleContainer);
 
                     const section1Grid = document.createElement('div');
-                    section1Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
+                    section1Grid.classList.add('section-grid');
+
+                    sectionsContainer.appendChild(section1TitleBox);
+                    sectionsContainer.appendChild(section1Grid);
 
                     sections1.forEach(section => {
                         const card = createSectionCard(section, data);
-                        section1Grid.appendChild(card);
+                        if (card) {
+                            section1Grid.appendChild(card);
+                        }
                     });
-                    section1TitleBox.appendChild(section1Grid);
-                    sectionsContainer.appendChild(section1TitleBox);
 
                     const section2TitleBox = document.createElement('div');
-                    section2TitleBox.classList.add('mb-8');
+                    section2TitleBox.classList.add('mb-4');
+
                     const section2TitleContainer = document.createElement('div');
                     section2TitleContainer.classList.add('section-title-container');
                     const section2TitleBarLeft = document.createElement('div');
                     section2TitleBarLeft.classList.add('section-title-bar');
                     const hevilz4ModsText2 = document.createElement('span');
-                    hevilz4ModsText2.textContent = "";
-                    hevilz4ModsText2.classList.add('text-2xl', 'font-semibold', 'mr-2', 'text-outline')
+                    hevilz4ModsText2.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
+
                     const hevilz4ModsImg2 = document.createElement('img');
                     hevilz4ModsImg2.src = "src/img/4icon.png";
                     hevilz4ModsImg2.alt = "hevilz 4 mods";
-                    hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline','mr-2', 'align-middle');
+                    hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
                     const section2Title = document.createElement('h2');
-                    section2Title.classList.add('text-3xl', 'font-semibold', 'section-title-text');
+                    section2Title.classList.add('section-title-text');
                     section2Title.textContent = "مودات التختيم";
                     const section2TitleBarRight = document.createElement('div');
                     section2TitleBarRight.classList.add('section-title-bar');
+
                     section2TitleContainer.appendChild(hevilz4ModsText2);
                     section2TitleContainer.appendChild(hevilz4ModsImg2);
                     section2TitleContainer.appendChild(section2TitleBarLeft);
                     section2TitleContainer.appendChild(section2Title);
                     section2TitleContainer.appendChild(section2TitleBarRight);
-                    section2TitleBox.appendChild(section2TitleContainer);
 
+                    section2TitleBox.appendChild(section2TitleContainer);
                     const section2Grid = document.createElement('div');
-                    section2Grid.classList.add('grid', 'grid-cols-4', 'sm:grid-cols-1', 'lg:grid-cols-6', 'gap-6');
+                    section2Grid.classList.add('section-grid');
+
+                    sectionsContainer.appendChild(section2TitleBox);
+                    sectionsContainer.appendChild(section2Grid);
 
                     sections2.forEach(section => {
                         const card = createSectionCard(section, data);
-                        section2Grid.appendChild(card);
-                    });
-                    section2TitleBox.appendChild(section2Grid);
-                    sectionsContainer.appendChild(section2TitleBox);
-
-                    const closeModalButton = document.querySelector("button");
-                    closeModalButton.addEventListener('click', () => {
-                        const modal = document.getElementById("data_modal");
-                        const select = modal.querySelector('select');
-
-
-                        if (select) {
-                            select.selectedIndex = 0;
+                        if (card) {
+                            section2Grid.appendChild(card);
                         }
 
-                        modal.close();
-                    });
-
-                    window.addEventListener('click', (event) => {
-                        const modal = document.getElementById("data_modal");
-                        if (event.target === modal) {
-                            closeModalButton.click();
-                        }
                     });
                 })
                 .catch(error => {
                     console.error('Error fetching JSON files:', error);
                 });
 
-            function createSectionCard(section, data) {
-                const card = document.createElement('div');
-                card.classList.add('card', 'p-4', 'rounded-lg', 'shadow-lg', 'hover:scale-105', 'transition-transform');
 
-                if (section.imgheader) {
-                    const img = document.createElement('img');
-                    img.src = section.imgheader;
-                    img.alt = section.title || 'Section Image';
-                    img.classList.add('w-full', 'h-40', 'object-cover', 'rounded-lg');
-                    card.appendChild(img);
+            document.getElementById('data_modal').addEventListener('hidden.bs.modal', function (event) {
+                const modal = document.getElementById("data_modal");
+                const select = modal.querySelector('select');
+                if (select) {
+                    select.selectedIndex = 0;
                 }
-
-                if (section.title) {
-                    const title = document.createElement('h3');
-                    title.classList.add('text-lg', 'font-semibold', 'text-outline');
-                     const titleSpan = document.createElement('span');
-                     titleSpan.textContent = section.title;
-                    title.appendChild(titleSpan);
-                    card.appendChild(title);
-                }
-
-                if (section.desc) {
-                    const desc = document.createElement('p');
-                    desc.classList.add('text-sm', 'text-gray-300', 'mb-4');
-                    desc.textContent = section.desc;
-                    card.appendChild(desc);
-                }
-
-                const selectMenu = document.createElement('div');
-                selectMenu.classList.add('w-full', 'text-white', 'border', 'border-base-400', 'rounded-lg', 'mt-4');
-
-                const select = document.createElement('select');
-                select.classList.add('select', 'select-bordered', 'w-full', 'max-w-xs');
-                select.setAttribute('data-section-title', section.title || 'Item');
-
-                const defaultOption = document.createElement('option');
-                defaultOption.textContent = `Select from ${section.title || 'Item'}`;
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                select.appendChild(defaultOption);
-
-                const sectionItems = data.filter(item => item.section === section.title);
-                sectionItems.forEach(item => {
-                    if (item.title) {
-                        const option = document.createElement('option');
-                        option.value = item.title;
-                        option.textContent = item.title;
-                        select.appendChild(option);
-                    }
-                });
-
-                select.addEventListener('change', (e) => {
-                    const selectedTitle = e.target.value;
-                    const selectedItem = data.find(item => item.title === selectedTitle);
-                    if (selectedItem) {
-                        openModal(selectedItem);
-                    }
-                });
-
-                selectMenu.appendChild(select);
-                card.appendChild(selectMenu);
-
-                return card;
-            }
+            });
         });
     </script>
 </head>
-<body class="text-white flex flex-col min-h-screen">
+
+<body>
     <div class="overlay"></div>
 
-    <div class="hero min-h-screen">
-        <div class="hero-content text-center text-container">
-            <div class="max-w-md">
-                <h1 class="text-3xl font-bold">Hevilz Mods ™</h1>
-                <p class="text text-center text-2xl">
-                    حزم هفلز في مكان واحد
-                    <br>
-                    تم جمعها و ترتيبها بحيث يكون الوصول لها سهل
-                    <br>
-                    تم بناء و ادارة الموقع من قبل
-                    <br>
-                    <strong>S_صقر</strong>
-                    <br>
-                    الروابط من
-                    <br>
-                    <strong>Hevilz</strong>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="sections-container flex flex-col gap-8 p-6 flex-grow">
-    </div>
-
-    <dialog id="data_modal" class="modal">
-        <div class="modal-box">
-            <form method="dialog">
-                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            </form>
-            <h3 id="modal-title" class="text-lg font-bold">Item Title</h3>
-            <p id="modal-desc" class="py-4">Item Description</p>
-            <img id="modal-img" src="" alt="Item Image" class="max-w-full h-auto mt-4 mb-4 rounded-xl">
-            <div id="main-buttons"></div>
-            <div id="modal-extras-container"></div>
-        </div>
-    </dialog>
-
-    <footer class="footer footer-center">
-        <aside>
-            <img src="src/img/favicon.png" alt="Hevilz" width="128" height="128">
-            <p class="text-center text-2xl">
-                Links by Hevilz
-                <br />
-                Website by BN_LOS
+    <div class="hero">
+        <div>
+            <h1>Hevilz Mods ™</h1>
+            <p>
+                حزم هفلز في مكان واحد
+                <br>
+                تم جمعها و ترتيبها بحيث يكون الوصول لها سهل
+                <br>
+                تم بناء و ادارة الموقع من قبل
+                <br>
+                <strong>S_صقر</strong>
+                <br>
+                الروابط من
+                <br>
+                <strong>Hevilz</strong>
             </p>
-        </aside>
-        <nav>
-            <h6 class="footer-title">Social</h6>
-            <div class="grid grid-flow-col gap-4">
-                <a href="https://www.twitch.tv/hevillz" target="_blank">
-                    <i class="fab fa-twitch text-white text-2xl"></i>
-                </a>
-                <a href="https://www.youtube.com/@Hevilz" target="_blank">
-                    <i class="fab fa-youtube text-white text-2xl"></i>
-                </a>
-                <a href="https://www.instagram.com/hevillz" target="_blank">
-                    <i class="fab fa-instagram text-white text-2xl"></i>
-                </a>
-                <a href="https://discord.gg/GE7vwg6Asq" target="_blank">
-                    <i class="fab fa-discord text-white text-2xl"></i>
-                </a>
+        </div>
+    </div>
+
+    <div class="sections-container">
+    </div>
+    <div class="modal fade" id="data_modal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modal-img" src="" alt="Item Image" class="img-fluid rounded-3 mb-3"
+                        style="display: none; width: 100%; border-radius: 12px; margin-bottom: 1.2rem">
+                    <p id="modal-desc" class="modal-desc" style="margin-bottom: 1.75rem; color:#ced4da;"></p>
+                    <div id="main-buttons" style="display:flex; flex-direction: column; gap: 0.6rem;"></div>
+                    <div id="modal-extras-container" style="display:flex; flex-direction: column; gap: 0.6rem;"></div>
+                </div>
             </div>
-        </nav>
+        </div>
+    </div>
+
+    <footer>
+        <div class="credits">
+            <div class="credit-item main-credit">
+                <img src="https://yt3.googleusercontent.com/wrByv6p6KNWlS7fmvvm5h74AJpYhpMokAl5pQOIWYLSc3aGqyIXKn2uIDNLljnscwZqeikqy_w=s160-c-k-c0x00ffffff-no-rj" alt="S_صقر">
+                <span>Hevilz</span>
+            </div>
+            <div class="credit-item">
+                <img src="https://yt3.googleusercontent.com/L8F5PxkFZJg9fvLC6kA3kisWVDmaCCm0nc4drudFBvhegKWMH9RecWWwxiVnU2fFzudVw9O1eto=s160-c-k-c0x00ffffff-no-rj" alt="BN_LOS">
+                <span>BN_LOS</span>
+            </div>
+        </div>
+        <div class="social-links">
+            <h6>Hevilz's Social Links</h6>
+            <div class="social-icons">
+                <a href="https://www.twitch.tv/hevillz" target="_blank"><i class="fab fa-twitch"></i></a>
+                <a href="https://www.youtube.com/@Hevilz" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/hevillz" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://discord.gg/GE7vwg6Asq" target="_blank"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
