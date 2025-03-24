@@ -1,13 +1,5 @@
 [
     {
-        "title": "Golden Rose",
-        "desc": "فكرة المود و طريقة التركيب موجودة داخل المقطع",
-        "img": "https://i.ytimg.com/vi/6Bz4LC8eSpE/hqdefault.jpg",
-        "downloadlink": "https://www.mediafire.com/file/3sayd6j38n2c3nk/Golden+Rose+Pack+Mod+(+Free+Release+).rar/file",
-        "tutlink": "https://www.youtube.com/watch?v=6Bz4LC8eSpE",
-        "section": "Weapons"
-    },
-    {
         "title": "Ultimate Weapons Retexture",
         "desc": "فكرة المود و طريقة التركيب موجودة داخل المقطع",
         "img": "https://i.ytimg.com/vi/RYWLKGsnPeE/hqdefault.jpg",
@@ -1706,5 +1698,58 @@
         "extratitle": "no",
         "tutlink": "",
         "section": "61-70"
+    },
+    {
+        "title": "71 - Corrupted World",
+        "desc": "By: NM<br><br>طريقة التركيب داخل المقطع<br><br>Password: NM<br>كلمة المرور: NM",
+        "img": "",
+        "downloadlink": "",
+        "extrasection1": "1",
+        "extrasectiontitle1": "مقاطع التركيب",
+        "extrasection2": "2",
+        "extrasectiontitle2": "الروابط",
+        "extra1": "Corrupted World | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=POo1JPnESyE",
+        "extra2": "Corrupted World | المود",
+        "extralink2": "https://www.mediafire.com/file/zrajvtx1z9way94/Corrupted_World.rar/file",
+        "extratitle": "no",
+        "tutlink": "",
+        "section": "71-80"
+    },
+    {
+        "title": "72 - Breaking Skulls",
+        "desc": "By: ZFGAMING<br><br>طريقة التركيب داخل المقطع",
+        "img": "",
+        "downloadlink": "",
+        "extrasection1": "1",
+        "extrasectiontitle1": "مقاطع التركيب",
+        "extrasection2": "2, 3",
+        "extrasectiontitle2": "الروابط",
+        "extra1": "Breaking Skulls | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=HCFFssyRuEo",
+        "extra2": "Breaking Skulls | المود",
+        "extralink2": "https://mega.nz/file/3h4jmZ7C#EjYoAH1rSZCUCxx3eH5ZJZTbnqoBi3jfkukwEZekVp8",
+        "extra3": "BS Patch | باتش",
+        "extralink3": "https://mega.nz/file/GtR2USKL#FkejeBNrg4W0wLAkMGtD8zDDr3PFnl_n4R3Ky58JRiM",
+        "extratitle": "no",
+        "tutlink": "",
+        "section": "71-80"
+    },
+    {
+        "title": "73 - Straight To Hell",
+        "desc": "By: MearFull<br><br>طريقة التركيب داخل المقطع<br><br>Password: MFL7<br>كلمة المرور: MFL7",
+        "img": "",
+        "downloadlink": "",
+        "extrasection1": "1",
+        "extrasectiontitle1": "مقاطع التركيب",
+        "extrasection2": "2",
+        "extrasectiontitle2": "الروابط",
+        "extra1": "Straight To Hell | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=rbJqUAncbfc",
+        "extra2": "Straight To Hell | المود",
+        "extralink2": "https://www.mediafire.com/file/8e4d52yr7dpfuhp/RE4-UHD_Straight_To_Hell.rar/file",
+        "extratitle": "no",
+        "tutlink": "",
+        "section": "71-80"
     }
 ]
