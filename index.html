@@ -34,7 +34,7 @@
             flex-direction: column;
         }
 
-        .overlay {
+        .full-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -42,6 +42,101 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             z-index: 1;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+            backdrop-filter: blur(12px);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .header-left img {
+            height: 2.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .header-left span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-bar-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        #search-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.2rem;
+        }
+
+        #search-input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            list-style: none;
+            padding: 0.25rem 0;
+            margin: 0;
+            display: none;
+            z-index: 11;
+        }
+
+        #search-results li {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        #search-results li:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #search-results li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
         }
 
         .hero {
@@ -53,6 +148,7 @@
             min-height: 100vh;
             text-align: center;
             padding: 4rem 2rem;
+            margin-top: 4rem; /* Account for the top bar */
         }
 
         .hero h1 {
@@ -168,6 +264,31 @@
         @media (max-width: 500px) {
             .section-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+           .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                height: auto;
+                padding: 0.5rem;
+            }
+
+            .header-left {
+                margin-bottom: 0.5rem;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .header-left img {
+                margin: 0 0.5rem 0 0;
+            }
+
+            .search-bar-container {
+                 width: 100%;
+            }
+
+            #search-container {
+                max-width: 100%; /* Adjust as needed */
             }
         }
 
@@ -470,20 +591,29 @@
         }
 
         @media (max-width: 767.98px) {
+           .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                height: auto;
+                padding: 0.5rem;
+            }
 
-            .credits,
-            .social-links {
-                flex: 1 1 100%;
-                margin-right: 0;
+            .header-left {
+                margin-bottom: 0.5rem;
+                justify-content: center;
                 text-align: center;
             }
 
-            .credit-item {
-                justify-content: center;
+            .header-left img {
+                margin: 0 0.5rem 0 0;
             }
 
-            .section-title-text {
-                font-size: 1.6rem;
+            .search-bar-container {
+                 width: 100%;
+            }
+
+            #search-container {
+                max-width: 100%; /* Adjust as needed */
             }
         }
 
@@ -494,10 +624,18 @@
         .modal-open {
             padding-right: 0 !important;
         }
+
+        .text-outline {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
     </style>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            let allData = []; // Store all item data for search
+            const searchInput = document.getElementById('search-input');
+            const searchResultsList = document.getElementById('search-results');
+
             const openModal = (item) => {
 
                 const modal = document.getElementById("data_modal");
@@ -569,7 +707,7 @@
                     downloadButton.textContent = 'Download | التنزيل';
                     downloadButton.classList.add('btn-outline-light');
                     downloadButton.target = "_blank";
-                    mainButtonsContainer.appendChild(downloadButton);
+                    mainButtonsContainer.appendChild(tutorialButton);
                 }
                 let extrasSectionIndex = 1;
                 while (item[`extrasectiontitle${extrasSectionIndex}`]) {
@@ -692,12 +830,65 @@
                 return cardContainer;
             }
 
+            // Function to perform the search
+            const performSearch = (searchTerm) => {
+                const results = allData.filter(item =>
+                    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                return results;
+            };
+
+            // Function to display search results
+            const displayResults = (results) => {
+                searchResultsList.innerHTML = ''; // Clear previous results
+
+                if (results.length === 0 && searchInput.value.trim() !== '') {
+                    const noResultsItem = document.createElement('li');
+                    noResultsItem.textContent = 'No results found.';
+                    searchResultsList.appendChild(noResultsItem);
+                } else {
+                    results.forEach(item => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = '#'; // Prevent page jump
+                        link.textContent = item.title;
+                        listItem.appendChild(link);
+
+                        listItem.addEventListener('click', () => {
+                            openModal(item);
+                            searchResultsList.style.display = 'none'; // Hide after selection
+                            searchInput.value = ''; // Clear the input
+                        });
+                        searchResultsList.appendChild(listItem);
+                    });
+                }
+
+                searchResultsList.style.display = results.length > 0 || searchInput.value.trim() !== '' ? 'block' : 'none'; // Show/hide list
+
+            };
+
+            // Event listener for search input
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.trim(); // Trim whitespace
+                const results = performSearch(searchTerm);
+                displayResults(results);
+            });
+
+            // Close search results on outside click
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('#search-container')) {
+                    searchResultsList.style.display = 'none';
+                }
+            });
+
             Promise.all([
                 fetch('sections.json').then(response => response.json()),
                 fetch('sections2.json').then(response => response.json()),
                 fetch('data.json').then(response => response.json())
             ])
                 .then(([sections1, sections2, data]) => {
+                    allData = data; // Store the data
+
                     const sectionsContainer = document.querySelector('.sections-container');
 
                     const section1TitleBox = document.createElement('div');
@@ -798,7 +989,20 @@
 </head>
 
 <body>
-    <div class="overlay"></div>
+    <div class="full-overlay"></div>
+
+    <div class="top-bar">
+        <div class="header-left">
+            <img src="src/img/4icon.png" alt="Hevilz Mods Icon">
+            <span>Hevilz Mods</span>
+        </div>
+        <div class="search-bar-container">
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Search items...">
+                <ul id="search-results"></ul>
+            </div>
+        </div>
+    </div>
 
     <div class="hero">
         <div>
