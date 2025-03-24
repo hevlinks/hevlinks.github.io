@@ -1,5 +1,10 @@
 [
     {
+        "title": "Additionals",
+        "desc": "امور اضافية",
+        "imgheader": "src/img2/adds.png"
+    },
+    {
         "title": "1-10",
         "desc": "مودات التختيم من 1 الى 10",
         "imgheader": "src/img2/1-10.png"
@@ -25,18 +30,18 @@
         "imgheader": "src/img2/41-50.png"
     },
     {
-        "title": "51-55",
-        "desc": "مودات التختيم من 51 الى 55",
-        "imgheader": "src/img2/51-55.png"
-    },
-    {
-        "title": "56-60",
-        "desc": "مودات التختيم من 56 الى 60",
-        "imgheader": "src/img2/56-60.png"
+        "title": "51-60",
+        "desc": "مودات التختيم من 51 الى 60",
+        "imgheader": "src/img2/51-60.png"
     },
     {
         "title": "61-70",
         "desc": "مودات التختيم من 61 الى 70",
         "imgheader": "src/img2/61-70.png"
+    },
+    {
+        "title": "71-72",
+        "desc": "مودات التختيم من 71 الى 72",
+        "imgheader": "src/img2/71-72.png"
     }
 ]
