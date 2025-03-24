@@ -692,8 +692,12 @@
                 }
 
 
+                // Moved button creation outside the if statements to prevent ReferenceError
+                let tutorialButton, downloadButton;
+
+
                 if (item.tutlink) {
-                    const tutorialButton = document.createElement('a');
+                    tutorialButton = document.createElement('a');
                     tutorialButton.href = item.tutlink;
                     tutorialButton.textContent = 'YouTube | الشرح و التركيب';
                     tutorialButton.classList.add('btn-outline-light');
@@ -702,13 +706,14 @@
                 }
 
                 if (item.downloadlink) {
-                    const downloadButton = document.createElement('a');
+                    downloadButton = document.createElement('a');
                     downloadButton.href = item.downloadlink;
                     downloadButton.textContent = 'Download | التنزيل';
                     downloadButton.classList.add('btn-outline-light');
                     downloadButton.target = "_blank";
-                    mainButtonsContainer.appendChild(tutorialButton);
+                    mainButtonsContainer.appendChild(downloadButton);
                 }
+
                 let extrasSectionIndex = 1;
                 while (item[`extrasectiontitle${extrasSectionIndex}`]) {
                     const extrasTitle = document.createElement('h4');
@@ -816,8 +821,7 @@
 
                 select.addEventListener('change', (e) => {
                     const selectedTitle = e.target.value;
-
-                    const selectedItem = sectionData.find(item => item.title === selectedTitle);
+                    const selectedItem = data.find(item => item.title === selectedTitle); // Use the allData array
                     if (selectedItem) {
                         openModal(selectedItem);
                     }
