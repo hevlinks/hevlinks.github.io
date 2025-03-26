@@ -4,13 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hevilz Mods ™</title>
+    <title>Hevilz Mods</title>
     <link rel="icon" type="image/x-icon" href="src/img/favicon.png">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
         *,
         *::before,
@@ -148,7 +145,7 @@
             min-height: 100vh;
             text-align: center;
             padding: 4rem 2rem;
-            margin-top: 4rem; /* Account for the top bar */
+            margin-top: 4rem;
         }
 
         .hero h1 {
@@ -239,6 +236,7 @@
             gap: 1.5rem;
             width: 100%;
             margin-bottom: 3rem;
+            padding: 50px;
         }
 
         @media (max-width: 1200px) {
@@ -266,7 +264,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-           .top-bar {
+            .top-bar {
                 flex-direction: column;
                 align-items: stretch;
                 height: auto;
@@ -284,18 +282,17 @@
             }
 
             .search-bar-container {
-                 width: 100%;
+                width: 100%;
             }
 
             #search-container {
-                max-width: 100%; /* Adjust as needed */
+                max-width: 100%;
             }
         }
 
         .card-container {
             perspective: 1200px;
             margin-bottom: 0;
-
         }
 
         .card {
@@ -324,7 +321,6 @@
             border-radius: 18px 18px 0 0;
         }
 
-
         .card-body {
             padding: 1.75rem;
             position: relative;
@@ -349,7 +345,6 @@
             flex-grow: 1;
         }
 
-
         .form-select {
             appearance: none;
             background-color: transparent;
@@ -365,7 +360,6 @@
             background-position: right 1.1rem center;
             background-size: 20px;
             margin-top: auto;
-
         }
 
         .form-select:focus {
@@ -380,7 +374,6 @@
             padding: 0.6rem;
         }
 
-
         .modal {
             z-index: 1055 !important;
         }
@@ -391,7 +384,6 @@
             transform: translateY(0);
             overflow-y: auto;
         }
-
 
         .modal-content {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
@@ -472,7 +464,6 @@
             max-width: 300px;
             margin: 0 auto;
             text-decoration: none;
-
         }
 
         .btn-outline-light:hover {
@@ -493,9 +484,7 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: flex-start;
-
         }
-
 
         .credits {
             text-align: left;
@@ -591,7 +580,7 @@
         }
 
         @media (max-width: 767.98px) {
-           .top-bar {
+            .top-bar {
                 flex-direction: column;
                 align-items: stretch;
                 height: auto;
@@ -609,11 +598,11 @@
             }
 
             .search-bar-container {
-                 width: 100%;
+                width: 100%;
             }
 
             #search-container {
-                max-width: 100%; /* Adjust as needed */
+                max-width: 100%;
             }
         }
 
@@ -632,12 +621,12 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let allData = []; // Store all item data for search
+            let allData = [];
+            let searchableData = [];
             const searchInput = document.getElementById('search-input');
             const searchResultsList = document.getElementById('search-results');
 
             const openModal = (item) => {
-
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
                 const modalTitle = document.getElementById("modal-title");
@@ -687,14 +676,9 @@
                     videoIndex++;
                 }
 
-                if (videoContainer.children.length > 0) {
+                if (videoContainer.children.length > 0) {}
 
-                }
-
-
-                // Moved button creation outside the if statements to prevent ReferenceError
                 let tutorialButton, downloadButton;
-
 
                 if (item.tutlink) {
                     tutorialButton = document.createElement('a');
@@ -728,7 +712,6 @@
                         includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
 
                         includedExtras.forEach(extraNum => {
-
                             if (item[`extra${extraNum}`] && item[`extralink${extraNum}`]) {
                                 const extraButton = document.createElement('a');
                                 extraButton.href = item[`extralink${extraNum}`];
@@ -762,14 +745,11 @@
             };
 
             function createSectionCard(section, data) {
-
                 const sectionData = data.filter(item => item.section === section.title);
-
 
                 if (sectionData.length === 0) {
                     return null;
                 }
-
 
                 const cardContainer = document.createElement('div');
                 cardContainer.classList.add('card-container');
@@ -792,7 +772,6 @@
                 title.textContent = section.title;
                 cardBody.appendChild(title);
 
-
                 if (section.desc) {
                     const desc = document.createElement('p');
                     desc.classList.add('card-text');
@@ -811,7 +790,6 @@
                 defaultOption.selected = true;
                 select.appendChild(defaultOption);
 
-
                 sectionData.forEach(item => {
                     const option = document.createElement('option');
                     option.value = item.title;
@@ -821,7 +799,7 @@
 
                 select.addEventListener('change', (e) => {
                     const selectedTitle = e.target.value;
-                    const selectedItem = data.find(item => item.title === selectedTitle); // Use the allData array
+                    const selectedItem = data.find(item => item.title === selectedTitle);
                     if (selectedItem) {
                         openModal(selectedItem);
                     }
@@ -834,17 +812,15 @@
                 return cardContainer;
             }
 
-            // Function to perform the search
             const performSearch = (searchTerm) => {
-                const results = allData.filter(item =>
+                const results = searchableData.filter(item =>
                     item.title.toLowerCase().includes(searchTerm.toLowerCase())
                 );
                 return results;
             };
 
-            // Function to display search results
             const displayResults = (results) => {
-                searchResultsList.innerHTML = ''; // Clear previous results
+                searchResultsList.innerHTML = '';
 
                 if (results.length === 0 && searchInput.value.trim() !== '') {
                     const noResultsItem = document.createElement('li');
@@ -854,31 +830,29 @@
                     results.forEach(item => {
                         const listItem = document.createElement('li');
                         const link = document.createElement('a');
-                        link.href = '#'; // Prevent page jump
+                        link.href = '#';
                         link.textContent = item.title;
                         listItem.appendChild(link);
 
                         listItem.addEventListener('click', () => {
                             openModal(item);
-                            searchResultsList.style.display = 'none'; // Hide after selection
-                            searchInput.value = ''; // Clear the input
+                            searchResultsList.style.display = 'none';
+                            searchInput.value = '';
                         });
                         searchResultsList.appendChild(listItem);
                     });
                 }
 
-                searchResultsList.style.display = results.length > 0 || searchInput.value.trim() !== '' ? 'block' : 'none'; // Show/hide list
-
+                searchResultsList.style.display = results.length > 0 || searchInput.value.trim() !== '' ? 'block' :
+                    'none';
             };
 
-            // Event listener for search input
             searchInput.addEventListener('input', () => {
-                const searchTerm = searchInput.value.trim(); // Trim whitespace
+                const searchTerm = searchInput.value.trim();
                 const results = performSearch(searchTerm);
                 displayResults(results);
             });
 
-            // Close search results on outside click
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('#search-container')) {
                     searchResultsList.style.display = 'none';
@@ -888,10 +862,15 @@
             Promise.all([
                 fetch('sections.json').then(response => response.json()),
                 fetch('sections2.json').then(response => response.json()),
+                fetch('sections3.json').then(response => response.json()),
                 fetch('data.json').then(response => response.json())
             ])
-                .then(([sections1, sections2, data]) => {
-                    allData = data; // Store the data
+                .then(([sections1, sections2, sections3, data]) => {
+                    allData = data;
+                    searchableData = data.filter(item => {
+                        const sectionNames3 = sections3.map(section => section.title)
+                        return !sectionNames3.includes(item.section);
+                    })
 
                     const sectionsContainer = document.querySelector('.sections-container');
 
@@ -975,6 +954,47 @@
                         }
 
                     });
+
+                    const section3TitleBox = document.createElement('div');
+                    section3TitleBox.classList.add('mb-4');
+
+                    const section3TitleContainer = document.createElement('div');
+                    section3TitleContainer.classList.add('section-title-container');
+                    const section3TitleBarLeft = document.createElement('div');
+                    section3TitleBarLeft.classList.add('section-title-bar');
+                    const hevilz4ModsText3 = document.createElement('span');
+                    hevilz4ModsText3.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
+
+                    const hevilz4ModsImg3 = document.createElement('img');
+                    hevilz4ModsImg3.src = "src/img/4icon.png";
+                    hevilz4ModsImg3.alt = "hevilz 4 mods";
+                    hevilz4ModsImg3.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
+                    const section3Title = document.createElement('h2');
+                    section3Title.classList.add('section-title-text');
+                    section3Title.textContent = "تصنيفات المودات";
+                    const section3TitleBarRight = document.createElement('div');
+                    section3TitleBarRight.classList.add('section-title-bar');
+
+                    section3TitleContainer.appendChild(hevilz4ModsText3);
+                    section3TitleContainer.appendChild(hevilz4ModsImg3);
+                    section3TitleContainer.appendChild(section3TitleBarLeft);
+                    section3TitleContainer.appendChild(section3Title);
+                    section3TitleContainer.appendChild(section3TitleBarRight);
+
+                    section3TitleBox.appendChild(section3TitleContainer);
+                    const section3Grid = document.createElement('div');
+                    section3Grid.classList.add('section-grid');
+
+                    sectionsContainer.appendChild(section3TitleBox);
+                    sectionsContainer.appendChild(section3Grid);
+
+                    sections3.forEach(section => {
+                        const card = createSectionCard(section, data);
+                        if (card) {
+                            section3Grid.appendChild(card);
+                        }
+                    });
+
                 })
                 .catch(error => {
                     console.error('Error fetching JSON files:', error);
@@ -994,7 +1014,6 @@
 
 <body>
     <div class="full-overlay"></div>
-
     <div class="top-bar">
         <div class="header-left">
             <img src="src/img/4icon.png" alt="Hevilz Mods Icon">
@@ -1010,7 +1029,7 @@
 
     <div class="hero">
         <div>
-            <h1>Hevilz Mods ™</h1>
+            <h1>Hevilz Mods</h1>
             <h2>موقع هفلز</h2>
             <br>
             <h3>جميع محتويات و روابط و شروحات سيرفرنا<br>في مكان واحد مرتبة و منظمة ليتم الوصول اليها بسهولة<br>تم بناء و ادارة الموقع من قبل<br>@Hevilz<br>@BN_LOS (S_صقر)
@@ -1064,7 +1083,6 @@
         </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>
