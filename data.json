@@ -538,7 +538,7 @@
     },
     {
         "title": "1 - Arrange",
-        "desc": "By: LuisWebber<br>HD Version By: kreed<br><br>طريقة التركيب داخل المقطع<br><br><b>=====| Original - النسخة الاصلية |=====</b><br>Password: luisfwebberarrange<br>كلمة المرور: luisfwebberarrange<br><br><b>=====| HDProject - نسخة الاتش دي |=====</b><br>Password: kreed<br>كلمة المرور: kreed",
+        "desc": "By: LuisWebber<br>HD Version By: kreed<br><br>طريقة التركيب لكل نسخة داخل المقاطع<br><br><b>| Original - النسخة الاصلية |</b><br>Password: luisfwebberarrange<br>كلمة المرور: luisfwebberarrange<br><br><b>| HDProject - نسخة الاتش دي |</b><br>Password: kreed<br>كلمة المرور: kreed",
         "img": "",
         "downloadlink": "",
         "extratitle": "no",
@@ -561,11 +561,19 @@
     },
     {
         "title": "2 - Los Crackudos Chaotic",
-        "desc": "By: Futon<br><br><b>==| مايتوافق مع الاتش دي |==</b><br><br>طريقة التركيب داخل المقطع",
+        "desc": "By: Futon<br><br>طريقة التركيب داخل المقطع",
         "img": "",
-        "downloadlink": "https://drive.google.com/file/d/137I8D8lx-cEVn89Kka-vdjQznMHGWygv/view",
+        "downloadlink": "",
+        "extrasection1": "1",
+        "extrasectiontitle1": "مقاطع التركيب",
+        "extrasection2": "2",
+        "extrasectiontitle2": "الروابط",
+        "extra1": "Los Crackudos Chaotic | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=I4GdLDKW0Pw",
+        "extra2": "Los Crackudos Chaotic | المود",
+        "extralink2": "https://drive.google.com/file/d/137I8D8lx-cEVn89Kka-vdjQznMHGWygv/view",
         "extratitle": "no",
-        "tutlink": "https://www.youtube.com/watch?v=I4GdLDKW0Pw",
+        "tutlink": "",
         "section": "1-10"
     },
     {
@@ -639,7 +647,7 @@
     },
     {
         "title": "6 - Randomizer (Items - Enemies)",
-        "desc": "Items By: naitsircNH<br>Enemies By: re_duke<br><br>طريقة التركيب داخل المقطع",
+        "desc": "Enemies By: re_duke<br>Items By: naitsircNH<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1",
@@ -677,7 +685,7 @@
     },
     {
         "title": "8 - Piece Of Cake",
-        "desc": "By: LuisWebber<br><br>طريقة التركيب لكل نسخة داخل المقاطع<br><br><b>=====| Original - النسخة الاصلية |=====</b><br>Password: luiswebber<br>كلمة المرور: luiswebber<br><br><b>=====| HDProject - نسخة الاتش دي |=====</b><br>Password: PieceOfCakeHD<br>كلمة المرور: PieceOfCakeHD",
+        "desc": "By: LuisWebber<br><br>طريقة التركيب لكل نسخة داخل المقاطع<br><br><b>| Original - النسخة الاصلية |</b><br>Password: luiswebber<br>كلمة المرور: luiswebber<br><br><b>| HDProject - نسخة الاتش دي |</b><br>Password: PieceOfCakeHD<br>كلمة المرور: PieceOfCakeHD",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1, 2",
@@ -745,7 +753,7 @@
     },
     {
         "title": "12 - Forbidden",
-        "desc": "By: Revengecocate<br>Port By:Sachiel Uesugui TDR<br><br>طريقة التركيب داخل المقطع<br><br>Password: ForbiddenCompletTDR<br>كلمة المرور: ForbiddenCompletTDR",
+        "desc": "By: Revengecocato<br>Port By:Sachiel Uesugui TDR<br><br>طريقة التركيب داخل المقطع<br><br>Password: ForbiddenCompletTDR<br>كلمة المرور: ForbiddenCompletTDR",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1",
@@ -947,7 +955,7 @@
     },
     {
         "title": "24 - The Seventh Hell",
-        "desc": "By: Metalglory666<br>Port By: ScoovyHD<br><br>طريقة التركيب داخل المقطع<br><br>Password: MODINDONESIA<br>كلمة المرور: MODINDONESIA",
+        "desc": "By: sulkarnain<br><br>طريقة التركيب داخل المقطع<br><br>Password: MODINDONESIA<br>كلمة المرور: MODINDONESIA",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1",
@@ -1015,7 +1023,7 @@
     },
     {
         "title": "28 - Path Of Danger",
-        "desc": "By: Z.H.R-RE4<br>Port By: DunkleyYTD<br><br>طريقة التركيب داخل المقطع",
+        "desc": "By: ابو عبدالله البقمي<br>Port By: DunkleyYTD<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1",
@@ -1304,7 +1312,7 @@
     },
     {
         "title": "45 - Impossible",
-        "desc": "By: leo lima<br> Port By: ScoovyHD<br><br>طريقة التركيب داخل المقطع",
+        "desc": "By: leo lima<br> Port By: Sachiel Uesugui TDR<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1",
@@ -1453,7 +1461,7 @@
     },
     {
         "title": "54 - Life in Hell",
-        "desc": "By: LuisWebber<br><br>طريقة التركيب داخل المقطع<br><br><b>=====| Original - النسخة الاصلية |=====</b><br>Password: luiswebber<br>كلمة المرور: luiswebber<br><br><b>=====| HDProject - نسخة الاتش دي |=====</b><br>Password: LifeInHellHD<br>كلمة المرور: LifeInHellHD",
+        "desc": "By: LuisWebber<br><br>طريقة التركيب داخل المقطع<br><br><b>| Original - النسخة الاصلية |</b><br>Password: luiswebber<br>كلمة المرور: luiswebber<br><br><b>| HDProject - نسخة الاتش دي |</b><br>Password: LifeInHellHD<br>كلمة المرور: LifeInHellHD",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1, 2",
@@ -1596,20 +1604,20 @@
         "section": "61-70"
     },
     {
-        "title": "62 - Fallen Into The Abyss",
-        "desc": "By: flexible_x<br><br>طريقة التركيب داخل المقطع<br><br>Password: Evo<br>كلمة المرور: Evo",
+        "title": "62 - Time To Die",
+        "desc": "By: sulkarnain<br><br>طريقة التركيب داخل المقطع<br><br>Password: MODINDONESIA<br>كلمة المرور: MODINDONESIA",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1",
         "extrasectiontitle1": "مقاطع التركيب",
         "extrasection2": "2, 3",
         "extrasectiontitle2": "الروابط",
-        "extra1": "Fallen Into The Abyss | تركيب",
-        "extralink1": "https://www.youtube.com/watch?v=tjhwTh_vo-s",
-        "extra2": "Fallen Into The Abyss | المود",
-        "extralink2": "https://www.mediafire.com/file/kgka1hjg6aued1b/Fallen+into+The+Abyss.rar/file",
-        "extra3": "FITA Patch | باتش",
-        "extralink3": "https://www.mediafire.com/file/lkbytkk4p611zpu/Fallen+into+The+Abyss+Patch.rar/file",
+        "extra1": "Time To Die | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=s1XYlkXE5Nw",
+        "extra2": "Time To Die | المود",
+        "extralink2": "https://drive.google.com/file/d/170kn5X-y0A6YSw5dLRwUJ36dccxhp1CE/view",
+        "extra3": "TTD Patch | باتش",
+        "extralink3": "https://drive.google.com/file/d/1f99nFitbwaTQQW6vy0WwAMn9Xa4EHwPZ/view",
         "extratitle": "no",
         "tutlink": "",
         "section": "61-70"
@@ -1647,7 +1655,26 @@
         "section": "61-70"
     },
     {
-        "title": "65 - Apocalipse Da Morte",
+        "title": "65 - Fallen Into The Abyss",
+        "desc": "By: flexible_x<br><br>طريقة التركيب داخل المقطع<br><br>Password: Evo<br>كلمة المرور: Evo",
+        "img": "",
+        "downloadlink": "",
+        "extrasection1": "1",
+        "extrasectiontitle1": "مقاطع التركيب",
+        "extrasection2": "2, 3",
+        "extrasectiontitle2": "الروابط",
+        "extra1": "Fallen Into The Abyss | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=tjhwTh_vo-s",
+        "extra2": "Fallen Into The Abyss | المود",
+        "extralink2": "https://www.mediafire.com/file/kgka1hjg6aued1b/Fallen+into+The+Abyss.rar/file",
+        "extra3": "FITA Patch | باتش",
+        "extralink3": "https://www.mediafire.com/file/lkbytkk4p611zpu/Fallen+into+The+Abyss+Patch.rar/file",
+        "extratitle": "no",
+        "tutlink": "",
+        "section": "61-70"
+    },
+    {
+        "title": "66 - Apocalipse Da Morte",
         "desc": "By: Z.H.R-RE4<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1664,7 +1691,7 @@
         "section": "61-70"
     },
     {
-        "title": "66 - Death Is Coming",
+        "title": "67 - Death Is Coming",
         "desc": "By: DunkleyYTD<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1683,7 +1710,7 @@
         "section": "61-70"
     },
     {
-        "title": "67 - The Adventurer",
+        "title": "68 - The Adventurer",
         "desc": "By: Z.H.R-RE4<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1700,7 +1727,7 @@
         "section": "61-70"
     },
     {
-        "title": "68 - Realm Of Death",
+        "title": "69 - Realm Of Death",
         "desc": "By: sulkarnain<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1717,7 +1744,7 @@
         "section": "61-70"
     },
     {
-        "title": "69 - Death To Death",
+        "title": "70 - Death To Death",
         "desc": "By: sulkarnain<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1734,7 +1761,7 @@
         "section": "61-70"
     },
     {
-        "title": "70 - Nostal In Hell",
+        "title": "71 - Nostal In Hell",
         "desc": "By: sulkarnain<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1748,10 +1775,10 @@
         "extralink2": "https://www.mediafire.com/file/fpab2bu2gbh4rxl/MOD+NOSTAL+IN+HELL+UHD.rar/file",
         "extratitle": "no",
         "tutlink": "",
-        "section": "61-70"
+        "section": "71-80"
     },
     {
-        "title": "71 - Tournament",
+        "title": "72 - Tournament",
         "desc": "By: Hevilz & Sohaib<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1772,7 +1799,7 @@
         "section": "71-80"
     },
     {
-        "title": "72 - Corrupted World",
+        "title": "73 - Corrupted World",
         "desc": "By: NM<br><br>طريقة التركيب داخل المقطع<br><br>Password: NM<br>كلمة المرور: NM",
         "img": "",
         "downloadlink": "",
@@ -1789,7 +1816,7 @@
         "section": "71-80"
     },
     {
-        "title": "73 - Breaking Skulls",
+        "title": "74 - Breaking Skulls",
         "desc": "By: ZFGAMING<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -1808,7 +1835,7 @@
         "section": "71-80"
     },
     {
-        "title": "74 - Straight To Hell",
+        "title": "75 - Straight To Hell",
         "desc": "By: MearFull<br><br>طريقة التركيب داخل المقطع<br><br>Password: MFL7<br>كلمة المرور: MFL7",
         "img": "",
         "downloadlink": "",
@@ -2219,7 +2246,7 @@
     },
     {
         "title": "5 - Piece Of Cake",
-        "desc": "By: LuisWebber<br><br>طريقة التركيب لكل نسخة داخل المقاطع<br><br><b>=====| Original - النسخة الاصلية |=====</b><br>Password: luiswebber<br>كلمة المرور: luiswebber<br><br><b>=====| HDProject - نسخة الاتش دي |=====</b><br>Password: PieceOfCakeHD<br>كلمة المرور: PieceOfCakeHD",
+        "desc": "By: LuisWebber<br><br>طريقة التركيب لكل نسخة داخل المقاطع<br><br><b>| Original - النسخة الاصلية |</b><br>Password: luiswebber<br>كلمة المرور: luiswebber<br><br><b>| HDProject - نسخة الاتش دي |</b><br>Password: PieceOfCakeHD<br>كلمة المرور: PieceOfCakeHD",
         "img": "",
         "downloadlink": "",
         "extrasection1": "1, 2",
