@@ -2083,7 +2083,7 @@
         "extralink3": "https://www.mediafire.com/file/la9h54a8s6l8qgu/Easy_Difficulty_(Into_The_Abyss).rar/file",
         "extratitle": "no",
         "tutlink": "",
-        "section": "Hardest 7 Mods"
+        "section": "Hardest 8 Mods"
     },
     {
         "title": "2 - Tournament (High Rate)",
@@ -2102,10 +2102,40 @@
         "extralink3": "https://www.mediafire.com/file/kibsk2sj3z3yc6k/High+Rate+Maps.rar/file",
         "extratitle": "no",
         "tutlink": "",
-        "section": "Hardest 7 Mods"
+        "section": "Hardest 8 Mods"
     },
     {
-        "title": "3 - Breaking Skulls",
+        "title": "3 - Alfajr Impossible ( Paid Mod )",
+        "desc": "By: Z.H.R-RE4<br><br><b>المود مدفوع و الشراء عن طريق رابط المتجر تحت</b>",
+        "img": "",
+        "downloadlink": "",
+        "extrasection1": "2",
+        "extrasectiontitle1": "الروابط",
+        "extra2": "Alfajr Impossible | رابط المتجر",
+        "extralink2": "https://hevlinks.github.io/",
+        "extratitle": "no",
+        "tutlink": "",
+        "section": "Hardest 8 Mods"
+    },
+    {
+        "title": "4 - Darkness",
+        "desc": "By: Player7z<br><br>طريقة التركيب داخل المقطع",
+        "img": "",
+        "downloadlink": "",
+        "extrasection1": "1",
+        "extrasectiontitle1": "مقاطع التركيب",
+        "extrasection2": "2",
+        "extrasectiontitle2": "الروابط",
+        "extra1": "Darkness | تركيب",
+        "extralink1": "https://www.youtube.com/watch?v=pOEplozWf44",
+        "extra2": "Darkness | المود",
+        "extralink2": "https://www.mediafire.com/file/b5ofqplwmuo4g5y/DARKNESS_(Demo).rar/file",
+        "extratitle": "no",
+        "tutlink": "",
+        "section": "Hardest 8 Mods"
+    },
+    {
+        "title": "5 - Breaking Skulls",
         "desc": "By: ZFGAMING<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -2121,23 +2151,10 @@
         "extralink3": "https://mega.nz/file/GtR2USKL#FkejeBNrg4W0wLAkMGtD8zDDr3PFnl_n4R3Ky58JRiM",
         "extratitle": "no",
         "tutlink": "",
-        "section": "Hardest 7 Mods"
+        "section": "Hardest 8 Mods"
     },
     {
-        "title": "4 - Alfajr Impossible ( Paid Mod )",
-        "desc": "By: Z.H.R-RE4<br><br><b>المود مدفوع و الشراء عن طريق رابط المتجر تحت</b>",
-        "img": "",
-        "downloadlink": "",
-        "extrasection1": "2",
-        "extrasectiontitle1": "الروابط",
-        "extra2": "Alfajr Impossible | رابط المتجر",
-        "extralink2": "https://hevlinks.github.io/",
-        "extratitle": "no",
-        "tutlink": "",
-        "section": "Hardest 7 Mods"
-    },
-    {
-        "title": "5 - Rising Of Evil Impossible++",
+        "title": "6 - Rising Of Evil Impossible++",
         "desc": "By: LuisWebber<br><br>طريقة التركيب داخل المقطع<br><br>Password: luiswebber<br>كلمة المرور: luiswebber",
         "img": "",
         "downloadlink": "",
@@ -2153,10 +2170,10 @@
         "extralink3": "https://www.youtube.com/watch?v=HefDp_Oz2SE",
         "extratitle": "no",
         "tutlink": "",
-        "section": "Hardest 7 Mods"
+        "section": "Hardest 8 Mods"
     },
     {
-        "title": "6 - Forbidden",
+        "title": "7 - Forbidden",
         "desc": "By: Revengecocate<br>Port By:Sachiel Uesugui TDR<br><br>طريقة التركيب داخل المقطع<br><br>Password: ForbiddenCompletTDR<br>كلمة المرور: ForbiddenCompletTDR",
         "img": "",
         "downloadlink": "",
@@ -2170,10 +2187,10 @@
         "extralink2": "https://www.mediafire.com/file/49zatguxm9ir5dx/RE4+UHD+MOD+Forbidden+Completo.rar/file",
         "extratitle": "no",
         "tutlink": "",
-        "section": "Hardest 7 Mods"
+        "section": "Hardest 8 Mods"
     },
     {
-        "title": "7 - Path Of Danger",
+        "title": "8 - Path Of Danger",
         "desc": "By: Z.H.R-RE4<br>Port By: DunkleyYTD<br><br>طريقة التركيب داخل المقطع",
         "img": "",
         "downloadlink": "",
@@ -2187,7 +2204,7 @@
         "extralink2": "https://www.mediafire.com/file/nwme08vvsjwwrs8/Path+Of+Danger+Mod.rar/file",
         "extratitle": "no",
         "tutlink": "",
-        "section": "Hardest 7 Mods"
+        "section": "Hardest 8 Mods"
     },
     {
         "title": "1 - Ultra Pro",
