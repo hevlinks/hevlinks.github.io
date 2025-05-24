@@ -9,621 +9,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-image: url('src/img/bg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-height: 100vh;
-            width: 100vw;
-            overflow-x: hidden;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .full-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-        }
-
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4rem;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(12px);
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-
-        .header-left img {
-            height: 2.5rem;
-            margin-right: 0.5rem;
-        }
-
-        .header-left span {
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .search-bar-container {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-
-        #search-container {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-        }
-
-        #search-input {
-            width: 100%;
-            padding: 0.5rem 2.5rem 0.5rem 1rem;
-            border: none;
-            border-radius: 25px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.7rem center;
-            background-size: 1.2rem;
-        }
-
-        #search-input:focus {
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        #search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            list-style: none;
-            padding: 0.25rem 0;
-            margin: 0;
-            display: none;
-            z-index: 11;
-        }
-
-        #search-results li {
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        #search-results li:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        #search-results li a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-        }
-
-        .hero {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 4rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(3.5rem, 9vw, 6rem);
-            font-weight: 900;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
-            margin-bottom: 1.5rem;
-            animation: fadeInDown 1s ease-out;
-            color: #f8f9fa;
-        }
-
-        .hero p {
-            font-size: clamp(1.4rem, 3.5vw, 2rem);
-            max-width: 900px;
-            margin: 0 auto;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-            animation: fadeInUp 1s ease-out 0.5s backwards;
-            color: #ced4da;
-        }
-
-        .sections-container {
-            position: relative;
-            z-index: 2;
-            padding: 4rem 1rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .section-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title-bar {
-            flex: 1;
-            height: 4px;
-            background: linear-gradient(to right, #d63384, #f8f9fa);
-            margin: 0 20px;
-            border-radius: 2px;
-        }
-
-        .section-title-text {
-            font-size: clamp(2rem, 4.5vw, 3rem);
-            font-weight: 800;
-            white-space: nowrap;
-            padding: 0 15px;
-            position: relative;
-            animation: glow 3s ease-in-out infinite alternate;
-            color: #f8f9fa;
-        }
-
-        .section-title-text::before,
-        .section-title-text::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(to bottom, #d63384, #f8f9fa);
-            border-radius: 2px;
-        }
-
-        .section-title-text::before {
-            left: -20px;
-        }
-
-        .section-title-text::after {
-            right: -20px;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 15px #fff, 0 0 25px #fff, 0 0 35px #d63384
-            }
-
-            to {
-                text-shadow: 0 0 25px #fff, 0 0 35px #fff, 0 0 45px #d63384
-            }
-        }
-
-        .section-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1.5rem;
-            width: 100%;
-            margin-bottom: 3rem;
-            padding: 50px;
-        }
-
-        @media (max-width: 1200px) {
-            .section-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .section-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .card img {
-                max-height: 120px;
-            }
-
-            .modal-dialog {
-                max-width: 98%;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .section-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .top-bar {
-                flex-direction: column;
-                align-items: stretch;
-                height: auto;
-                padding: 0.5rem;
-            }
-
-            .header-left {
-                margin-bottom: 0.5rem;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .header-left img {
-                margin: 0 0.5rem 0 0;
-            }
-
-            .search-bar-container {
-                width: 100%;
-            }
-
-            #search-container {
-                max-width: 100%;
-            }
-        }
-
-        .card-container {
-            perspective: 1200px;
-            margin-bottom: 0;
-        }
-
-        .card {
-            position: relative;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            transform-style: preserve-3d;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: rotateY(12deg) scale(1.08);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 18px 18px 0 0;
-        }
-
-        .card-body {
-            padding: 1.75rem;
-            position: relative;
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-            color: #f8f9fa;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-        }
-
-        .card-text {
-            font-size: 1.05rem;
-            color: #ced4da;
-            margin-bottom: 1.2rem;
-            flex-grow: 1;
-        }
-
-        .form-select {
-            appearance: none;
-            background-color: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 100px;
-            padding: 0.9rem 1.1rem;
-            color: #fff;
-            width: 100%;
-            cursor: pointer;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff' width='20px' height='20px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1.1rem center;
-            background-size: 20px;
-            margin-top: auto;
-        }
-
-        .form-select:focus {
-            outline: none;
-            border-color: #d63384;
-            box-shadow: 0 0 0 4px rgba(214, 51, 132, 0.3);
-        }
-
-        .form-select option {
-            background-color: rgba(0, 0, 0, 0.85);
-            color: #fff;
-            padding: 0.6rem;
-        }
-
-        .modal {
-            z-index: 1055 !important;
-        }
-
-        .modal-dialog {
-            margin: 5vh auto;
-            max-width: 50%;
-            transform: translateY(0);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            color: #fff;
-        }
-
-        .modal-header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 1.2rem 1.75rem;
-        }
-
-        .modal-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-        }
-
-        .modal-body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .modal-image-container {
-            padding: 1.75rem;
-        }
-
-        .modal-body img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            max-height: 300px;
-        }
-
-        .modal-desc-container {
-            padding: 1.75rem;
-            width: 90%;
-            text-align: center;
-        }
-
-        .modal-desc {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1.75rem;
-            color: #ced4da;
-        }
-
-        .modal-body h3,
-        .modal-body h4 {
-            color: #f8f9fa;
-        }
-
-        #main-buttons,
-        #modal-extras-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            align-items: center;
-            width: 100%;
-        }
-
-        .btn-outline-light {
-            border: 2px solid #fff;
-            border-radius: 100px;
-            padding: 0.7rem 1.2rem;
-            color: #fff;
-            background-color: transparent;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-            font-size: larger;
-            font-weight: bolder;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            text-decoration: none;
-        }
-
-        .btn-outline-light:hover {
-            background-color: #fff;
-            color: #000;
-            transform: scale(1.07);
-        }
-
-        footer {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 2.5rem 1rem;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .credits {
-            text-align: left;
-            flex: 1 1 300px;
-            margin-right: 2.5rem;
-        }
-
-        .credit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.2rem;
-        }
-
-        .credit-item img {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            margin-right: 1.2rem;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .credit-item.main-credit img {
-            width: 90px;
-            height: 90px;
-            border-width: 3px;
-        }
-
-        .credit-item span {
-            font-size: 1.1rem;
-            color: #ced4da;
-        }
-
-        .credit-item.main-credit span {
-            font-size: 1.4rem;
-            color: #f8f9fa;
-            font-weight: 600;
-        }
-
-        .social-links {
-            flex: 1 1 300px;
-            text-align: center;
-        }
-
-        .social-links h6 {
-            margin-bottom: 1.2rem;
-            font-size: 1.3rem;
-            color: #f8f9fa;
-        }
-
-        .social-icons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-icons a {
-            color: #fff;
-            font-size: 1.9rem;
-            margin: 0 0.9rem;
-            transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
-            display: inline-block;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-        }
-
-        .social-icons a:hover {
-            transform: translateY(-6px);
-            color: #d63384;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-60px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(60px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .top-bar {
-                flex-direction: column;
-                align-items: stretch;
-                height: auto;
-                padding: 0.5rem;
-            }
-
-            .header-left {
-                margin-bottom: 0.5rem;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .header-left img {
-                margin: 0 0.5rem 0 0;
-            }
-
-            .search-bar-container {
-                width: 100%;
-            }
-
-            #search-container {
-                max-width: 100%;
-            }
-        }
-
-        .max-h-32 {
-            max-height: 9rem;
-        }
-
-        .modal-open {
-            padding-right: 0 !important;
-        }
-
-        .text-outline {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{background-image:url('src/img/bg.png');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;min-height:100vh;width:100vw;overflow-x:hidden;color:#fff;display:flex;flex-direction:column}
+        .full-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);z-index:1}
+        .top-bar{position:fixed;top:0;left:0;width:100%;height:4rem;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px)}
+        .header-left{display:flex;align-items:center;height:100%}
+        .header-left img{height:2.5rem;margin-right:0.5rem}
+        .header-left span{font-size:1.2rem;font-weight:bold;text-shadow:1px 1px 2px rgba(0,0,0,0.5)}
+        .search-bar-container{display:flex;align-items:center;height:100%}
+        #search-container{position:relative;width:100%;max-width:300px}
+        #search-input{width:100%;padding:0.5rem 2.5rem 0.5rem 1rem;border:none;border-radius:25px;background-color:rgba(255,255,255,0.1);color:#fff;font-size:0.9rem;transition:background-color 0.3s ease;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.7rem center;background-size:1.2rem}
+        #search-input:focus{outline:none;background-color:rgba(255,255,255,0.2)}
+        #search-results{position:absolute;top:100%;left:0;width:100%;background-color:rgba(0,0,0,0.8);border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.3);list-style:none;padding:0.25rem 0;margin:0;display:none;z-index:11}
+        #search-results li{padding:0.5rem 1rem;cursor:pointer;transition:background-color 0.2s ease}
+        #search-results li:hover{background-color:rgba(255,255,255,0.1)}
+        #search-results li a{color:#fff;text-decoration:none;display:block}
+        .hero{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:4rem 2rem;margin-top:4rem}
+        .hero h1{font-size:clamp(3.5rem,9vw,6rem);font-weight:900;text-shadow:0 3px 6px rgba(0,0,0,0.6);margin-bottom:1.5rem;animation:fadeInDown 1s ease-out;color:#f8f9fa}
+        .hero p{font-size:clamp(1.4rem,3.5vw,2rem);max-width:900px;margin:0 auto;text-shadow:0 2px 4px rgba(0,0,0,0.6);animation:fadeInUp 1s ease-out 0.5s backwards;color:#ced4da}
+        .sections-container{position:relative;z-index:2;padding:4rem 1rem;flex-grow:1;display:flex;flex-direction:column;width:100%}
+        .section-title-container{display:flex;align-items:center;justify-content:center;margin-bottom:3rem}
+        .section-title-bar{flex:1;height:4px;background:linear-gradient(to right,#d63384,#f8f9fa);margin:0 20px;border-radius:2px}
+        .section-title-text{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;white-space:nowrap;padding:0 15px;position:relative;animation:glow 3s ease-in-out infinite alternate;color:#f8f9fa}
+        .section-title-text::before,.section-title-text::after{content:'';position:absolute;top:0;height:100%;width:4px;background:linear-gradient(to bottom,#d63384,#f8f9fa);border-radius:2px}
+        .section-title-text::before{left:-20px}
+        .section-title-text::after{right:-20px}
+        @keyframes glow{from{text-shadow:0 0 15px #fff,0 0 25px #fff,0 0 35px #d63384}to{text-shadow:0 0 25px #fff,0 0 35px #fff,0 0 45px #d63384}}
+        .section-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1.5rem;width:100%;margin-bottom:3rem;padding:50px}
+        @media (max-width:1200px){.section-grid{grid-template-columns:repeat(4,1fr)}}
+        @media (max-width:768px){.section-grid{grid-template-columns:repeat(3,1fr)}.card img{max-height:120px}.modal-dialog{max-width:98%}}
+        @media (max-width:500px){.section-grid{grid-template-columns:repeat(2,1fr)}.top-bar{flex-direction:column;align-items:stretch;height:auto;padding:0.5rem}.header-left{margin-bottom:0.5rem;justify-content:center;text-align:center}.header-left img{margin:0 0.5rem 0 0}.search-bar-container{width:100%}#search-container{max-width:100%}}
+        .card-container{perspective:1200px;margin-bottom:0}
+        .card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:transform 0.5s ease,box-shadow 0.5s ease;transform-style:preserve-3d;height:100%;display:flex;flex-direction:column}
+        .card:hover{transform:rotateY(12deg) scale(1.08);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+        .card img{width:100%;height:auto;object-fit:cover;border-radius:18px 18px 0 0}
+        .card-body{padding:1.75rem;position:relative;z-index:3;display:flex;flex-direction:column;flex-grow:1}
+        .card-title{font-size:1.3rem;font-weight:700;margin-bottom:0.6rem;color:#f8f9fa;text-shadow:1px 1px 3px rgba(0,0,0,0.6)}
+        .card-text{font-size:1.05rem;color:#ced4da;margin-bottom:1.2rem;flex-grow:1}
+        .form-select{appearance:none;background-color:transparent;border:1px solid rgba(255,255,255,0.6);border-radius:100px;padding:0.9rem 1.1rem;color:#fff;width:100%;cursor:pointer;transition:border-color 0.3s ease,box-shadow 0.3s ease;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff' width='20px' height='20px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.1rem center;background-size:20px;margin-top:auto}
+        .form-select:focus{outline:none;border-color:#d63384;box-shadow:0 0 0 4px rgba(214,51,132,0.3)}
+        .form-select option{background-color:rgba(0,0,0,0.85);color:#fff;padding:0.6rem}
+        .modal{z-index:1055!important}
+        .modal-dialog{margin:5vh auto;max-width:50%;transform:translateY(0);overflow-y:auto}
+        .modal-content{background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,0.5);color:#fff}
+        .modal-header{border-bottom:1px solid rgba(255,255,255,0.3);padding:1.2rem 1.75rem}
+        .modal-title{font-size:1.7rem;font-weight:700}
+        .modal-body{display:flex;flex-direction:column;align-items:center}
+        .modal-image-container{padding:1.75rem}
+        .modal-body img{width:100%;height:auto;object-fit:contain;max-height:300px}
+        .modal-desc-container{padding:1.75rem;width:90%;text-align:center}
+        .modal-desc{font-size:1.5rem;font-weight:bold;margin-bottom:1.75rem;color:#ced4da}
+        .modal-body h3,.modal-body h4{color:#f8f9fa}
+        #main-buttons,#modal-extras-container{display:flex;flex-direction:column;gap:0.6rem;align-items:center;width:100%}
+        .btn-outline-light{border:2px solid #fff;border-radius:100px;padding:0.7rem 1.2rem;color:#fff;background-color:transparent;transition:background-color 0.3s ease,color 0.3s ease,transform 0.3s ease;font-size:larger;font-weight:bolder;display:flex;align-items:center;justify-content:center;margin:0 auto;text-decoration:none}
+        .btn-outline-light:hover{background-color:#fff;color:#000;transform:scale(1.07)}
+        footer{background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,0.25);padding:2.5rem 1rem;text-align:center;position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+        .credits{text-align:left;flex:1 1 300px;margin-right:2.5rem}
+        .credit-item{display:flex;align-items:center;margin-bottom:1.2rem}
+        .credit-item img{width:55px;height:55px;border-radius:50%;margin-right:1.2rem;object-fit:cover;border:2px solid rgba(255,255,255,0.5)}
+        .credit-item.main-credit img{width:90px;height:90px;border-width:3px}
+        .credit-item span{font-size:1.1rem;color:#ced4da}
+        .credit-item.main-credit span{font-size:1.4rem;color:#f8f9fa;font-weight:600}
+        .social-links{flex:1 1 300px;text-align:center}
+        .social-links h6{margin-bottom:1.2rem;font-size:1.3rem;color:#f8f9fa}
+        .social-icons{display:flex;align-items:center;justify-content:center}
+        .social-icons a{color:#fff;font-size:1.9rem;margin:0 0.9rem;transition:transform 0.3s ease,color 0.3s ease,filter 0.3s ease;display:inline-block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
+        .social-icons a:hover{transform:translateY(-6px);color:#d63384}
+        @keyframes fadeInDown{from{opacity:0;transform:translateY(-60px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
+        @media (max-width:767.98px){.top-bar{flex-direction:column;align-items:stretch;height:auto;padding:0.5rem}.header-left{margin-bottom:0.5rem;justify-content:center;text-align:center}.header-left img{margin:0 0.5rem 0 0}.search-bar-container{width:100%}#search-container{max-width:100%}}
+        .max-h-32{max-height:9rem}
+        .modal-open{padding-right:0!important}
+        .text-outline{text-shadow:2px 2px 4px rgba(0,0,0,0.5)}
+        .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1300}
+        .sidebar{position:fixed;top:0;left:0;height:100vh;width:340px;background:linear-gradient(45deg, black, transparent);backdrop-filter:blur(12px);color:#fff;z-index:1400;overflow-y:auto;transform:translateX(-110%);transition:transform 0.32s cubic-bezier(.4,0,.2,1);box-shadow:3px 0 18px rgba(0,0,0,0.16);padding-bottom:3rem}
+        .sidebar.open{transform:translateX(0)}
+        .sidebar-header{font-size:1.5rem;font-weight:900;text-shadow:0 2px 10px #0007;letter-spacing:1px;padding:1.1rem 1.2rem 0.3rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.09);display:flex;justify-content:space-between;align-items:center}
+        .sidebar-close{border:none;background:transparent;font-size:1.8rem;color:#f5f5f5;cursor:pointer;transition:color .2s}
+        .sidebar-close:hover{color:#d63384}
+        .sidebar-section-title{font-size:1.17rem;font-weight:bold;margin:1.6rem 1.2rem 0.7rem 1.2rem;padding-bottom:0.1rem;color:#f8f9fa;border-bottom:1px solid rgba(214,51,132,0.19)}
+        .sidebar-list{list-style:none;margin:0 0 0.6rem 0;padding:0 1.2rem}
+        .sidebar-list-item{padding:0.62rem 0.4rem 0.62rem 0.6rem;border-radius:8px;cursor:pointer;transition:background 0.19s;font-size:1.04rem}
+        .sidebar-list-item:hover{background:rgba(214,51,132,0.13);color:#d63384}
+        .sidebar-list-item:not(:last-child){margin-bottom:0.18rem}
+        @media (max-width:500px){.sidebar{width:93vw}}
+        .sidebar-toggle-btn{display:flex;align-items:center;justify-content:center;margin-right:1.2rem;background:transparent;border:none;font-size:2rem;color:#fff;cursor:pointer;transition:color .2s;z-index:1200}
+        .sidebar-toggle-btn:hover{color:#d63384}
+        body.sidebar-opened .top-bar,body.sidebar-opened .hero,body.sidebar-opened .sections-container,body.sidebar-opened footer{filter:blur(0.7px) brightness(0.97);pointer-events:none;user-select:none}
     </style>
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let allData = [];
             let searchableData = [];
+            let sidebar, sidebarBackdrop;
             const searchInput = document.getElementById('search-input');
             const searchResultsList = document.getElementById('search-results');
-
             const openModal = (item) => {
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
@@ -631,25 +111,20 @@
                 const modalDesc = document.getElementById("modal-desc");
                 const mainButtonsContainer = document.getElementById("main-buttons");
                 const modalExtrasContainer = document.getElementById("modal-extras-container");
-
                 modalImg.src = '';
                 modalImg.style.display = 'none';
                 modalTitle.textContent = '';
                 modalDesc.innerHTML = '';
                 mainButtonsContainer.innerHTML = '';
                 modalExtrasContainer.innerHTML = '';
-
                 if (item.img) {
                     modalImg.src = item.img;
                     modalImg.style.display = 'block';
                 }
-
                 modalTitle.textContent = item.title || 'Untitled Item';
                 modalDesc.innerHTML = item.desc || 'No description available.';
-
                 const videoContainer = document.createElement('div');
                 videoContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center', 'mt-4', 'mb-4');
-
                 let videoIndex = 1;
                 while (item[`vidlink${videoIndex}`] && item[`vidimg${videoIndex}`]) {
                     if (item[`vidtitle${videoIndex}`]) {
@@ -661,7 +136,6 @@
                         videoTitle.style.marginBottom = '0.25rem';
                         videoContainer.appendChild(videoTitle);
                     }
-
                     const videoLink = document.createElement('a');
                     videoLink.href = item[`vidlink${videoIndex}`];
                     videoLink.target = "_blank";
@@ -673,11 +147,10 @@
                     videoContainer.appendChild(videoLink);
                     videoIndex++;
                 }
-
-                if (videoContainer.children.length > 0) {}
-
+                if (videoContainer.children.length > 0) {
+                    modalDesc.appendChild(videoContainer);
+                }
                 let tutorialButton, downloadButton;
-
                 if (item.tutlink) {
                     tutorialButton = document.createElement('a');
                     tutorialButton.href = item.tutlink;
@@ -686,7 +159,6 @@
                     tutorialButton.target = "_blank";
                     mainButtonsContainer.appendChild(tutorialButton);
                 }
-
                 if (item.downloadlink) {
                     downloadButton = document.createElement('a');
                     downloadButton.href = item.downloadlink;
@@ -695,7 +167,6 @@
                     downloadButton.target = "_blank";
                     mainButtonsContainer.appendChild(downloadButton);
                 }
-
                 let extrasSectionIndex = 1;
                 while (item[`extrasectiontitle${extrasSectionIndex}`]) {
                     const extrasTitle = document.createElement('h4');
@@ -708,7 +179,6 @@
                     let includedExtras = [];
                     if (item[`extrasection${extrasSectionIndex}`]) {
                         includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
-
                         includedExtras.forEach(extraNum => {
                             if (item[`extra${extraNum}`] && item[`extralink${extraNum}`]) {
                                 const extraButton = document.createElement('a');
@@ -722,7 +192,6 @@
                     }
                     extrasSectionIndex++;
                 }
-
                 if (extrasSectionIndex === 1) {
                     let extraIndex = 1;
                     while (item[`extra${extraIndex}`]) {
@@ -737,89 +206,76 @@
                         extraIndex++;
                     }
                 }
-
                 const modalElement = new bootstrap.Modal(modal);
                 modalElement.show();
             };
-
-            function createSectionCard(section, data) {
-                const sectionData = data.filter(item => item.section === section.title);
-
-                if (sectionData.length === 0) {
-                    return null;
-                }
-
-                const cardContainer = document.createElement('div');
-                cardContainer.classList.add('card-container');
-                const card = document.createElement('div');
-                card.classList.add('card', 'h-100');
-
-                if (section.imgheader) {
-                    const img = document.createElement('img');
-                    img.src = section.imgheader;
-                    img.alt = section.title || 'Section Image';
-                    img.classList.add('card-img-top');
-                    card.appendChild(img);
-                }
-
-                const cardBody = document.createElement('div');
-                cardBody.classList.add('card-body');
-
-                const title = document.createElement('h5');
-                title.classList.add('card-title');
-                title.textContent = section.title;
-                cardBody.appendChild(title);
-
-                if (section.desc) {
-                    const desc = document.createElement('p');
-                    desc.classList.add('card-text');
-                    desc.textContent = section.desc;
-                    cardBody.appendChild(desc);
-                }
-                const selectMenu = document.createElement('div');
-
-                const select = document.createElement('select');
-                select.classList.add('form-select');
-                select.setAttribute('data-section-title', section.title || 'Item');
-
-                const defaultOption = document.createElement('option');
-                defaultOption.textContent = `Select from ${section.title || 'Item'}`;
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                select.appendChild(defaultOption);
-
-                sectionData.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.title;
-                    option.textContent = item.title;
-                    select.appendChild(option);
+            function buildSidebar(data) {
+                const sectionMap = {};
+                data.forEach(item => {
+                    if (!sectionMap[item.section]) sectionMap[item.section] = [];
+                    sectionMap[item.section].push(item);
                 });
-
-                select.addEventListener('change', (e) => {
-                    const selectedTitle = e.target.value;
-                    const selectedItem = data.find(item => item.title === selectedTitle);
-                    if (selectedItem) {
-                        openModal(selectedItem);
-                    }
-                });
-                selectMenu.appendChild(select);
-                cardBody.appendChild(selectMenu);
-
-                card.appendChild(cardBody);
-                cardContainer.appendChild(card);
-                return cardContainer;
+                sidebar.innerHTML = '';
+                const header = document.createElement('div');
+                header.className = 'sidebar-header';
+                header.innerHTML = `<span>All Mods | جميع المودات</span>
+                  <button class="sidebar-close" id="sidebarCloseBtn">&times;</button>`;
+                sidebar.appendChild(header);
+                for (const [sectionTitle, items] of Object.entries(sectionMap)) {
+                    const secTitle = document.createElement('div');
+                    secTitle.className = 'sidebar-section-title';
+                    secTitle.textContent = sectionTitle || 'بدون تصنيف';
+                    sidebar.appendChild(secTitle);
+                    const ul = document.createElement('ul');
+                    ul.className = 'sidebar-list';
+                    items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'sidebar-list-item';
+                        li.textContent = item.title;
+                        li.tabIndex = 0;
+                        li.onclick = () => {
+                            closeSidebar();
+                            openModal(item);
+                        };
+                        ul.appendChild(li);
+                    });
+                    sidebar.appendChild(ul);
+                }
+                document.getElementById('sidebarCloseBtn').onclick = closeSidebar;
             }
-
+            function openSidebar() {
+                sidebar.classList.add('open');
+                sidebarBackdrop.style.display = 'block';
+                document.body.classList.add('sidebar-opened');
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                sidebarBackdrop.style.display = 'none';
+                document.body.classList.remove('sidebar-opened');
+            }
+            sidebarBackdrop = document.createElement('div');
+            sidebarBackdrop.className = 'sidebar-backdrop';
+            sidebarBackdrop.onclick = closeSidebar;
+            sidebar = document.createElement('nav');
+            sidebar.className = 'sidebar';
+            document.body.appendChild(sidebarBackdrop);
+            document.body.appendChild(sidebar);
+            const topBar = document.querySelector('.top-bar .header-left');
+            const sidebarToggleBtn = document.createElement('button');
+            sidebarToggleBtn.className = 'sidebar-toggle-btn';
+            sidebarToggleBtn.type = 'button';
+            sidebarToggleBtn.innerHTML = '<i class="fa fa-bars"></i>';
+            sidebarToggleBtn.title = 'Show All Items';
+            sidebarToggleBtn.onclick = openSidebar;
+            topBar.insertBefore(sidebarToggleBtn, topBar.firstChild);
             const performSearch = (searchTerm) => {
                 const results = searchableData.filter(item =>
                     item.title.toLowerCase().includes(searchTerm.toLowerCase())
                 );
                 return results;
             };
-
             const displayResults = (results) => {
                 searchResultsList.innerHTML = '';
-
                 if (results.length === 0 && searchInput.value.trim() !== '') {
                     const noResultsItem = document.createElement('li');
                     noResultsItem.textContent = 'No results found.';
@@ -831,7 +287,6 @@
                         link.href = '#';
                         link.textContent = item.title;
                         listItem.appendChild(link);
-
                         listItem.addEventListener('click', () => {
                             openModal(item);
                             searchResultsList.style.display = 'none';
@@ -840,165 +295,135 @@
                         searchResultsList.appendChild(listItem);
                     });
                 }
-
-                searchResultsList.style.display = results.length > 0 || searchInput.value.trim() !== '' ? 'block' :
-                    'none';
+                searchResultsList.style.display = results.length > 0 || searchInput.value.trim() !== '' ? 'block' : 'none';
             };
-
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.trim();
                 const results = performSearch(searchTerm);
                 displayResults(results);
             });
-
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('#search-container')) {
                     searchResultsList.style.display = 'none';
                 }
             });
-
             Promise.all([
                 fetch('sections.json').then(response => response.json()),
                 fetch('sections2.json').then(response => response.json()),
                 fetch('sections3.json').then(response => response.json()),
                 fetch('data.json').then(response => response.json())
             ])
-                .then(([sections1, sections2, sections3, data]) => {
-                    allData = data;
-                    searchableData = data.filter(item => {
-                        const sectionNames3 = sections3.map(section => section.title)
-                        return !sectionNames3.includes(item.section);
-                    })
-
-                    const sectionsContainer = document.querySelector('.sections-container');
-
-                    const section1TitleBox = document.createElement('div');
-                    section1TitleBox.classList.add('mb-4');
-                    const section1TitleContainer = document.createElement('div');
-                    section1TitleContainer.classList.add('section-title-container');
-
-                    const section1TitleBarLeft = document.createElement('div');
-                    section1TitleBarLeft.classList.add('section-title-bar');
-                    const hevilz4ModsText1 = document.createElement('span');
-                    hevilz4ModsText1.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
-                    const hevilz4ModsImg1 = document.createElement('img');
-                    hevilz4ModsImg1.src = "src/img/4icon.png";
-                    hevilz4ModsImg1.alt = "hevilz 4 mods";
-                    hevilz4ModsImg1.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
-
-                    const section1Title = document.createElement('h2');
-                    section1Title.classList.add('section-title-text');
-                    section1Title.textContent = "Hevilz Mods | مودات هفلز";
-                    const section1TitleBarRight = document.createElement('div');
-                    section1TitleBarRight.classList.add('section-title-bar');
-                    section1TitleContainer.appendChild(hevilz4ModsText1);
-                    section1TitleContainer.appendChild(hevilz4ModsImg1);
-                    section1TitleContainer.appendChild(section1TitleBarLeft);
-                    section1TitleContainer.appendChild(section1Title);
-                    section1TitleContainer.appendChild(section1TitleBarRight);
-
-                    section1TitleBox.appendChild(section1TitleContainer);
-
-                    const section1Grid = document.createElement('div');
-                    section1Grid.classList.add('section-grid');
-
-                    sectionsContainer.appendChild(section1TitleBox);
-                    sectionsContainer.appendChild(section1Grid);
-
-                    sections1.forEach(section => {
-                        const card = createSectionCard(section, data);
-                        if (card) {
-                            section1Grid.appendChild(card);
-                        }
-                    });
-
-                    const section2TitleBox = document.createElement('div');
-                    section2TitleBox.classList.add('mb-4');
-
-                    const section2TitleContainer = document.createElement('div');
-                    section2TitleContainer.classList.add('section-title-container');
-                    const section2TitleBarLeft = document.createElement('div');
-                    section2TitleBarLeft.classList.add('section-title-bar');
-                    const hevilz4ModsText2 = document.createElement('span');
-                    hevilz4ModsText2.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
-
-                    const hevilz4ModsImg2 = document.createElement('img');
-                    hevilz4ModsImg2.src = "src/img/4icon.png";
-                    hevilz4ModsImg2.alt = "hevilz 4 mods";
-                    hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
-                    const section2Title = document.createElement('h2');
-                    section2Title.classList.add('section-title-text');
-                    section2Title.textContent = "مودات التختيم";
-                    const section2TitleBarRight = document.createElement('div');
-                    section2TitleBarRight.classList.add('section-title-bar');
-
-                    section2TitleContainer.appendChild(hevilz4ModsText2);
-                    section2TitleContainer.appendChild(hevilz4ModsImg2);
-                    section2TitleContainer.appendChild(section2TitleBarLeft);
-                    section2TitleContainer.appendChild(section2Title);
-                    section2TitleContainer.appendChild(section2TitleBarRight);
-
-                    section2TitleBox.appendChild(section2TitleContainer);
-                    const section2Grid = document.createElement('div');
-                    section2Grid.classList.add('section-grid');
-
-                    sectionsContainer.appendChild(section2TitleBox);
-                    sectionsContainer.appendChild(section2Grid);
-
-                    sections2.forEach(section => {
-                        const card = createSectionCard(section, data);
-                        if (card) {
-                            section2Grid.appendChild(card);
-                        }
-
-                    });
-
-                    const section3TitleBox = document.createElement('div');
-                    section3TitleBox.classList.add('mb-4');
-
-                    const section3TitleContainer = document.createElement('div');
-                    section3TitleContainer.classList.add('section-title-container');
-                    const section3TitleBarLeft = document.createElement('div');
-                    section3TitleBarLeft.classList.add('section-title-bar');
-                    const hevilz4ModsText3 = document.createElement('span');
-                    hevilz4ModsText3.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
-
-                    const hevilz4ModsImg3 = document.createElement('img');
-                    hevilz4ModsImg3.src = "src/img/4icon.png";
-                    hevilz4ModsImg3.alt = "hevilz 4 mods";
-                    hevilz4ModsImg3.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
-                    const section3Title = document.createElement('h2');
-                    section3Title.classList.add('section-title-text');
-                    section3Title.textContent = "تصنيفات المودات";
-                    const section3TitleBarRight = document.createElement('div');
-                    section3TitleBarRight.classList.add('section-title-bar');
-
-                    section3TitleContainer.appendChild(hevilz4ModsText3);
-                    section3TitleContainer.appendChild(hevilz4ModsImg3);
-                    section3TitleContainer.appendChild(section3TitleBarLeft);
-                    section3TitleContainer.appendChild(section3Title);
-                    section3TitleContainer.appendChild(section3TitleBarRight);
-
-                    section3TitleBox.appendChild(section3TitleContainer);
-                    const section3Grid = document.createElement('div');
-                    section3Grid.classList.add('section-grid');
-
-                    sectionsContainer.appendChild(section3TitleBox);
-                    sectionsContainer.appendChild(section3Grid);
-
-                    sections3.forEach(section => {
-                        const card = createSectionCard(section, data);
-                        if (card) {
-                            section3Grid.appendChild(card);
-                        }
-                    });
-
-                })
-                .catch(error => {
-                    console.error('Error fetching JSON files:', error);
+            .then(([sections1, sections2, sections3, data]) => {
+                allData = data;
+                searchableData = data.filter(item => {
+                    const sectionNames3 = sections3.map(section => section.title)
+                    return !sectionNames3.includes(item.section);
                 });
-
-
+                buildSidebar(data);
+                const sectionsContainer = document.querySelector('.sections-container');
+                const section1TitleBox = document.createElement('div');
+                section1TitleBox.classList.add('mb-4');
+                const section1TitleContainer = document.createElement('div');
+                section1TitleContainer.classList.add('section-title-container');
+                const section1TitleBarLeft = document.createElement('div');
+                section1TitleBarLeft.classList.add('section-title-bar');
+                const hevilz4ModsText1 = document.createElement('span');
+                hevilz4ModsText1.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
+                const hevilz4ModsImg1 = document.createElement('img');
+                hevilz4ModsImg1.src = "src/img/4icon.png";
+                hevilz4ModsImg1.alt = "hevilz 4 mods";
+                hevilz4ModsImg1.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
+                const section1Title = document.createElement('h2');
+                section1Title.classList.add('section-title-text');
+                section1Title.textContent = "Hevilz Mods | مودات هفلز";
+                const section1TitleBarRight = document.createElement('div');
+                section1TitleBarRight.classList.add('section-title-bar');
+                section1TitleContainer.appendChild(hevilz4ModsText1);
+                section1TitleContainer.appendChild(hevilz4ModsImg1);
+                section1TitleContainer.appendChild(section1TitleBarLeft);
+                section1TitleContainer.appendChild(section1Title);
+                section1TitleContainer.appendChild(section1TitleBarRight);
+                section1TitleBox.appendChild(section1TitleContainer);
+                const section1Grid = document.createElement('div');
+                section1Grid.classList.add('section-grid');
+                sectionsContainer.appendChild(section1TitleBox);
+                sectionsContainer.appendChild(section1Grid);
+                sections1.forEach(section => {
+                    const card = createSectionCard(section, data);
+                    if (card) {
+                        section1Grid.appendChild(card);
+                    }
+                });
+                const section2TitleBox = document.createElement('div');
+                section2TitleBox.classList.add('mb-4');
+                const section2TitleContainer = document.createElement('div');
+                section2TitleContainer.classList.add('section-title-container');
+                const section2TitleBarLeft = document.createElement('div');
+                section2TitleBarLeft.classList.add('section-title-bar');
+                const hevilz4ModsText2 = document.createElement('span');
+                hevilz4ModsText2.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
+                const hevilz4ModsImg2 = document.createElement('img');
+                hevilz4ModsImg2.src = "src/img/4icon.png";
+                hevilz4ModsImg2.alt = "hevilz 4 mods";
+                hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
+                const section2Title = document.createElement('h2');
+                section2Title.classList.add('section-title-text');
+                section2Title.textContent = "مودات التختيم";
+                const section2TitleBarRight = document.createElement('div');
+                section2TitleBarRight.classList.add('section-title-bar');
+                section2TitleContainer.appendChild(hevilz4ModsText2);
+                section2TitleContainer.appendChild(hevilz4ModsImg2);
+                section2TitleContainer.appendChild(section2TitleBarLeft);
+                section2TitleContainer.appendChild(section2Title);
+                section2TitleContainer.appendChild(section2TitleBarRight);
+                section2TitleBox.appendChild(section2TitleContainer);
+                const section2Grid = document.createElement('div');
+                section2Grid.classList.add('section-grid');
+                sectionsContainer.appendChild(section2TitleBox);
+                sectionsContainer.appendChild(section2Grid);
+                sections2.forEach(section => {
+                    const card = createSectionCard(section, data);
+                    if (card) {
+                        section2Grid.appendChild(card);
+                    }
+                });
+                const section3TitleBox = document.createElement('div');
+                section3TitleBox.classList.add('mb-4');
+                const section3TitleContainer = document.createElement('div');
+                section3TitleContainer.classList.add('section-title-container');
+                const section3TitleBarLeft = document.createElement('div');
+                section3TitleBarLeft.classList.add('section-title-bar');
+                const hevilz4ModsText3 = document.createElement('span');
+                hevilz4ModsText3.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
+                const hevilz4ModsImg3 = document.createElement('img');
+                hevilz4ModsImg3.src = "src/img/4icon.png";
+                hevilz4ModsImg3.alt = "hevilz 4 mods";
+                hevilz4ModsImg3.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
+                const section3Title = document.createElement('h2');
+                section3Title.classList.add('section-title-text');
+                section3Title.textContent = "تصنيفات المودات";
+                const section3TitleBarRight = document.createElement('div');
+                section3TitleBarRight.classList.add('section-title-bar');
+                section3TitleContainer.appendChild(hevilz4ModsText3);
+                section3TitleContainer.appendChild(hevilz4ModsImg3);
+                section3TitleContainer.appendChild(section3TitleBarLeft);
+                section3TitleContainer.appendChild(section3Title);
+                section3TitleContainer.appendChild(section3TitleBarRight);
+                section3TitleBox.appendChild(section3TitleContainer);
+                const section3Grid = document.createElement('div');
+                section3Grid.classList.add('section-grid');
+                sectionsContainer.appendChild(section3TitleBox);
+                sectionsContainer.appendChild(section3Grid);
+                sections3.forEach(section => {
+                    const card = createSectionCard(section, data);
+                    if (card) {
+                        section3Grid.appendChild(card);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON files:', error);
+            });
             document.getElementById('data_modal').addEventListener('hidden.bs.modal', function (event) {
                 const modal = document.getElementById("data_modal");
                 const select = modal.querySelector('select');
@@ -1006,6 +431,62 @@
                     select.selectedIndex = 0;
                 }
             });
+            function createSectionCard(section, data) {
+                const sectionData = data.filter(item => item.section === section.title);
+                if (sectionData.length === 0) {
+                    return null;
+                }
+                const cardContainer = document.createElement('div');
+                cardContainer.classList.add('card-container');
+                const card = document.createElement('div');
+                card.classList.add('card', 'h-100');
+                if (section.imgheader) {
+                    const img = document.createElement('img');
+                    img.src = section.imgheader;
+                    img.alt = section.title || 'Section Image';
+                    img.classList.add('card-img-top');
+                    card.appendChild(img);
+                }
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = section.title;
+                cardBody.appendChild(title);
+                if (section.desc) {
+                    const desc = document.createElement('p');
+                    desc.classList.add('card-text');
+                    desc.textContent = section.desc;
+                    cardBody.appendChild(desc);
+                }
+                const selectMenu = document.createElement('div');
+                const select = document.createElement('select');
+                select.classList.add('form-select');
+                select.setAttribute('data-section-title', section.title || 'Item');
+                const defaultOption = document.createElement('option');
+                defaultOption.textContent = `Select from ${section.title || 'Item'}`;
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                select.appendChild(defaultOption);
+                sectionData.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.title;
+                    option.textContent = item.title;
+                    select.appendChild(option);
+                });
+                select.addEventListener('change', (e) => {
+                    const selectedTitle = e.target.value;
+                    const selectedItem = data.find(item => item.title === selectedTitle);
+                    if (selectedItem) {
+                        openModal(selectedItem);
+                    }
+                });
+                selectMenu.appendChild(select);
+                cardBody.appendChild(selectMenu);
+                card.appendChild(cardBody);
+                cardContainer.appendChild(card);
+                return cardContainer;
+            }
         });
     </script>
 </head>
@@ -1048,7 +529,6 @@
                     <div class="modal-image-container">
                         <img id="modal-img" src="" alt="Item Image" class="img-fluid rounded-3" style="display: none;">
                     </div>
-
                     <div class="modal-desc-container">
                         <p id="modal-desc" class="modal-desc"></p>
                         <div id="main-buttons"></div>
@@ -1082,5 +562,4 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
 </body>
-
 </html>
