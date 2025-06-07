@@ -206,6 +206,10 @@
                         extraIndex++;
                     }
                 }
+                if (item._id) {
+                    history.replaceState(null, "", `#${item._id}`);
+                }
+
                 const modalElement = new bootstrap.Modal(modal);
                 modalElement.show();
             };
@@ -314,12 +318,19 @@
                 fetch('data.json').then(response => response.json())
             ])
             .then(([sections1, sections2, sections3, data]) => {
-                allData = data;
+                allData = [...data].sort((a, b) => a.title.localeCompare(b.title));
+                allData.forEach((item, index) => item._id = index + 1);
                 searchableData = data.filter(item => {
                     const sectionNames3 = sections3.map(section => section.title)
                     return !sectionNames3.includes(item.section);
                 });
                 buildSidebar(data);
+                const hash = window.location.hash.slice(1);
+                if (hash) {
+                    const match = allData.find(i => i._id == hash);
+                    if (match) openModal(match);
+                }
+
                 const sectionsContainer = document.querySelector('.sections-container');
                 const section1TitleBox = document.createElement('div');
                 section1TitleBox.classList.add('mb-4');
@@ -429,6 +440,9 @@
                 const select = modal.querySelector('select');
                 if (select) {
                     select.selectedIndex = 0;
+                }
+                if (window.location.hash) {
+                        history.replaceState(null, "", window.location.pathname);
                 }
             });
             function createSectionCard(section, data) {
