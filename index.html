@@ -331,6 +331,13 @@
                     if (match) openModal(match);
                 }
 
+                window.addEventListener("hashchange", () => {
+                   const hash = window.location.hash.slice(1);
+                   if (!hash) return;
+                   const item = allData.find(i => i._id == hash);
+                   if (item) openModal(item);
+                });
+
                 const sectionsContainer = document.querySelector('.sections-container');
                 const section1TitleBox = document.createElement('div');
                 section1TitleBox.classList.add('mb-4');
