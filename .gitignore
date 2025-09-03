@@ -10,3 +10,6 @@ src/img/bg.psd.old
 *.new
 src/img/oldbg (2).png
 *.rar
+/node_modules
+package.json
+package-lock.json
