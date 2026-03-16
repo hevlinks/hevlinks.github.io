@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البطولات | Hevilz Mods</title>
+    <link rel="icon" type="image/x-icon" href="../src/img/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{background-image:url('../src/img/bg.png');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;min-height:100vh;width:100vw;overflow-x:hidden;color:#fff;display:flex;flex-direction:column}
+        .full-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);z-index:1}
+        .top-bar{position:fixed;top:0;left:0;width:100%;height:4rem;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px)}
+        .header-left{display:flex;align-items:center;height:100%}
+        .header-left img{height:2.5rem;margin-right:0.5rem}
+        .header-left span{font-size:1.2rem;font-weight:bold;text-shadow:1px 1px 2px rgba(0,0,0,0.5)}
+        .hero{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:4rem 2rem;margin-top:4rem}
+        .hero h1{font-size:clamp(3.5rem,9vw,6rem);font-weight:900;text-shadow:0 3px 6px rgba(0,0,0,0.6);margin-bottom:1.5rem;animation:fadeInDown 1s ease-out;color:#f8f9fa}
+        .hero p{font-size:clamp(1.4rem,3.5vw,2rem);max-width:900px;margin:0 auto;text-shadow:0 2px 4px rgba(0,0,0,0.6);animation:fadeInUp 1s ease-out 0.5s backwards;color:#ced4da}
+        .sections-container{position:relative;z-index:2;padding:4rem 1rem;flex-grow:1;display:flex;flex-direction:column;width:100%}
+        .section-title-container{display:flex;align-items:center;justify-content:center;margin-bottom:3rem}
+        .section-title-bar{flex:1;height:4px;background:linear-gradient(to right,#d63384,#f8f9fa);margin:0 20px;border-radius:2px}
+        .section-title-text{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;white-space:nowrap;padding:0 15px;position:relative;animation:glow 3s ease-in-out infinite alternate;color:#f8f9fa}
+        .section-title-text::before,.section-title-text::after{content:'';position:absolute;top:0;height:100%;width:4px;background:linear-gradient(to bottom,#d63384,#f8f9fa);border-radius:2px}
+        .section-title-text::before{left:-20px}
+        .section-title-text::after{right:-20px}
+        @keyframes glow{from{text-shadow:0 0 15px #fff,0 0 25px #fff,0 0 35px #d63384}to{text-shadow:0 0 25px #fff,0 0 35px #fff,0 0 45px #d63384}}
+        .section-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:1.5rem;width:100%;margin-bottom:3rem;padding:50px}
+        .section-grid .card-container{flex:0 0 auto;max-width:280px;width:280px;height:auto;min-height:380px}
+        @media (max-width:768px){.section-grid .card-container{max-width:220px;width:220px;min-height:350px}.card img{height:100px}}
+        @media (max-width:500px){.section-grid .card-container{max-width:45%;height:auto;min-height:300px}.top-bar{flex-direction:column;align-items:stretch;height:auto;padding:0.5rem}.header-left{margin-bottom:0.5rem;justify-content:center;text-align:center}.header-left img{margin:0 0.5rem 0 0}}
+        .card-container{perspective:1200px;margin-bottom:0}
+        .card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:transform 0.5s ease,box-shadow 0.5s ease;transform-style:preserve-3d;height:100%;display:flex;flex-direction:column}
+        .card:hover{transform:rotateY(12deg) scale(1.08);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+        .card img{width:100%;height:158px;object-fit:cover;border-radius:18px 18px 0 0}
+        .card-body{padding:0.8rem;position:relative;z-index:3;display:flex;flex-direction:column;flex-grow:1;overflow:hidden}
+        .card-title{font-size:1rem;font-weight:700;margin-bottom:0.3rem;color:#f8f9fa;text-shadow:1px 1px 3px rgba(0,0,0,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .card-text{font-size:0.8rem;color:#ced4da;margin-bottom:0.5rem;flex-grow:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.3}
+        /* Price Tag */
+        .price-tag{display:inline-flex;align-items:center;gap:0.3rem;background:linear-gradient(135deg,#c9a227,#8b6914);color:#fff;padding:0.2rem 0.5rem;border-radius:20px;font-size:0.7rem;font-weight:700;margin-bottom:0.4rem;width:fit-content}
+        .price-tag .riyal-icon{width:10px;height:10px;object-fit:contain;filter:brightness(0) invert(1)}
+        /* Winner Tags */
+        .winner-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.4rem}
+        .winner-tag{display:inline-flex;align-items:center;gap:0.25rem;padding:0.2rem 0.4rem;border-radius:15px;font-size:0.65rem;font-weight:600}
+        .winner-tag.gold{background:linear-gradient(135deg,#c9a227,#8b6914);color:#fff}
+        .winner-tag.silver{background:linear-gradient(135deg,#a8a8a8,#6b6b6b);color:#fff}
+        .winner-tag.bronze{background:linear-gradient(135deg,#a0522d,#6b3710);color:#fff}
+        .winner-tag i{font-size:0.55rem}
+        .winner-tag .prize{display:inline-flex;align-items:center;gap:0.15rem;background:rgba(0,0,0,0.2);padding:0.1rem 0.3rem;border-radius:10px;margin-left:0.2rem}
+        .winner-tag .prize .riyal-icon{width:8px;height:8px;object-fit:contain;filter:brightness(0) invert(1)}
+        /* Top Section */
+        .top-section{margin-bottom:0.4rem;padding:0.4rem;background:rgba(0,0,0,0.2);border-radius:10px}
+        .top-header{display:flex;align-items:center;gap:0.3rem;font-size:0.7rem;font-weight:700;margin-bottom:0.3rem;color:#ffa600}
+        .top-header i{font-size:0.6rem}
+        .top-list{display:flex;flex-wrap:wrap;gap:0.25rem}
+        /* Top Player Base Style */
+        .top-player{display:inline-flex;align-items:center;gap:0.2rem;padding:0.15rem 0.35rem;border-radius:12px;font-size:0.6rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#4a4a4a,#2a2a2a);border:1px solid rgba(255,255,255,0.2)}
+        .top-player .pos-num{width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:800;background:#fff;color:#4a4a4a}
+        /* Buttons */
+        .card-buttons{display:flex;flex-direction:column;gap:0.4rem;align-items:center;width:100%;margin-top:auto}
+        .buttons-line{display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;width:100%}
+        .btn-outline-light{border:2px solid #fff;border-radius:100px;padding:0.3rem 0.6rem;color:#fff;background-color:transparent;transition:background-color 0.3s ease,color 0.3s ease,transform 0.3s ease;font-size:0.75rem;font-weight:bolder;display:flex;align-items:center;justify-content:center;text-decoration:none;flex:1;min-width:0;text-align:center;white-space:nowrap}
+        .btn-outline-light:hover{background-color:#fff;color:#000;transform:scale(1.05)}
+        footer{background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,0.25);padding:2.5rem 1rem;text-align:center;position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+        .credits{text-align:left;flex:1 1 300px;margin-right:2.5rem}
+        .credit-item{display:flex;align-items:center;margin-bottom:1.2rem}
+        .credit-item img{width:55px;height:55px;border-radius:50%;margin-right:1.2rem;object-fit:cover;border:2px solid rgba(255,255,255,0.5)}
+        .credit-item span{font-size:1.1rem;color:#ced4da}
+        .credit-item.main-credit img{width:90px;height:90px;border-width:3px}
+        .credit-item.main-credit span{font-size:1.4rem;color:#f8f9fa;font-weight:600}
+        .social-links{flex:1 1 300px;text-align:center}
+        .social-links h6{margin-bottom:1.2rem;font-size:1.3rem;color:#f8f9fa}
+        .social-icons{display:flex;align-items:center;justify-content:center}
+        .social-icons a{color:#fff;font-size:1.9rem;margin:0 0.9rem;transition:transform 0.3s ease,color 0.3s ease,filter 0.3s ease;display:inline-block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
+        .social-icons a:hover{transform:translateY(-6px);color:#d63384}
+        @keyframes fadeInDown{from{opacity:0;transform:translateY(-60px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:transformY(0)}}
+        @media (max-width:767.98px){.top-bar{flex-direction:column;align-items:stretch;height:auto;padding:0.5rem}.header-left{margin-bottom:0.5rem;justify-content:center;text-align:center}.header-left img{margin:0 0.5rem 0 0}}
+    </style>
+</head>
+
+<body>
+    <div class="full-overlay"></div>
+    <div class="top-bar">
+        <div class="header-left">
+            <a href="../" class="btn-outline-light" style="padding: 0.4rem 0.8rem; font-size: 0.9rem; margin-right: 1rem;">
+                <i class="fas fa-arrow-left"></i> الرئيسية
+            </a>
+            <img src="../src/img/4icon.png" alt="Hevilz Mods Icon">
+            <span>البطولات</span>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div>
+            <h1><i class="fas fa-trophy" style="color: #ffa600;"></i> البطولات</h1>
+            <p>شارك في بطولاتنا التنافسية واظهر مهاراتك بين لعيبة رزيدنت ايفل 4</p>
+        </div>
+    </div>
+
+    <div class="sections-container" id="sections-container">
+    </div>
+
+    <footer>
+        <div class="credits">
+            <div class="credit-item main-credit">
+                <img src="https://yt3.googleusercontent.com/wrByv6p6KNWlS7fmvvm5h74AJpYhpMokAl5pQOIWYLSc3aGqyIXKn2uIDNLljnscwZqeikqy_w=s160-c-k-c0x00ffffff-no-rj" alt="S_صقر">
+                <span>Hevilz</span>
+            </div>
+            <div class="credit-item">
+                <img src="https://yt3.googleusercontent.com/L8F5PxkFZJg9fvLC6kA3kisWVDmaCCm0nc4drudFBvhegKWMH9RecWWwxiVnU2fFzudVw9O1eto=s160-c-k-c0x00ffffff-no-rj" alt="BN_LOS">
+                <span>BN_LOS</span>
+            </div>
+        </div>
+        <div class="social-links">
+            <h6>Hevilz's Social Links</h6>
+            <div class="social-icons">
+                <a href="https://www.twitch.tv/hevillz" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+                <a href="https://www.youtube.com/@Hevilz" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/hevillz" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://discord.gg/GE7vwg6Asq" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const RIYAL_ICON = '<img class="riyal-icon" src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="SR">';
+
+            const COLOR_PALETTE = {
+                gold: {
+                    background: 'linear-gradient(135deg, #c9a227, #8b6914)',
+                    border: 'rgba(201, 162, 39, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#c9a227'
+                },
+                silver: {
+                    background: 'linear-gradient(135deg, #a8a8a8, #6b6b6b)',
+                    border: 'rgba(168, 168, 168, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#6b6b6b'
+                },
+                bronze: {
+                    background: 'linear-gradient(135deg, #a0522d, #6b3710)',
+                    border: 'rgba(160, 82, 45, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#a0522d'
+                },
+                platinum: {
+                    background: 'linear-gradient(135deg, #e5e4e2, #b4b4b4)',
+                    border: 'rgba(229, 228, 226, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#8a8a8a'
+                },
+                diamond: {
+                    background: 'linear-gradient(135deg, #b9f2ff, #4fc3f7)',
+                    border: 'rgba(79, 195, 247, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#0288d1'
+                },
+                ruby: {
+                    background: 'linear-gradient(135deg, #e74c3c, #922b21)',
+                    border: 'rgba(231, 76, 60, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#c0392b'
+                },
+                emerald: {
+                    background: 'linear-gradient(135deg, #2ecc71, #1a5c34)',
+                    border: 'rgba(46, 204, 113, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#27ae60'
+                },
+                sapphire: {
+                    background: 'linear-gradient(135deg, #3498db, #1a5276)',
+                    border: 'rgba(52, 152, 219, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#2980b9'
+                },
+                purple: {
+                    background: 'linear-gradient(135deg, #9b59b6, #5b2c6f)',
+                    border: 'rgba(155, 89, 182, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#8e44ad'
+                },
+                orange: {
+                    background: 'linear-gradient(135deg, #f39c12, #9a6200)',
+                    border: 'rgba(243, 156, 18, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#d68910'
+                },
+                pink: {
+                    background: 'linear-gradient(135deg, #e91e63, #880e4f)',
+                    border: 'rgba(233, 30, 99, 0.6)',
+                    numBg: '#fff',
+                    numColor: '#c2185b'
+                },
+                default: {
+                    background: 'linear-gradient(135deg, #4a4a4a, #2a2a2a)',
+                    border: 'rgba(255, 255, 255, 0.2)',
+                    numBg: '#fff',
+                    numColor: '#4a4a4a'
+                }
+            };
+
+            function generateColorCSS() {
+                let css = '';
+                for (const [colorName, colors] of Object.entries(COLOR_PALETTE)) {
+                    css += `
+                        .top-player.color-${colorName}{
+                            background: ${colors.background};
+                            border: 1px solid ${colors.border};
+                        }
+                        .top-player.color-${colorName} .pos-num{
+                            background: ${colors.numBg};
+                            color: ${colors.numColor};
+                        }
+                    `;
+                }
+                
+                if (COLOR_PALETTE.gold) {
+                    css += `
+                        .top-player.pos1{
+                            background: ${COLOR_PALETTE.gold.background};
+                            border: 1px solid ${COLOR_PALETTE.gold.border};
+                        }
+                        .top-player.pos1 .pos-num{
+                            background: ${COLOR_PALETTE.gold.numBg};
+                            color: ${COLOR_PALETTE.gold.numColor};
+                        }
+                    `;
+                }
+                if (COLOR_PALETTE.silver) {
+                    css += `
+                        .top-player.pos2{
+                            background: ${COLOR_PALETTE.silver.background};
+                            border: 1px solid ${COLOR_PALETTE.silver.border};
+                        }
+                        .top-player.pos2 .pos-num{
+                            background: ${COLOR_PALETTE.silver.numBg};
+                            color: ${COLOR_PALETTE.silver.numColor};
+                        }
+                    `;
+                }
+                if (COLOR_PALETTE.bronze) {
+                    css += `
+                        .top-player.pos3{
+                            background: ${COLOR_PALETTE.bronze.background};
+                            border: 1px solid ${COLOR_PALETTE.bronze.border};
+                        }
+                        .top-player.pos3 .pos-num{
+                            background: ${COLOR_PALETTE.bronze.numBg};
+                            color: ${COLOR_PALETTE.bronze.numColor};
+                        }
+                    `;
+                }
+                
+                const style = document.createElement('style');
+                style.textContent = css;
+                document.head.appendChild(style);
+            }
+
+            generateColorCSS();
+
+            const DEFAULT_SECTION = {
+                id: 'Section1',
+                title: 'البطولات',
+                icon: 'fas fa-trophy'
+            };
+
+            function createCard(item) {
+                const cardContainer = document.createElement('div');
+                cardContainer.classList.add('card-container');
+
+                const card = document.createElement('div');
+                card.classList.add('card', 'h-100');
+
+                if (item.img) {
+                    const img = document.createElement('img');
+                    img.src = item.img;
+                    img.alt = item.title;
+                    img.classList.add('card-img-top');
+                    card.appendChild(img);
+                }
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = item.title;
+                cardBody.appendChild(title);
+
+                if (item.desc) {
+                    const desc = document.createElement('p');
+                    desc.classList.add('card-text');
+                    desc.innerHTML = item.desc;
+                    cardBody.appendChild(desc);
+                }
+
+                if (item.price) {
+                    const priceTag = document.createElement('div');
+                    priceTag.classList.add('price-tag');
+                    priceTag.innerHTML = `${RIYAL_ICON} ${item.price}`;
+                    cardBody.appendChild(priceTag);
+                }
+
+                const winnerTags = document.createElement('div');
+                winnerTags.classList.add('winner-tags');
+                
+                let winnerIndex = 1;
+                while (item[`winner${winnerIndex}`]) {
+                    const winnerName = item[`winner${winnerIndex}`];
+                    const winnerPrize = item[`winnerprice${winnerIndex}`];
+                    const winnerDiff = item[`winnerdiff${winnerIndex}`];
+                    
+                    const winnerTag = document.createElement('div');
+                    winnerTag.classList.add('winner-tag', 'gold');
+                    
+                    let winnerContent = `<i class="fas fa-trophy"></i> ${winnerName}`;
+                    if (winnerPrize) {
+                        winnerContent += `<span class="prize">${RIYAL_ICON}${winnerPrize}</span>`;
+                    }
+                    if (winnerDiff) {
+                        winnerContent += ` <span style="opacity:0.7">(${winnerDiff})</span>`;
+                    }
+                    
+                    winnerTag.innerHTML = winnerContent;
+                    winnerTags.appendChild(winnerTag);
+                    winnerIndex++;
+                }
+                
+                if (winnerTags.children.length > 0) {
+                    cardBody.appendChild(winnerTags);
+                }
+
+                let diffIndex = 1;
+                while (item[`topdiff${diffIndex}`]) {
+                    const topPlayers = item[`topdiff${diffIndex}`];
+                    const diffName = item[`topdiffname${diffIndex}`] || `Difficulty ${diffIndex}`;
+                    
+                    if (topPlayers) {
+                        const topSection = document.createElement('div');
+                        topSection.classList.add('top-section');
+                        
+                        const topHeader = document.createElement('div');
+                        topHeader.classList.add('top-header');
+                        topHeader.innerHTML = `<i class="fas fa-medal"></i> ${diffName}`;
+                        topSection.appendChild(topHeader);
+                        
+                        const topList = document.createElement('div');
+                        topList.classList.add('top-list');
+                        
+                        const players = topPlayers.split(',').map(p => p.trim()).filter(p => p);
+                        
+                        players.forEach((player, idx) => {
+                            const pos = idx + 1;
+                            const playerEl = document.createElement('span');
+                            
+                            const customColor = item[`diff${diffIndex}playerlistcolor${pos}`];
+                            
+                            playerEl.classList.add('top-player');
+                            
+                            if (customColor && COLOR_PALETTE[customColor.toLowerCase()]) {
+                                playerEl.classList.add(`color-${customColor.toLowerCase()}`);
+                            } else {
+                                playerEl.classList.add(`pos${pos}`);
+                            }
+                            
+                            playerEl.innerHTML = `<span class="pos-num">${pos}</span> ${player}`;
+                            topList.appendChild(playerEl);
+                        });
+                        
+                        topSection.appendChild(topList);
+                        cardBody.appendChild(topSection);
+                    }
+                    diffIndex++;
+                }
+
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.classList.add('card-buttons');
+
+                const allButtons = [];
+                let buttonIndex = 1;
+                while (item[`button${buttonIndex}`] && item[`link${buttonIndex}`]) {
+                    allButtons.push({
+                        num: buttonIndex,
+                        text: item[`button${buttonIndex}`],
+                        link: item[`link${buttonIndex}`]
+                    });
+                    buttonIndex++;
+                }
+
+                if (allButtons.length > 0) {
+                    const buttonLines = {};
+                    let lineIndex = 1;
+                    
+                    while (item[`buttonsline${lineIndex}`] !== undefined) {
+                        const lineValue = item[`buttonsline${lineIndex}`];
+                        if (lineValue) {
+                            const buttonNums = lineValue.toString().split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+                            buttonLines[lineIndex] = buttonNums;
+                        }
+                        lineIndex++;
+                    }
+
+                    if (Object.keys(buttonLines).length === 0) {
+                        buttonLines[1] = allButtons.map(btn => btn.num);
+                    }
+
+                    const assignedButtons = new Set();
+
+                    const sortedLineIndices = Object.keys(buttonLines).map(Number).sort((a, b) => a - b);
+                    
+                    sortedLineIndices.forEach(lineIdx => {
+                        const buttonNums = buttonLines[lineIdx];
+                        const lineButtons = allButtons.filter(btn => buttonNums.includes(btn.num) && !assignedButtons.has(btn.num));
+                        
+                        if (lineButtons.length > 0) {
+                            lineButtons.forEach(btn => assignedButtons.add(btn.num));
+                            
+                            const line = document.createElement('div');
+                            line.classList.add('buttons-line');
+                            lineButtons.forEach(btn => {
+                                const btnEl = document.createElement('a');
+                                btnEl.href = btn.link;
+                                btnEl.classList.add('btn-outline-light');
+                                btnEl.textContent = btn.text;
+                                btnEl.target = "_blank";
+                                line.appendChild(btnEl);
+                            });
+                            buttonsContainer.appendChild(line);
+                        }
+                    });
+
+                    const remainingButtons = allButtons.filter(btn => !assignedButtons.has(btn.num));
+                    if (remainingButtons.length > 0) {
+                        const line = document.createElement('div');
+                        line.classList.add('buttons-line');
+                        remainingButtons.forEach(btn => {
+                            const btnEl = document.createElement('a');
+                            btnEl.href = btn.link;
+                            btnEl.classList.add('btn-outline-light');
+                            btnEl.textContent = btn.text;
+                            btnEl.target = "_blank";
+                            line.appendChild(btnEl);
+                        });
+                        buttonsContainer.appendChild(line);
+                    }
+                }
+
+                cardBody.appendChild(buttonsContainer);
+                card.appendChild(cardBody);
+                cardContainer.appendChild(card);
+
+                return cardContainer;
+            }
+
+            function createSection(sectionConfig, items) {
+                const titleBox = document.createElement('div');
+                titleBox.classList.add('mb-4');
+
+                const titleContainer = document.createElement('div');
+                titleContainer.classList.add('section-title-container');
+
+                const barLeft = document.createElement('div');
+                barLeft.classList.add('section-title-bar');
+
+                const title = document.createElement('h2');
+                title.classList.add('section-title-text');
+                title.innerHTML = `<i class="${sectionConfig.icon}"></i> ${sectionConfig.title}`;
+
+                const barRight = document.createElement('div');
+                barRight.classList.add('section-title-bar');
+
+                titleContainer.appendChild(barLeft);
+                titleContainer.appendChild(title);
+                titleContainer.appendChild(barRight);
+                titleBox.appendChild(titleContainer);
+
+                const grid = document.createElement('div');
+                grid.classList.add('section-grid');
+
+                items.forEach(item => {
+                    const card = createCard(item);
+                    grid.appendChild(card);
+                });
+
+                return { titleBox, grid };
+            }
+
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('sections-container');
+
+                    const items = Array.isArray(data) ? data : (data.items || data.cards || Object.values(data)[0]);
+                    
+                    if (!Array.isArray(items)) {
+                        console.error('Data is not an array');
+                        return;
+                    }
+
+                    const sectionIds = [...new Set(items.map(item => item.section || DEFAULT_SECTION.id))];
+
+                    sectionIds.forEach(sectionId => {
+                        const sectionItems = items.filter(item => (item.section || DEFAULT_SECTION.id) === sectionId);
+
+                        if (sectionItems.length > 0) {
+                            const sectionConfig = {
+                                id: sectionId,
+                                title: sectionItems[0].sectiontitle || DEFAULT_SECTION.title,
+                                icon: sectionItems[0].sectionicon || DEFAULT_SECTION.icon
+                            };
+
+                            const { titleBox, grid } = createSection(sectionConfig, sectionItems);
+                            container.appendChild(titleBox);
+                            container.appendChild(grid);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading data:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>

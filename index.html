@@ -35,10 +35,65 @@
         .section-title-text::before{left:-20px}
         .section-title-text::after{right:-20px}
         @keyframes glow{from{text-shadow:0 0 15px #fff,0 0 25px #fff,0 0 35px #d63384}to{text-shadow:0 0 25px #fff,0 0 35px #fff,0 0 45px #d63384}}
-        .section-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1.5rem;width:100%;margin-bottom:3rem;padding:50px}
-        @media (max-width:1200px){.section-grid{grid-template-columns:repeat(4,1fr)}}
-        @media (max-width:768px){.section-grid{grid-template-columns:repeat(3,1fr)}.card img{max-height:120px}.modal-dialog{max-width:98%}}
-        @media (max-width:500px){.section-grid{grid-template-columns:repeat(2,1fr)}.top-bar{flex-direction:column;align-items:stretch;height:auto;padding:0.5rem}.header-left{margin-bottom:0.5rem;justify-content:center;text-align:center}.header-left img{margin:0 0.5rem 0 0}.search-bar-container{width:100%}#search-container{max-width:100%}}
+        
+        .section-group-container{width:100%;margin-bottom:2rem;background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border-radius:18px;border:1px solid rgba(255,255,255,0.15);overflow:hidden}
+        .section-group-header{padding:1.5rem 2rem;background:linear-gradient(90deg, rgba(214,51,132,0.2), transparent);border-bottom:1px solid rgba(255,255,255,0.1)}
+        .section-group-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:#f8f9fa;text-shadow:0 2px 4px rgba(0,0,0,0.5);text-align:center}
+        .section-group-content{padding:0}
+        .section-group-content .section-title-container{margin-bottom:2rem}
+        .section-group-content .section-grid-legacy{padding:0 2rem 2rem 2rem;margin-bottom:0}
+        @media (max-width:768px){.section-group-header{padding:1rem 1.5rem}.section-group-content .section-grid-legacy{padding:0 1rem 1rem 1rem}}
+        
+        .section-grid-legacy{display:grid;grid-template-columns:repeat(6,1fr);gap:1.5rem;width:100%;margin-bottom:3rem;padding:50px}
+        @media (max-width:1200px){.section-grid-legacy{grid-template-columns:repeat(4,1fr)}}
+        @media (max-width:768px){.section-grid-legacy{grid-template-columns:repeat(3,1fr)}.card img{max-height:120px}.modal-dialog{max-width:98%}}
+        @media (max-width:500px){.section-grid-legacy{grid-template-columns:repeat(2,1fr)}.top-bar{flex-direction:column;align-items:stretch;height:auto;padding:0.5rem}.header-left{margin-bottom:0.5rem;justify-content:center;text-align:center}.header-left img{margin:0 0.5rem 0 0}.search-bar-container{width:100%}#search-container{max-width:100%}}
+        
+        .section-grid-modern{display:grid;grid-template-columns:repeat(8,1fr);gap:1rem;width:100%;margin-bottom:1rem;padding:0 30px}
+        @media (max-width:1400px){.section-grid-modern{grid-template-columns:repeat(6,1fr)}}
+        @media (max-width:1100px){.section-grid-modern{grid-template-columns:repeat(5,1fr)}}
+        @media (max-width:900px){.section-grid-modern{grid-template-columns:repeat(4,1fr)}}
+        @media (max-width:700px){.section-grid-modern{grid-template-columns:repeat(3,1fr)}}
+        @media (max-width:500px){.section-grid-modern{grid-template-columns:repeat(2,1fr)}}
+        
+        .modern-group-container{width:100%;margin-bottom:2rem;padding:0 30px}
+        .modern-group-title{font-size:1.3rem;font-weight:700;color:#fff;text-align:center;padding:0.6rem 1.2rem;margin-bottom:1rem;background:linear-gradient(90deg, transparent, rgba(214,51,132,0.5), #ff007f66, rgba(214,51,132,0.5), transparent);border-radius:8px;text-shadow:0 1px 3px rgba(0,0,0,0.5);letter-spacing:0.5px;position:relative}
+        .modern-group-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:1rem;width:100%}
+        @media (max-width:1400px){.modern-group-grid{grid-template-columns:repeat(6,1fr)}}
+        @media (max-width:1100px){.modern-group-grid{grid-template-columns:repeat(5,1fr)}}
+        @media (max-width:900px){.modern-group-grid{grid-template-columns:repeat(4,1fr)}}
+        @media (max-width:700px){.modern-group-grid{grid-template-columns:repeat(3,1fr)}}
+        @media (max-width:500px){.modern-group-grid{grid-template-columns:repeat(2,1fr)}}
+        
+        .section-difficulty-container{width:100%;margin-bottom:2rem;padding:0 30px}
+        .difficulty-row{margin-bottom:1.5rem}
+        .difficulty-row-title{font-size:1.3rem;font-weight:700;color:#fff;text-align:center;padding:0.6rem 1.2rem;margin-bottom:1rem;border-radius:8px;text-shadow:0 1px 3px rgba(0,0,0,0.5);letter-spacing:0.5px;width:100%}
+        .difficulty-row-title.easy{background:linear-gradient(90deg, transparent, rgba(40,167,69,0.5), rgba(40,167,69,0.3), rgba(40,167,69,0.5), transparent)}
+        .difficulty-row-title.medium{background:linear-gradient(90deg, transparent, rgba(255,193,7,0.5), rgba(255,193,7,0.3), rgba(255,193,7,0.5), transparent)}
+        .difficulty-row-title.hard{background:linear-gradient(90deg, transparent, rgba(220,53,69,0.5), rgba(220,53,69,0.3), rgba(220,53,69,0.5), transparent)}
+        .difficulty-row-title.veryhard{background:linear-gradient(90deg, transparent, rgba(172, 0, 17, 0.5), rgba(220,53,69,0.3), rgba(220,53,69,0.5), transparent)}
+        .difficulty-items-row{display:flex;flex-wrap:nowrap;gap:0.8rem;overflow-x:auto;padding:0.5rem 0;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.3) rgba(0,0,0,0.2)}
+        .difficulty-items-row::-webkit-scrollbar{height:6px}
+        .difficulty-items-row::-webkit-scrollbar-track{background:rgba(0,0,0,0.2);border-radius:10px}
+        .difficulty-items-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.3);border-radius:10px}
+        .difficulty-item-btn{flex:0 0 auto;padding:0.5rem 1.2rem;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;color:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;text-decoration:none;display:inline-block}
+        .difficulty-item-btn:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+        @media (max-width:768px){.difficulty-items-row{gap:0.5rem}.difficulty-item-btn{padding:0.4rem 0.9rem;font-size:0.75rem}}
+        
+        .card-container-modern{perspective:1200px;margin-bottom:0}
+        .card-modern{position:relative;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:transform 0.5s ease,box-shadow 0.5s ease;transform-style:preserve-3d;height:100%;display:flex;flex-direction:column}
+        .card-modern:hover{transform:rotateY(12deg) scale(1.08);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+        .card-modern img{width:100%;height: auto;object-fit:cover;border-radius:12px 12px 0 0}
+        .card-modern .card-body{padding:0.6rem;position:relative;z-index:3;display:flex;flex-direction:column;flex-grow:1;overflow:hidden}
+        .card-modern .card-title{font-size:0.8rem;font-weight:700;margin-bottom:0.2rem;color:#f8f9fa;text-shadow:1px 1px 3px rgba(0,0,0,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .card-modern .card-text{font-size:0.65rem;color:#ced4da;margin-bottom:0.3rem;flex-grow:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.2}
+        .card-tags{display:flex;flex-wrap:wrap;gap:0.2rem;margin-bottom:0.3rem}
+        .card-tag{display:inline-flex;align-items:center;gap:0.15rem;padding:0.15rem 0.5rem;border-radius:10px;font-size:0.55rem;font-weight:600;background:linear-gradient(135deg, #ff0090, #171717);color:#fff}
+        .card-modern .card-buttons{display:flex;flex-direction:column;gap:0.3rem;align-items:center;width:100%;margin-top:auto}
+        .card-modern .buttons-line{display:flex;flex-wrap:wrap;gap:0.2rem;justify-content:center;width:100%}
+        .card-modern .btn-outline-light{border:1px solid #fff;border-radius:100px;padding:2px;color:#fff;background-color:transparent;transition:background-color 0.3s ease,color 0.3s ease,transform 0.3s ease;font-size:0.6rem;font-weight:bolder;display:flex;align-items:center;justify-content:center;text-decoration:none;flex:1;min-width:0;text-align:center}
+        .card-modern .btn-outline-light:hover{background-color:#fff;color:#000;transform:scale(1.05)}
+        
         .card-container{perspective:1200px;margin-bottom:0}
         .card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:transform 0.5s ease,box-shadow 0.5s ease;transform-style:preserve-3d;height:100%;display:flex;flex-direction:column}
         .card:hover{transform:rotateY(12deg) scale(1.08);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
@@ -49,11 +104,18 @@
         .form-select{appearance:none;background-color:transparent;border:1px solid rgba(255,255,255,0.6);border-radius:100px;padding:0.9rem 1.1rem;color:#fff;width:100%;cursor:pointer;transition:border-color 0.3s ease,box-shadow 0.3s ease;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff' width='20px' height='20px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.1rem center;background-size:20px;margin-top:auto}
         .form-select:focus{outline:none;border-color:#d63384;box-shadow:0 0 0 4px rgba(214,51,132,0.3)}
         .form-select option{background-color:rgba(0,0,0,0.85);color:#fff;padding:0.6rem}
+        
         .modal{z-index:1055!important}
         .modal-dialog{margin:5vh auto;max-width:50%;transform:translateY(0);overflow-y:auto}
         .modal-content{background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,0.5);color:#fff}
-        .modal-header{border-bottom:1px solid rgba(255,255,255,0.3);padding:1.2rem 1.75rem}
+        .modal-header{border-bottom:1px solid rgba(255,255,255,0.3);padding:1.2rem 1.75rem;flex-wrap:wrap;gap:0.5rem;align-items:center;flex-direction:column}
+        .modal-header-row{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;justify-content:space-between;width:100%}
         .modal-title{font-size:1.7rem;font-weight:700}
+        .modal-header-tags{display:flex;flex-direction:column;gap:0.3rem;align-items:center;width:100%}
+        .modal-header-tags .card-tag{font-size:1rem;padding:0.4rem 2rem;border-radius:12px}
+        .modal-header-tags .tag-line{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;justify-content:center;width:100%}
+        .card-tags{display:flex;flex-direction:column;gap:0.2rem;margin-bottom:0.3rem}
+        .card-tags .tag-line{display:flex;flex-wrap:wrap;gap:0.2rem;align-items:center}
         .modal-body{display:flex;flex-direction:column;align-items:center}
         .modal-image-container{padding:1.75rem}
         .modal-body img{width:100%;height:auto;object-fit:contain;max-height:300px}
@@ -61,14 +123,14 @@
         .modal-desc{font-size:1.5rem;font-weight:bold;margin-bottom:1.75rem;color:#ced4da}
         .modal-body h3,.modal-body h4{color:#f8f9fa}
         #main-buttons,#modal-extras-container{display:flex;flex-direction:column;gap:0.6rem;align-items:center;width:100%}
-        .btn-outline-light{border:2px solid #fff;border-radius:100px;padding:0.7rem 1.2rem;color:#fff;background-color:transparent;transition:background-color 0.3s ease,color 0.3s ease,transform 0.3s ease;font-size:larger;font-weight:bolder;display:flex;align-items:center;justify-content:center;margin:0 auto;text-decoration:none}
-        .btn-outline-light:hover{background-color:#fff;color:#000;transform:scale(1.07)}
+        .btn-outline-light-modal{border:2px solid #fff;border-radius:100px;padding:0.7rem 1.2rem;color:#fff;background-color:transparent;transition:background-color 0.3s ease,color 0.3s ease,transform 0.3s ease;font-size:larger;font-weight:bolder;display:flex;align-items:center;justify-content:center;margin:0 auto;text-decoration:none}
+        .btn-outline-light-modal:hover{background-color:#fff;color:#000;transform:scale(1.07)}
         footer{background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03));backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,0.25);padding:2.5rem 1rem;text-align:center;position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
         .credits{text-align:left;flex:1 1 300px;margin-right:2.5rem}
         .credit-item{display:flex;align-items:center;margin-bottom:1.2rem}
         .credit-item img{width:55px;height:55px;border-radius:50%;margin-right:1.2rem;object-fit:cover;border:2px solid rgba(255,255,255,0.5)}
-        .credit-item.main-credit img{width:90px;height:90px;border-width:3px}
         .credit-item span{font-size:1.1rem;color:#ced4da}
+        .credit-item.main-credit img{width:90px;height:90px;border-width:3px}
         .credit-item.main-credit span{font-size:1.4rem;color:#f8f9fa;font-weight:600}
         .social-links{flex:1 1 300px;text-align:center}
         .social-links h6{margin-bottom:1.2rem;font-size:1.3rem;color:#f8f9fa}
@@ -87,16 +149,112 @@
         .sidebar-header{font-size:1.5rem;font-weight:900;text-shadow:0 2px 10px #0007;letter-spacing:1px;padding:1.1rem 1.2rem 0.3rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.09);display:flex;justify-content:space-between;align-items:center}
         .sidebar-close{border:none;background:transparent;font-size:1.8rem;color:#f5f5f5;cursor:pointer;transition:color .2s}
         .sidebar-close:hover{color:#d63384}
-        .sidebar-section-title{font-size:1.17rem;font-weight:bold;margin:1.6rem 1.2rem 0.7rem 1.2rem;padding-bottom:0.1rem;color:#f8f9fa;border-bottom:1px solid rgba(214,51,132,0.19)}
-        .sidebar-list{list-style:none;margin:0 0 0.6rem 0;padding:0 1.2rem}
-        .sidebar-list-item{padding:0.62rem 0.4rem 0.62rem 0.6rem;border-radius:8px;cursor:pointer;transition:background 0.19s;font-size:1.04rem}
-        .sidebar-list-item:hover{background:rgba(214,51,132,0.13);color:#d63384}
-        .sidebar-list-item:not(:last-child){margin-bottom:0.18rem}
+        .sidebar-section-title{font-size:1.1rem;font-weight:bold;margin:1.2rem 1.2rem 0.5rem 1.2rem;padding:0.4rem 0.5rem;color:#f8f9fa;border-bottom:2px solid rgba(214,51,132,0.4);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:color 0.2s,background 0.2s;border-radius:6px}
+        .sidebar-section-title:hover{color:#d63384;background:rgba(214,51,132,0.1)}
+        .sidebar-section-title .expand-icon{font-size:0.8rem;transition:transform 0.3s ease}
+        .sidebar-section-title.expanded .expand-icon{transform:rotate(90deg)}
+        .sidebar-section-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease-out}
+        .sidebar-section-content.expanded{max-height:5000px}
+        .sidebar-card-title{font-size:0.95rem;font-weight:600;margin:0.3rem 1.4rem 0.2rem 1.4rem;padding:0.35rem 0.5rem;color:#ced4da;border-left:3px solid rgba(214,51,132,0.3);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:color 0.2s,background 0.2s,border-color 0.2s;border-radius:4px}
+        .sidebar-card-title:hover{color:#d63384;background:rgba(214,51,132,0.08);border-left-color:#d63384}
+        .sidebar-card-title .expand-icon{font-size:0.7rem;transition:transform 0.3s ease}
+        .sidebar-card-title.expanded .expand-icon{transform:rotate(90deg)}
+        .sidebar-card-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out}
+        .sidebar-card-content.expanded{max-height:2000px}
+        .sidebar-list{list-style:none;margin:0;padding:0 1.2rem 0.3rem 2rem}
+        .sidebar-list-item{padding:0.45rem 0.5rem;border-radius:6px;cursor:pointer;transition:background 0.19s,color 0.19s;font-size:0.9rem;color:#adb5bd}
+        .sidebar-list-item:hover{background:rgba(214,51,132,0.15);color:#d63384}
+        .sidebar-list-item:not(:last-child){margin-bottom:0.1rem}
+        .sidebar-group-title{font-size:0.85rem;font-weight:600;margin:0.3rem 1.4rem 0.2rem 1.4rem;padding:0.35rem 0.5rem;color:#d63384;border-left:3px solid rgba(214,51,132,0.5);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:color 0.2s,background 0.2s,border-color 0.2s;border-radius:4px}
+        .sidebar-group-title:hover{color:#fff;background:rgba(214,51,132,0.15);border-left-color:#fff}
+        .sidebar-group-title .expand-icon{font-size:0.65rem;transition:transform 0.3s ease}
+        .sidebar-group-title.expanded .expand-icon{transform:rotate(90deg)}
+        .sidebar-group-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out}
+        .sidebar-group-content.expanded{max-height:2000px}
         @media (max-width:500px){.sidebar{width:93vw}}
         .sidebar-toggle-btn{display:flex;align-items:center;justify-content:center;margin-right:1.2rem;background:transparent;border:none;font-size:2rem;color:#fff;cursor:pointer;transition:color .2s;z-index:1200}
         .sidebar-toggle-btn:hover{color:#d63384}
         body.sidebar-opened .top-bar,body.sidebar-opened .hero,body.sidebar-opened .sections-container,body.sidebar-opened footer{filter:blur(0.7px) brightness(0.97);pointer-events:none;user-select:none}
     </style>
+</head>
+
+<body>
+    <div class="full-overlay"></div>
+    <div class="top-bar">
+        <div class="header-left">
+            <img src="src/img/4icon.png" alt="Hevilz Mods Icon">
+            <span>Hevilz Mods</span>
+        </div>
+        <div class="search-bar-container">
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Search items...">
+                <ul id="search-results"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div>
+            <h1>Hevilz Mods</h1>
+            <h2>موقع هفلز</h2>
+            <br>
+            <h3>جميع محتويات و روابط و شروحات سيرفرنا<br>في مكان واحد مرتبة و منظمة ليتم الوصول اليها بسهولة<br>تم بناء و ادارة الموقع من قبل<br>@Hevilz<br>@BN_LOS (S_صقر)
+            </h3>
+            <br>
+            <a href="Tournaments/" class="btn-outline-light-modal" style="display:inline-flex;">
+                <i class="fas fa-trophy" style="color: #ffc107; margin-right: 0.5rem;"></i>
+                البطولات
+            </a>
+        </div>
+    </div>
+
+    <div class="sections-container" id="sections-container">
+    </div>
+    
+    <div class="modal fade" id="data_modal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-container">
+                        <img id="modal-img" src="" alt="Item Image" class="img-fluid rounded-3" style="display: none;">
+                    </div>
+                    <div class="modal-desc-container">
+                        <p id="modal-desc" class="modal-desc"></p>
+                        <div id="main-buttons"></div>
+                        <div id="modal-extras-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="credits">
+            <div class="credit-item main-credit">
+                <img src="https://yt3.googleusercontent.com/wrByv6p6KNWlS7fmvvm5h74AJpYhpMokAl5pQOIWYLSc3aGqyIXKn2uIDNLljnscwZqeikqy_w=s160-c-k-c0x00ffffff-no-rj" alt="S_صقر">
+                <span>Hevilz</span>
+            </div>
+            <div class="credit-item">
+                <img src="https://yt3.googleusercontent.com/L8F5PxkFZJg9fvLC6kA3kisWVDmaCCm0nc4drudFBvhegKWMH9RecWWwxiVnU2fFzudVw9O1eto=s160-c-k-c0x00ffffff-no-rj" alt="BN_LOS">
+                <span>BN_LOS</span>
+            </div>
+        </div>
+        <div class="social-links">
+            <h6>Hevilz's Social Links</h6>
+            <div class="social-icons">
+                <a href="https://www.twitch.tv/hevillz" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+                <a href="https://www.youtube.com/@Hevilz" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/hevillz" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://discord.gg/GE7vwg6Asq" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let allData = [];
@@ -104,25 +262,385 @@
             let sidebar, sidebarBackdrop;
             const searchInput = document.getElementById('search-input');
             const searchResultsList = document.getElementById('search-results');
-            const openModal = (item) => {
+            
+            const TAG_COLOR_PALETTE = {
+                pink: {
+                    background: 'linear-gradient(135deg, #ff0090, #171717)',
+                    color: '#fff'
+                },
+                gold: {
+                    background: 'linear-gradient(135deg, #c9a227, #8b6914)',
+                    color: '#fff'
+                },
+                silver: {
+                    background: 'linear-gradient(135deg, #a8a8a8, #6b6b6b)',
+                    color: '#fff'
+                },
+                bronze: {
+                    background: 'linear-gradient(135deg, #a0522d, #6b3710)',
+                    color: '#fff'
+                },
+                platinum: {
+                    background: 'linear-gradient(135deg, #e5e4e2, #b4b4b4)',
+                    color: '#333'
+                },
+                diamond: {
+                    background: 'linear-gradient(135deg, #b9f2ff, #4fc3f7)',
+                    color: '#0288d1'
+                },
+                ruby: {
+                    background: 'linear-gradient(135deg, #e74c3c, #922b21)',
+                    color: '#fff'
+                },
+                emerald: {
+                    background: 'linear-gradient(135deg, #2ecc71, #1a5c34)',
+                    color: '#fff'
+                },
+                sapphire: {
+                    background: 'linear-gradient(135deg, #3498db, #1a5276)',
+                    color: '#fff'
+                },
+                purple: {
+                    background: 'linear-gradient(135deg, #9b59b6, #5b2c6f)',
+                    color: '#fff'
+                },
+                orange: {
+                    background: 'linear-gradient(135deg, #f39c12, #9a6200)',
+                    color: '#fff'
+                },
+                red: {
+                    background: 'linear-gradient(135deg, #e74c3c, #c0392b)',
+                    color: '#fff'
+                },
+                green: {
+                    background: 'linear-gradient(135deg, #27ae60, #1e8449)',
+                    color: '#fff'
+                },
+                blue: {
+                    background: 'linear-gradient(135deg, #3498db, #2980b9)',
+                    color: '#fff'
+                },
+                cyan: {
+                    background: 'linear-gradient(135deg, #00bcd4, #0097a7)',
+                    color: '#fff'
+                },
+                yellow: {
+                    background: 'linear-gradient(135deg, #f1c40f, #d4ac0d)',
+                    color: '#333'
+                },
+                white: {
+                    background: 'linear-gradient(135deg, #ffffff, #e0e0e0)',
+                    color: '#333'
+                },
+                black: {
+                    background: 'linear-gradient(135deg, #2c3e50, #1a252f)',
+                    color: '#fff'
+                },
+                default: {
+                    background: 'linear-gradient(135deg, #ff0090, #171717)',
+                    color: '#fff'
+                }
+            };
+
+            function generateTagColorCSS() {
+                let css = '';
+                for (const [colorName, colors] of Object.entries(TAG_COLOR_PALETTE)) {
+                    css += `
+                        .card-tag.color-${colorName}{
+                            background: ${colors.background};
+                            color: ${colors.color};
+                        }
+                    `;
+                }
+                const style = document.createElement('style');
+                style.textContent = css;
+                document.head.appendChild(style);
+            }
+
+            generateTagColorCSS();
+            
+            function getItemDifficulties(item) {
+                const difficulties = [];
+                if (item.difficulty) {
+                    difficulties.push(item.difficulty.toLowerCase());
+                }
+                let diffIndex = 1;
+                while (item[`difficulty${diffIndex}`]) {
+                    difficulties.push(item[`difficulty${diffIndex}`].toLowerCase());
+                    diffIndex++;
+                }
+                return [...new Set(difficulties)];
+            }
+
+            function createTagsWithLines(item, container, tagSize = 'small') {
+                const allTags = [];
+                let tagIndex = 1;
+                while (item[`tag${tagIndex}`]) {
+                    allTags.push({
+                        num: tagIndex,
+                        text: item[`tag${tagIndex}`],
+                        color: item[`tagcolor${tagIndex}`]
+                    });
+                    tagIndex++;
+                }
+
+                if (allTags.length === 0) return;
+
+                const tagLines = {};
+                let lineIndex = 1;
+                let hasTaglines = false;
+                while (item[`tagline${lineIndex}`] !== undefined) {
+                    hasTaglines = true;
+                    const lineValue = item[`tagline${lineIndex}`];
+                    if (lineValue && lineValue.toString().trim() !== '') {
+                        const tagNums = lineValue.toString().split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+                        if (tagNums.length > 0) {
+                            tagLines[lineIndex] = tagNums;
+                        }
+                    }
+                    lineIndex++;
+                }
+
+                if (!hasTaglines || Object.keys(tagLines).length === 0) {
+                    tagLines[1] = allTags.map(t => t.num);
+                }
+
+                const assignedTags = new Set();
+                const sortedLineIndices = Object.keys(tagLines).map(Number).sort((a, b) => a - b);
+                
+                sortedLineIndices.forEach(lineIdx => {
+                    const tagNums = tagLines[lineIdx];
+                    const lineTags = allTags.filter(t => tagNums.includes(t.num) && !assignedTags.has(t.num));
+                    
+                    if (lineTags.length > 0) {
+                        lineTags.forEach(t => assignedTags.add(t.num));
+                        
+                        const lineDiv = document.createElement('div');
+                        lineDiv.classList.add('tag-line');
+                        
+                        lineTags.forEach(t => {
+                            const tag = document.createElement('span');
+                            tag.classList.add('card-tag');
+                            if (tagSize === 'large') {
+                                tag.style.fontSize = '1rem';
+                                tag.style.padding = '0.4rem 2rem';
+                                tag.style.borderRadius = '12px';
+                            }
+                            if (t.color && TAG_COLOR_PALETTE[t.color.toLowerCase()]) {
+                                tag.classList.add(`color-${t.color.toLowerCase()}`);
+                            }
+                            tag.textContent = t.text;
+                            lineDiv.appendChild(tag);
+                        });
+                        container.appendChild(lineDiv);
+                    }
+                });
+
+                const remainingTags = allTags.filter(t => !assignedTags.has(t.num));
+                if (remainingTags.length > 0) {
+                    const lineDiv = document.createElement('div');
+                    lineDiv.classList.add('tag-line');
+                    
+                    remainingTags.forEach(t => {
+                        const tag = document.createElement('span');
+                        tag.classList.add('card-tag');
+                        if (tagSize === 'large') {
+                            tag.style.fontSize = '1rem';
+                            tag.style.padding = '0.4rem 2rem';
+                            tag.style.borderRadius = '12px';
+                        }
+                        if (t.color && TAG_COLOR_PALETTE[t.color.toLowerCase()]) {
+                            tag.classList.add(`color-${t.color.toLowerCase()}`);
+                        }
+                        tag.textContent = t.text;
+                        lineDiv.appendChild(tag);
+                    });
+                    container.appendChild(lineDiv);
+                }
+            }
+
+            const SECTIONS_CONFIG = [
+                {
+                    id: 'section1',
+                    title: 'Hevilz Mods | مودات هفلز',
+                    type: 'legacy',
+                    sectionsFile: 'sections.json',
+                    dataSource: 'data.json',
+                    sectionGroup: 'group2'
+                },
+                {
+                    id: 'section2',
+                    title: 'مودات التختيم',
+                    type: 'legacy',
+                    sectionsFile: 'sections2.json',
+                    dataSource: 'data.json',
+                    sectionGroup: 'group1'
+                },
+                {
+                    id: 'section3',
+                    title: 'Mods by Difficulty | حسب الصعوبة',
+                    type: 'difficulty',
+                    dataSource: 'data.json',
+                    sectionGroup: 'group1'
+                },
+                {
+                    id: 'section4',
+                    title: 'تصنيفات المودات',
+                    type: 'legacy',
+                    sectionsFile: 'sections3.json',
+                    dataSource: 'data.json',
+                    sectionGroup: 'group1'
+                },
+                {
+                    id: 'section5',
+                    title: 'RE4 Skins | سكنات ريزدينت ايفل 4',
+                    type: 'modern',
+                    dataSource: 'data2.json',
+                    sectionGroup: 'group2'
+                }
+            ];
+            
+            const SECTION_GROUPS_CONFIG = [
+                {
+                    id: 'group1',
+                    title: 'All Mods | جميع المودات',
+                    showGroupTitle: true
+                },
+                {
+                    id: 'group2',
+                    title: 'Others | اصناف اخرى',
+                    showGroupTitle: false
+                }
+            ];
+
+            const openModal = (item, isModern = false) => {
                 const modal = document.getElementById("data_modal");
                 const modalImg = document.getElementById("modal-img");
                 const modalTitle = document.getElementById("modal-title");
                 const modalDesc = document.getElementById("modal-desc");
                 const mainButtonsContainer = document.getElementById("main-buttons");
                 const modalExtrasContainer = document.getElementById("modal-extras-container");
+                
                 modalImg.src = '';
                 modalImg.style.display = 'none';
                 modalTitle.textContent = '';
                 modalDesc.innerHTML = '';
                 mainButtonsContainer.innerHTML = '';
                 modalExtrasContainer.innerHTML = '';
+                
                 if (item.img) {
                     modalImg.src = item.img;
                     modalImg.style.display = 'block';
                 }
                 modalTitle.textContent = item.title || 'Untitled Item';
                 modalDesc.innerHTML = item.desc || 'No description available.';
+                
+                const modalHeader = document.querySelector('.modal-header');
+                
+                const existingTagsContainer = modalHeader.querySelector('.modal-header-tags');
+                if (existingTagsContainer) {
+                    existingTagsContainer.remove();
+                }
+                
+                let headerRow = modalHeader.querySelector('.modal-header-row');
+                if (!headerRow) {
+                    headerRow = document.createElement('div');
+                    headerRow.classList.add('modal-header-row');
+                    
+                    const closeBtn = modalHeader.querySelector('.btn-close');
+                    headerRow.appendChild(modalTitle);
+                    if (closeBtn) {
+                        headerRow.appendChild(closeBtn);
+                    }
+                    modalHeader.insertBefore(headerRow, modalHeader.firstChild);
+                }
+                
+                const headerTagsContainer = document.createElement('div');
+                headerTagsContainer.classList.add('modal-header-tags');
+                createTagsWithLines(item, headerTagsContainer, 'large');
+                if (headerTagsContainer.children.length > 0) {
+                    modalHeader.appendChild(headerTagsContainer);
+                }
+                
+                if (isModern) {
+                    const allButtons = [];
+                    let buttonIndex = 1;
+                    while (item[`button${buttonIndex}`] && item[`link${buttonIndex}`]) {
+                        allButtons.push({
+                            num: buttonIndex,
+                            text: item[`button${buttonIndex}`],
+                            link: item[`link${buttonIndex}`]
+                        });
+                        buttonIndex++;
+                    }
+
+                    if (allButtons.length > 0) {
+                        const buttonLines = {};
+                        let lineIndex = 1;
+                        while (item[`buttonsline${lineIndex}`] !== undefined) {
+                            const lineValue = item[`buttonsline${lineIndex}`];
+                            if (lineValue) {
+                                const buttonNums = lineValue.toString().split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+                                buttonLines[lineIndex] = buttonNums;
+                            }
+                            lineIndex++;
+                        }
+
+                        if (Object.keys(buttonLines).length === 0) {
+                            buttonLines[1] = allButtons.map(btn => btn.num);
+                        }
+
+                        const assignedButtons = new Set();
+                        const sortedLineIndices = Object.keys(buttonLines).map(Number).sort((a, b) => a - b);
+                        
+                        sortedLineIndices.forEach(lineIdx => {
+                            const buttonNums = buttonLines[lineIdx];
+                            const lineButtons = allButtons.filter(btn => buttonNums.includes(btn.num) && !assignedButtons.has(btn.num));
+                            
+                            if (lineButtons.length > 0) {
+                                lineButtons.forEach(btn => assignedButtons.add(btn.num));
+                                
+                                const lineDiv = document.createElement('div');
+                                lineDiv.style.display = 'flex';
+                                lineDiv.style.flexWrap = 'wrap';
+                                lineDiv.style.gap = '0.5rem';
+                                lineDiv.style.justifyContent = 'center';
+                                lineDiv.style.marginTop = '0.5rem';
+                                
+                                lineButtons.forEach(btn => {
+                                    const btnEl = document.createElement('a');
+                                    btnEl.href = btn.link;
+                                    btnEl.classList.add('btn-outline-light-modal');
+                                    btnEl.textContent = btn.text;
+                                    btnEl.target = "_blank";
+                                    lineDiv.appendChild(btnEl);
+                                });
+                                mainButtonsContainer.appendChild(lineDiv);
+                            }
+                        });
+
+                        const remainingButtons = allButtons.filter(btn => !assignedButtons.has(btn.num));
+                        if (remainingButtons.length > 0) {
+                            const lineDiv = document.createElement('div');
+                            lineDiv.style.display = 'flex';
+                            lineDiv.style.flexWrap = 'wrap';
+                            lineDiv.style.gap = '0.5rem';
+                            lineDiv.style.justifyContent = 'center';
+                            lineDiv.style.marginTop = '0.5rem';
+                            
+                            remainingButtons.forEach(btn => {
+                                const btnEl = document.createElement('a');
+                                btnEl.href = btn.link;
+                                btnEl.classList.add('btn-outline-light-modal');
+                                btnEl.textContent = btn.text;
+                                btnEl.target = "_blank";
+                                lineDiv.appendChild(btnEl);
+                            });
+                            mainButtonsContainer.appendChild(lineDiv);
+                        }
+                    }
+                }
+                
                 const videoContainer = document.createElement('div');
                 videoContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center', 'mt-4', 'mb-4');
                 let videoIndex = 1;
@@ -150,62 +668,68 @@
                 if (videoContainer.children.length > 0) {
                     modalDesc.appendChild(videoContainer);
                 }
-                let tutorialButton, downloadButton;
-                if (item.tutlink) {
-                    tutorialButton = document.createElement('a');
-                    tutorialButton.href = item.tutlink;
-                    tutorialButton.textContent = 'YouTube | الشرح و التركيب';
-                    tutorialButton.classList.add('btn-outline-light');
-                    tutorialButton.target = "_blank";
-                    mainButtonsContainer.appendChild(tutorialButton);
-                }
-                if (item.downloadlink) {
-                    downloadButton = document.createElement('a');
-                    downloadButton.href = item.downloadlink;
-                    downloadButton.textContent = 'Download | التنزيل';
-                    downloadButton.classList.add('btn-outline-light');
-                    downloadButton.target = "_blank";
-                    mainButtonsContainer.appendChild(downloadButton);
-                }
-                let extrasSectionIndex = 1;
-                while (item[`extrasectiontitle${extrasSectionIndex}`]) {
-                    const extrasTitle = document.createElement('h4');
-                    extrasTitle.style.fontSize = '1.5rem';
-                    extrasTitle.style.fontWeight = '600';
-                    extrasTitle.style.marginTop = '1.5rem';
-                    extrasTitle.style.marginBottom = '0.5rem';
-                    extrasTitle.textContent = item[`extrasectiontitle${extrasSectionIndex}`];
-                    modalExtrasContainer.appendChild(extrasTitle);
-                    let includedExtras = [];
-                    if (item[`extrasection${extrasSectionIndex}`]) {
-                        includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
-                        includedExtras.forEach(extraNum => {
-                            if (item[`extra${extraNum}`] && item[`extralink${extraNum}`]) {
+                
+                if (!isModern) {
+                    let tutorialButton, downloadButton;
+                    if (item.tutlink) {
+                        tutorialButton = document.createElement('a');
+                        tutorialButton.href = item.tutlink;
+                        tutorialButton.textContent = 'YouTube | الشرح و التركيب';
+                        tutorialButton.classList.add('btn-outline-light-modal');
+                        tutorialButton.target = "_blank";
+                        mainButtonsContainer.appendChild(tutorialButton);
+                    }
+                    if (item.downloadlink) {
+                        downloadButton = document.createElement('a');
+                        downloadButton.href = item.downloadlink;
+                        downloadButton.textContent = 'Download | التنزيل';
+                        downloadButton.classList.add('btn-outline-light-modal');
+                        downloadButton.target = "_blank";
+                        mainButtonsContainer.appendChild(downloadButton);
+                    }
+                    
+                    let extrasSectionIndex = 1;
+                    while (item[`extrasectiontitle${extrasSectionIndex}`]) {
+                        const extrasTitle = document.createElement('h4');
+                        extrasTitle.style.fontSize = '1.5rem';
+                        extrasTitle.style.fontWeight = '600';
+                        extrasTitle.style.marginTop = '1.5rem';
+                        extrasTitle.style.marginBottom = '0.5rem';
+                        extrasTitle.textContent = item[`extrasectiontitle${extrasSectionIndex}`];
+                        modalExtrasContainer.appendChild(extrasTitle);
+                        let includedExtras = [];
+                        if (item[`extrasection${extrasSectionIndex}`]) {
+                            includedExtras = item[`extrasection${extrasSectionIndex}`].split(',').map(s => s.trim());
+                            includedExtras.forEach(extraNum => {
+                                if (item[`extra${extraNum}`] && item[`extralink${extraNum}`]) {
+                                    const extraButton = document.createElement('a');
+                                    extraButton.href = item[`extralink${extraNum}`];
+                                    extraButton.textContent = item[`extra${extraNum}`];
+                                    extraButton.classList.add('btn-outline-light-modal');
+                                    extraButton.target = "_blank";
+                                    modalExtrasContainer.appendChild(extraButton);
+                                }
+                            });
+                        }
+                        extrasSectionIndex++;
+                    }
+                    
+                    if (extrasSectionIndex === 1) {
+                        let extraIndex = 1;
+                        while (item[`extra${extraIndex}`]) {
+                            if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
                                 const extraButton = document.createElement('a');
-                                extraButton.href = item[`extralink${extraNum}`];
-                                extraButton.textContent = item[`extra${extraNum}`];
-                                extraButton.classList.add('btn-outline-light');
+                                extraButton.href = item[`extralink${extraIndex}`];
+                                extraButton.textContent = item[`extra${extraIndex}`];
+                                extraButton.classList.add('btn-outline-light-modal');
                                 extraButton.target = "_blank";
                                 modalExtrasContainer.appendChild(extraButton);
                             }
-                        });
-                    }
-                    extrasSectionIndex++;
-                }
-                if (extrasSectionIndex === 1) {
-                    let extraIndex = 1;
-                    while (item[`extra${extraIndex}`]) {
-                        if (item[`extra${extraIndex}`] && item[`extralink${extraIndex}`]) {
-                            const extraButton = document.createElement('a');
-                            extraButton.href = item[`extralink${extraIndex}`];
-                            extraButton.textContent = item[`extra${extraIndex}`];
-                            extraButton.classList.add('btn-outline-light');
-                            extraButton.target = "_blank";
-                            modalExtrasContainer.appendChild(extraButton);
+                            extraIndex++;
                         }
-                        extraIndex++;
                     }
                 }
+                
                 if (item._id) {
                     history.replaceState(null, "", `#${item._id}`);
                 }
@@ -213,50 +737,232 @@
                 const modalElement = new bootstrap.Modal(modal);
                 modalElement.show();
             };
-            function buildSidebar(data) {
-                const sectionMap = {};
-                data.forEach(item => {
-                    if (!sectionMap[item.section]) sectionMap[item.section] = [];
-                    sectionMap[item.section].push(item);
-                });
+
+            function buildSidebar(fetchedData) {
                 sidebar.innerHTML = '';
                 const header = document.createElement('div');
                 header.className = 'sidebar-header';
                 header.innerHTML = `<span>All Mods | جميع المودات</span>
                   <button class="sidebar-close" id="sidebarCloseBtn">&times;</button>`;
                 sidebar.appendChild(header);
-                for (const [sectionTitle, items] of Object.entries(sectionMap)) {
-                    const secTitle = document.createElement('div');
-                    secTitle.className = 'sidebar-section-title';
-                    secTitle.textContent = sectionTitle || 'بدون تصنيف';
-                    sidebar.appendChild(secTitle);
-                    const ul = document.createElement('ul');
-                    ul.className = 'sidebar-list';
-                    items.forEach(item => {
-                        const li = document.createElement('li');
-                        li.className = 'sidebar-list-item';
-                        li.textContent = item.title;
-                        li.tabIndex = 0;
-                        li.onclick = () => {
-                            closeSidebar();
-                            openModal(item);
+
+                SECTIONS_CONFIG.forEach(config => {
+                    if (config.excludeFromSidebar) return;
+
+                    const sectionTitle = document.createElement('div');
+                    sectionTitle.className = 'sidebar-section-title';
+                    sectionTitle.innerHTML = `<span>${config.title}</span><i class="fas fa-chevron-right expand-icon"></i>`;
+                    sidebar.appendChild(sectionTitle);
+
+                    const sectionContent = document.createElement('div');
+                    sectionContent.className = 'sidebar-section-content';
+
+                    if (config.type === 'legacy' && config.sectionsFile) {
+                        const cardsData = fetchedData[config.sectionsFile] || [];
+                        const itemsData = fetchedData[config.dataSource] || [];
+
+                        cardsData.forEach(card => {
+                            const cardItems = itemsData.filter(item => item.section === card.title);
+
+                            if (cardItems.length > 0) {
+                                const cardTitle = document.createElement('div');
+                                cardTitle.className = 'sidebar-card-title';
+                                cardTitle.innerHTML = `<span>${card.title}</span><i class="fas fa-chevron-right expand-icon"></i>`;
+                                sectionContent.appendChild(cardTitle);
+
+                                const cardContent = document.createElement('div');
+                                cardContent.className = 'sidebar-card-content';
+
+                                const ul = document.createElement('ul');
+                                ul.className = 'sidebar-list';
+                                cardItems.forEach(item => {
+                                    const li = document.createElement('li');
+                                    li.className = 'sidebar-list-item';
+                                    li.textContent = item.title;
+                                    li.tabIndex = 0;
+                                    li.onclick = (e) => {
+                                        e.stopPropagation();
+                                        closeSidebar();
+                                        openModal(item, false);
+                                    };
+                                    ul.appendChild(li);
+                                });
+                                cardContent.appendChild(ul);
+                                sectionContent.appendChild(cardContent);
+
+                                cardTitle.onclick = (e) => {
+                                    e.stopPropagation();
+                                    cardTitle.classList.toggle('expanded');
+                                    cardContent.classList.toggle('expanded');
+                                };
+                            }
+                        });
+                    } else if (config.type === 'modern') {
+                        const itemsData = fetchedData[config.dataSource] || [];
+                        
+                        const groupedItems = {};
+                        const ungroupedItems = [];
+                        
+                        itemsData.forEach(item => {
+                            if (item.group) {
+                                if (!groupedItems[item.group]) {
+                                    groupedItems[item.group] = [];
+                                }
+                                groupedItems[item.group].push(item);
+                            } else {
+                                ungroupedItems.push(item);
+                            }
+                        });
+                        
+                        const sortedGroupKeys = Object.keys(groupedItems).sort((a, b) => {
+                            const getFirstNum = (str) => parseInt(str.split('-')[0]) || 0;
+                            return getFirstNum(a) - getFirstNum(b);
+                        });
+                        
+                        sortedGroupKeys.forEach(groupKey => {
+                            const groupTitle = document.createElement('div');
+                            groupTitle.className = 'sidebar-group-title';
+                            groupTitle.innerHTML = `<span>Items ${groupKey}</span><i class="fas fa-chevron-right expand-icon"></i>`;
+                            sectionContent.appendChild(groupTitle);
+                            
+                            const groupContent = document.createElement('div');
+                            groupContent.className = 'sidebar-group-content';
+                            
+                            const ul = document.createElement('ul');
+                            ul.className = 'sidebar-list';
+                            groupedItems[groupKey].forEach(item => {
+                                const li = document.createElement('li');
+                                li.className = 'sidebar-list-item';
+                                li.textContent = item.title;
+                                li.tabIndex = 0;
+                                li.onclick = (e) => {
+                                    e.stopPropagation();
+                                    closeSidebar();
+                                    openModal(item, true);
+                                };
+                                ul.appendChild(li);
+                            });
+                            groupContent.appendChild(ul);
+                            sectionContent.appendChild(groupContent);
+                            
+                            groupTitle.onclick = (e) => {
+                                e.stopPropagation();
+                                groupTitle.classList.toggle('expanded');
+                                groupContent.classList.toggle('expanded');
+                            };
+                        });
+                        
+                        if (ungroupedItems.length > 0) {
+                            const ul = document.createElement('ul');
+                            ul.className = 'sidebar-list';
+                            ul.style.paddingLeft = '1.4rem';
+                            ungroupedItems.forEach(item => {
+                                const li = document.createElement('li');
+                                li.className = 'sidebar-list-item';
+                                li.textContent = item.title;
+                                li.tabIndex = 0;
+                                li.onclick = (e) => {
+                                    e.stopPropagation();
+                                    closeSidebar();
+                                    openModal(item, true);
+                                };
+                                ul.appendChild(li);
+                            });
+                            sectionContent.appendChild(ul);
+                        }
+                    } else if (config.type === 'difficulty') {
+                        const itemsData = fetchedData[config.dataSource] || [];
+                        
+                        const naturalSort = (a, b) => {
+                            return a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' });
                         };
-                        ul.appendChild(li);
-                    });
-                    sidebar.appendChild(ul);
-                }
+                        
+                        const easyItems = [];
+                        const mediumItems = [];
+                        const hardItems = [];
+                        const veryhardItems = [];
+                        
+                        itemsData.forEach(item => {
+                            const difficulties = getItemDifficulties(item);
+                            difficulties.forEach(diff => {
+                                if (diff === 'easy') easyItems.push(item);
+                                else if (diff === 'medium') mediumItems.push(item);
+                                else if (diff === 'hard') hardItems.push(item);
+                                else if (diff === 'veryhard') veryhardItems.push(item);
+                            });
+                        });
+                        
+                        easyItems.sort(naturalSort);
+                        mediumItems.sort(naturalSort);
+                        hardItems.sort(naturalSort);
+                        veryhardItems.sort(naturalSort);
+                        
+                        const difficultyGroups = [
+                            { name: 'Easy', items: easyItems },
+                            { name: 'Medium', items: mediumItems },
+                            { name: 'Hard', items: hardItems },
+                            { name: 'Very Hard', items: veryhardItems }
+                        ];
+                        
+                        difficultyGroups.forEach(group => {
+                            if (group.items.length === 0) return;
+                            
+                            const groupTitle = document.createElement('div');
+                            groupTitle.className = 'sidebar-group-title';
+                            groupTitle.innerHTML = `<span>${group.name}</span><i class="fas fa-chevron-right expand-icon"></i>`;
+                            sectionContent.appendChild(groupTitle);
+                            
+                            const groupContent = document.createElement('div');
+                            groupContent.className = 'sidebar-group-content';
+                            
+                            const ul = document.createElement('ul');
+                            ul.className = 'sidebar-list';
+                            group.items.forEach(item => {
+                                const li = document.createElement('li');
+                                li.className = 'sidebar-list-item';
+                                li.textContent = item.title;
+                                li.tabIndex = 0;
+                                li.onclick = (e) => {
+                                    e.stopPropagation();
+                                    closeSidebar();
+                                    openModal(item, false);
+                                };
+                                ul.appendChild(li);
+                            });
+                            groupContent.appendChild(ul);
+                            sectionContent.appendChild(groupContent);
+                            
+                            groupTitle.onclick = (e) => {
+                                e.stopPropagation();
+                                groupTitle.classList.toggle('expanded');
+                                groupContent.classList.toggle('expanded');
+                            };
+                        });
+                    }
+
+                    sidebar.appendChild(sectionContent);
+
+                    sectionTitle.onclick = () => {
+                        sectionTitle.classList.toggle('expanded');
+                        sectionContent.classList.toggle('expanded');
+                    };
+                });
+
                 document.getElementById('sidebarCloseBtn').onclick = closeSidebar;
             }
+            
             function openSidebar() {
                 sidebar.classList.add('open');
                 sidebarBackdrop.style.display = 'block';
                 document.body.classList.add('sidebar-opened');
             }
+            
             function closeSidebar() {
                 sidebar.classList.remove('open');
                 sidebarBackdrop.style.display = 'none';
                 document.body.classList.remove('sidebar-opened');
             }
+            
             sidebarBackdrop = document.createElement('div');
             sidebarBackdrop.className = 'sidebar-backdrop';
             sidebarBackdrop.onclick = closeSidebar;
@@ -264,6 +970,7 @@
             sidebar.className = 'sidebar';
             document.body.appendChild(sidebarBackdrop);
             document.body.appendChild(sidebar);
+            
             const topBar = document.querySelector('.top-bar .header-left');
             const sidebarToggleBtn = document.createElement('button');
             sidebarToggleBtn.className = 'sidebar-toggle-btn';
@@ -272,12 +979,14 @@
             sidebarToggleBtn.title = 'Show All Items';
             sidebarToggleBtn.onclick = openSidebar;
             topBar.insertBefore(sidebarToggleBtn, topBar.firstChild);
+
             const performSearch = (searchTerm) => {
                 const results = searchableData.filter(item =>
                     item.title.toLowerCase().includes(searchTerm.toLowerCase())
                 );
                 return results;
             };
+            
             const displayResults = (results) => {
                 searchResultsList.innerHTML = '';
                 if (results.length === 0 && searchInput.value.trim() !== '') {
@@ -301,158 +1010,199 @@
                 }
                 searchResultsList.style.display = results.length > 0 || searchInput.value.trim() !== '' ? 'block' : 'none';
             };
+            
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.trim();
                 const results = performSearch(searchTerm);
                 displayResults(results);
             });
+            
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('#search-container')) {
                     searchResultsList.style.display = 'none';
                 }
             });
-            Promise.all([
-                fetch('sections.json').then(response => response.json()),
-                fetch('sections2.json').then(response => response.json()),
-                fetch('sections3.json').then(response => response.json()),
-                fetch('data.json').then(response => response.json())
-            ])
-            .then(([sections1, sections2, sections3, data]) => {
-                allData = [...data].sort((a, b) => a.title.localeCompare(b.title));
-                allData.forEach((item, index) => item._id = index + 1);
-                searchableData = data.filter(item => {
-                    const sectionNames3 = sections3.map(section => section.title)
-                    return !sectionNames3.includes(item.section);
+
+            function createDifficultySection(items) {
+                const container = document.createElement('div');
+                container.className = 'section-difficulty-container';
+                
+                const naturalSort = (a, b) => {
+                    return a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' });
+                };
+                
+                const easyItems = [];
+                const mediumItems = [];
+                const hardItems = [];
+                const veryhardItems = [];
+                
+                items.forEach(item => {
+                    const difficulties = getItemDifficulties(item);
+                    difficulties.forEach(diff => {
+                        if (diff === 'easy') easyItems.push(item);
+                        else if (diff === 'medium') mediumItems.push(item);
+                        else if (diff === 'hard') hardItems.push(item);
+                        else if (diff === 'veryhard') veryhardItems.push(item);
+                    });
                 });
-                buildSidebar(data);
-                const hash = window.location.hash.slice(1);
-                if (hash) {
-                    const match = allData.find(i => i._id == hash);
-                    if (match) openModal(match);
+                
+                easyItems.sort(naturalSort);
+                mediumItems.sort(naturalSort);
+                hardItems.sort(naturalSort);
+                veryhardItems.sort(naturalSort);
+                
+                const difficultyGroups = [
+                    { name: 'Easy', items: easyItems, class: 'easy' },
+                    { name: 'Medium', items: mediumItems, class: 'medium' },
+                    { name: 'Hard', items: hardItems, class: 'hard' },
+                    { name: 'Very Hard', items: veryhardItems, class: 'veryhard' }
+                ];
+                
+                difficultyGroups.forEach(group => {
+                    if (group.items.length === 0) return;
+                    
+                    const row = document.createElement('div');
+                    row.className = 'difficulty-row';
+                    
+                    const rowTitle = document.createElement('div');
+                    rowTitle.className = `difficulty-row-title ${group.class}`;
+                    rowTitle.textContent = group.name;
+                    row.appendChild(rowTitle);
+                    
+                    const itemsRow = document.createElement('div');
+                    itemsRow.className = 'difficulty-items-row';
+                    
+                    group.items.forEach(item => {
+                        const btn = document.createElement('button');
+                        btn.className = 'difficulty-item-btn';
+                        btn.textContent = item.title;
+                        btn.onclick = () => openModal(item, false);
+                        itemsRow.appendChild(btn);
+                    });
+                    
+                    row.appendChild(itemsRow);
+                    container.appendChild(row);
+                });
+                
+                return container;
+            }
+            
+            function createModernCard(item) {
+                const cardContainer = document.createElement('div');
+                cardContainer.classList.add('card-container-modern');
+
+                const card = document.createElement('div');
+                card.classList.add('card-modern', 'h-100');
+
+                if (item.img) {
+                    const img = document.createElement('img');
+                    img.src = item.img;
+                    img.alt = item.title;
+                    card.appendChild(img);
                 }
 
-                window.addEventListener("hashchange", () => {
-                   const hash = window.location.hash.slice(1);
-                   if (!hash) return;
-                   const item = allData.find(i => i._id == hash);
-                   if (item) openModal(item);
-                });
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
 
-                const sectionsContainer = document.querySelector('.sections-container');
-                const section1TitleBox = document.createElement('div');
-                section1TitleBox.classList.add('mb-4');
-                const section1TitleContainer = document.createElement('div');
-                section1TitleContainer.classList.add('section-title-container');
-                const section1TitleBarLeft = document.createElement('div');
-                section1TitleBarLeft.classList.add('section-title-bar');
-                const hevilz4ModsText1 = document.createElement('span');
-                hevilz4ModsText1.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
-                const hevilz4ModsImg1 = document.createElement('img');
-                hevilz4ModsImg1.src = "src/img/4icon.png";
-                hevilz4ModsImg1.alt = "hevilz 4 mods";
-                hevilz4ModsImg1.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
-                const section1Title = document.createElement('h2');
-                section1Title.classList.add('section-title-text');
-                section1Title.textContent = "Hevilz Mods | مودات هفلز";
-                const section1TitleBarRight = document.createElement('div');
-                section1TitleBarRight.classList.add('section-title-bar');
-                section1TitleContainer.appendChild(hevilz4ModsText1);
-                section1TitleContainer.appendChild(hevilz4ModsImg1);
-                section1TitleContainer.appendChild(section1TitleBarLeft);
-                section1TitleContainer.appendChild(section1Title);
-                section1TitleContainer.appendChild(section1TitleBarRight);
-                section1TitleBox.appendChild(section1TitleContainer);
-                const section1Grid = document.createElement('div');
-                section1Grid.classList.add('section-grid');
-                sectionsContainer.appendChild(section1TitleBox);
-                sectionsContainer.appendChild(section1Grid);
-                sections1.forEach(section => {
-                    const card = createSectionCard(section, data);
-                    if (card) {
-                        section1Grid.appendChild(card);
-                    }
-                });
-                const section2TitleBox = document.createElement('div');
-                section2TitleBox.classList.add('mb-4');
-                const section2TitleContainer = document.createElement('div');
-                section2TitleContainer.classList.add('section-title-container');
-                const section2TitleBarLeft = document.createElement('div');
-                section2TitleBarLeft.classList.add('section-title-bar');
-                const hevilz4ModsText2 = document.createElement('span');
-                hevilz4ModsText2.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
-                const hevilz4ModsImg2 = document.createElement('img');
-                hevilz4ModsImg2.src = "src/img/4icon.png";
-                hevilz4ModsImg2.alt = "hevilz 4 mods";
-                hevilz4ModsImg2.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
-                const section2Title = document.createElement('h2');
-                section2Title.classList.add('section-title-text');
-                section2Title.textContent = "مودات التختيم";
-                const section2TitleBarRight = document.createElement('div');
-                section2TitleBarRight.classList.add('section-title-bar');
-                section2TitleContainer.appendChild(hevilz4ModsText2);
-                section2TitleContainer.appendChild(hevilz4ModsImg2);
-                section2TitleContainer.appendChild(section2TitleBarLeft);
-                section2TitleContainer.appendChild(section2Title);
-                section2TitleContainer.appendChild(section2TitleBarRight);
-                section2TitleBox.appendChild(section2TitleContainer);
-                const section2Grid = document.createElement('div');
-                section2Grid.classList.add('section-grid');
-                sectionsContainer.appendChild(section2TitleBox);
-                sectionsContainer.appendChild(section2Grid);
-                sections2.forEach(section => {
-                    const card = createSectionCard(section, data);
-                    if (card) {
-                        section2Grid.appendChild(card);
-                    }
-                });
-                const section3TitleBox = document.createElement('div');
-                section3TitleBox.classList.add('mb-4');
-                const section3TitleContainer = document.createElement('div');
-                section3TitleContainer.classList.add('section-title-container');
-                const section3TitleBarLeft = document.createElement('div');
-                section3TitleBarLeft.classList.add('section-title-bar');
-                const hevilz4ModsText3 = document.createElement('span');
-                hevilz4ModsText3.classList.add('fs-4', 'fw-semibold', 'me-2', 'text-outline');
-                const hevilz4ModsImg3 = document.createElement('img');
-                hevilz4ModsImg3.src = "src/img/4icon.png";
-                hevilz4ModsImg3.alt = "hevilz 4 mods";
-                hevilz4ModsImg3.classList.add('h-12', 'w-auto', 'inline', 'me-2', 'align-middle');
-                const section3Title = document.createElement('h2');
-                section3Title.classList.add('section-title-text');
-                section3Title.textContent = "تصنيفات المودات";
-                const section3TitleBarRight = document.createElement('div');
-                section3TitleBarRight.classList.add('section-title-bar');
-                section3TitleContainer.appendChild(hevilz4ModsText3);
-                section3TitleContainer.appendChild(hevilz4ModsImg3);
-                section3TitleContainer.appendChild(section3TitleBarLeft);
-                section3TitleContainer.appendChild(section3Title);
-                section3TitleContainer.appendChild(section3TitleBarRight);
-                section3TitleBox.appendChild(section3TitleContainer);
-                const section3Grid = document.createElement('div');
-                section3Grid.classList.add('section-grid');
-                sectionsContainer.appendChild(section3TitleBox);
-                sectionsContainer.appendChild(section3Grid);
-                sections3.forEach(section => {
-                    const card = createSectionCard(section, data);
-                    if (card) {
-                        section3Grid.appendChild(card);
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching JSON files:', error);
-            });
-            document.getElementById('data_modal').addEventListener('hidden.bs.modal', function (event) {
-                const modal = document.getElementById("data_modal");
-                const select = modal.querySelector('select');
-                if (select) {
-                    select.selectedIndex = 0;
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = item.title;
+                cardBody.appendChild(title);
+
+                if (item.desc) {
+                    const desc = document.createElement('p');
+                    desc.classList.add('card-text');
+                    desc.textContent = item.desc;
+                    cardBody.appendChild(desc);
                 }
-                if (window.location.hash) {
-                        history.replaceState(null, "", window.location.pathname);
+
+                const tagsContainer = document.createElement('div');
+                tagsContainer.classList.add('card-tags');
+                createTagsWithLines(item, tagsContainer, 'small');
+                if (tagsContainer.children.length > 0) {
+                    cardBody.appendChild(tagsContainer);
                 }
-            });
-            function createSectionCard(section, data) {
+
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.classList.add('card-buttons');
+
+                const allButtons = [];
+                let buttonIndex = 1;
+                while (item[`button${buttonIndex}`] && item[`link${buttonIndex}`]) {
+                    allButtons.push({
+                        num: buttonIndex,
+                        text: item[`button${buttonIndex}`],
+                        link: item[`link${buttonIndex}`]
+                    });
+                    buttonIndex++;
+                }
+
+                if (allButtons.length > 0) {
+                    const buttonLines = {};
+                    let lineIndex = 1;
+                    
+                    while (item[`buttonsline${lineIndex}`] !== undefined) {
+                        const lineValue = item[`buttonsline${lineIndex}`];
+                        if (lineValue) {
+                            const buttonNums = lineValue.toString().split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+                            buttonLines[lineIndex] = buttonNums;
+                        }
+                        lineIndex++;
+                    }
+
+                    if (Object.keys(buttonLines).length === 0) {
+                        buttonLines[1] = allButtons.map(btn => btn.num);
+                    }
+
+                    const assignedButtons = new Set();
+
+                    const sortedLineIndices = Object.keys(buttonLines).map(Number).sort((a, b) => a - b);
+                    
+                    sortedLineIndices.forEach(lineIdx => {
+                        const buttonNums = buttonLines[lineIdx];
+                        const lineButtons = allButtons.filter(btn => buttonNums.includes(btn.num) && !assignedButtons.has(btn.num));
+                        
+                        if (lineButtons.length > 0) {
+                            lineButtons.forEach(btn => assignedButtons.add(btn.num));
+                            
+                            const line = document.createElement('div');
+                            line.classList.add('buttons-line');
+                            lineButtons.forEach(btn => {
+                                const btnEl = document.createElement('a');
+                                btnEl.href = btn.link;
+                                btnEl.classList.add('btn-outline-light');
+                                btnEl.textContent = btn.text;
+                                btnEl.target = "_blank";
+                                line.appendChild(btnEl);
+                            });
+                            buttonsContainer.appendChild(line);
+                        }
+                    });
+
+                    const remainingButtons = allButtons.filter(btn => !assignedButtons.has(btn.num));
+                    if (remainingButtons.length > 0) {
+                        const line = document.createElement('div');
+                        line.classList.add('buttons-line');
+                        remainingButtons.forEach(btn => {
+                            const btnEl = document.createElement('a');
+                            btnEl.href = btn.link;
+                            btnEl.classList.add('btn-outline-light');
+                            btnEl.textContent = btn.text;
+                            btnEl.target = "_blank";
+                            line.appendChild(btnEl);
+                        });
+                        buttonsContainer.appendChild(line);
+                    }
+                }
+
+                cardBody.appendChild(buttonsContainer);
+                card.appendChild(cardBody);
+                cardContainer.appendChild(card);
+
+                return cardContainer;
+            }
+
+            function createLegacyCard(section, data) {
                 const sectionData = data.filter(item => item.section === section.title);
                 if (sectionData.length === 0) {
                     return null;
@@ -508,79 +1258,245 @@
                 cardContainer.appendChild(card);
                 return cardContainer;
             }
+
+            function createSectionHeader(title) {
+                const titleBox = document.createElement('div');
+                titleBox.classList.add('mb-4');
+                const titleContainer = document.createElement('div');
+                titleContainer.classList.add('section-title-container');
+                const barLeft = document.createElement('div');
+                barLeft.classList.add('section-title-bar');
+                const titleText = document.createElement('h2');
+                titleText.classList.add('section-title-text');
+                titleText.textContent = title;
+                const barRight = document.createElement('div');
+                barRight.classList.add('section-title-bar');
+                titleContainer.appendChild(barLeft);
+                titleContainer.appendChild(titleText);
+                titleContainer.appendChild(barRight);
+                titleBox.appendChild(titleContainer);
+                return titleBox;
+            }
+
+            const dataSources = new Set();
+            const sectionsFiles = new Set();
+            
+            SECTIONS_CONFIG.forEach(config => {
+                if (config.dataSource) dataSources.add(config.dataSource);
+                if (config.sectionsFile) sectionsFiles.add(config.sectionsFile);
+            });
+
+            const fetchPromises = {};
+            dataSources.forEach(source => {
+                fetchPromises[source] = fetch(source).then(response => response.json());
+            });
+            sectionsFiles.forEach(file => {
+                fetchPromises[file] = fetch(file).then(response => response.json());
+            });
+
+            Promise.all(Object.values(fetchPromises))
+            .then(results => {
+                const keys = Object.keys(fetchPromises);
+                const fetchedData = {};
+                keys.forEach((key, index) => {
+                    fetchedData[key] = results[index];
+                });
+
+                const mainData = fetchedData['data.json'] || [];
+                allData = [...mainData].sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' }));
+                allData.forEach((item, index) => item._id = index + 1);
+                
+                const sections3 = fetchedData['sections3.json'] || [];
+                const sectionNames3 = sections3.map(section => section.title);
+                searchableData = mainData.filter(item => 
+                    !sectionNames3.includes(item.section) && item.excludesearch !== true && item.excludesearch !== "true"
+                );
+                
+                buildSidebar(fetchedData);
+
+                const hash = window.location.hash.slice(1);
+                if (hash) {
+                    const match = allData.find(i => i._id == hash);
+                    const isModernItem = match && (match.button1 && match.link1);
+                    if (match) openModal(match, isModernItem);
+                }
+
+                window.addEventListener("hashchange", () => {
+                   const hash = window.location.hash.slice(1);
+                   if (!hash) return;
+                   const item = allData.find(i => i._id == hash);
+                   const isModernItem = item && (item.button1 && item.link1);
+                   if (item) openModal(item, isModernItem);
+                });
+
+                const container = document.getElementById('sections-container');
+                
+                function renderSectionContent(config, targetContainer, fetchedData) {
+                    if (config.type === 'legacy') {
+                        const grid = document.createElement('div');
+                        grid.classList.add('section-grid-legacy');
+                        
+                        const sectionsData = fetchedData[config.sectionsFile] || [];
+                        const mainData = fetchedData[config.dataSource] || [];
+                        
+                        sectionsData.forEach(section => {
+                            const card = createLegacyCard(section, mainData);
+                            if (card) grid.appendChild(card);
+                        });
+                        
+                        targetContainer.appendChild(grid);
+                    } else if (config.type === 'modern') {
+                        const items = fetchedData[config.dataSource] || [];
+                        
+                        const groupedItems = {};
+                        const ungroupedItems = [];
+                        
+                        items.forEach(item => {
+                            if (item.group) {
+                                if (!groupedItems[item.group]) {
+                                    groupedItems[item.group] = [];
+                                }
+                                groupedItems[item.group].push(item);
+                            } else {
+                                ungroupedItems.push(item);
+                            }
+                        });
+                        
+                        const sortedGroupKeys = Object.keys(groupedItems).sort((a, b) => {
+                            const getFirstNum = (str) => parseInt(str.split('-')[0]) || 0;
+                            return getFirstNum(a) - getFirstNum(b);
+                        });
+                        
+                        sortedGroupKeys.forEach(groupKey => {
+                            const groupContainer = document.createElement('div');
+                            groupContainer.className = 'modern-group-container';
+                            
+                            const groupTitle = document.createElement('div');
+                            groupTitle.className = 'modern-group-title';
+                            groupTitle.textContent = `${groupKey}`;
+                            groupContainer.appendChild(groupTitle);
+                            
+                            const groupGrid = document.createElement('div');
+                            groupGrid.className = 'modern-group-grid';
+                            
+                            groupedItems[groupKey].forEach(item => {
+                                const card = createModernCard(item);
+                                groupGrid.appendChild(card);
+                            });
+                            
+                            groupContainer.appendChild(groupGrid);
+                            targetContainer.appendChild(groupContainer);
+                        });
+                        
+                        if (ungroupedItems.length > 0) {
+                            const grid = document.createElement('div');
+                            grid.classList.add('section-grid-modern');
+                            
+                            ungroupedItems.forEach(item => {
+                                const card = createModernCard(item);
+                                grid.appendChild(card);
+                            });
+                            
+                            targetContainer.appendChild(grid);
+                        }
+                    } else if (config.type === 'difficulty') {
+                        const items = fetchedData[config.dataSource] || [];
+                        const difficultySection = createDifficultySection(items);
+                        targetContainer.appendChild(difficultySection);
+                    }
+                }
+                
+                const groupedSections = {};
+                const ungroupedSections = [];
+                
+                SECTIONS_CONFIG.forEach(config => {
+                    if (config.excludeFromPage) return;
+                    if (config.sectionGroup) {
+                        if (!groupedSections[config.sectionGroup]) {
+                            groupedSections[config.sectionGroup] = [];
+                        }
+                        groupedSections[config.sectionGroup].push(config);
+                    } else {
+                        ungroupedSections.push(config);
+                    }
+                });
+                
+                ungroupedSections.forEach(config => {
+                    const sectionHeader = createSectionHeader(config.title);
+                    container.appendChild(sectionHeader);
+                    renderSectionContent(config, container, fetchedData);
+                });
+                
+                SECTION_GROUPS_CONFIG.forEach(groupConfig => {
+                    const sectionsInGroup = groupedSections[groupConfig.id] || [];
+                    if (sectionsInGroup.length === 0) return;
+                    
+                    const groupContainer = document.createElement('div');
+                    groupContainer.className = 'section-group-container';
+                    
+                    if (groupConfig.showGroupTitle) {
+                        const groupHeader = document.createElement('div');
+                        groupHeader.className = 'section-group-header';
+                        
+                        const groupTitle = document.createElement('h2');
+                        groupTitle.className = 'section-group-title';
+                        groupTitle.textContent = groupConfig.title;
+                        groupHeader.appendChild(groupTitle);
+                        
+                        groupContainer.appendChild(groupHeader);
+                    }
+                    
+                    const groupContent = document.createElement('div');
+                    groupContent.className = 'section-group-content';
+                    
+                    sectionsInGroup.forEach(config => {
+                        const sectionHeader = createSectionHeader(config.title);
+                        groupContent.appendChild(sectionHeader);
+                        renderSectionContent(config, groupContent, fetchedData);
+                    });
+                    
+                    groupContainer.appendChild(groupContent);
+                    container.appendChild(groupContainer);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON files:', error);
+            });
+
+            document.getElementById('data_modal').addEventListener('hidden.bs.modal', function (event) {
+                const modal = document.getElementById("data_modal");
+                const select = modal.querySelector('select');
+                if (select) {
+                    select.selectedIndex = 0;
+                }
+                
+                const modalHeader = document.querySelector('.modal-header');
+                
+                const existingTagsContainer = modalHeader.querySelector('.modal-header-tags');
+                if (existingTagsContainer) {
+                    existingTagsContainer.remove();
+                }
+                
+                const headerRow = modalHeader.querySelector('.modal-header-row');
+                if (headerRow) {
+                    const modalTitle = headerRow.querySelector('.modal-title');
+                    const closeBtn = headerRow.querySelector('.btn-close');
+                    
+                    if (modalTitle) {
+                        modalHeader.insertBefore(modalTitle, headerRow);
+                    }
+                    if (closeBtn) {
+                        modalHeader.insertBefore(closeBtn, headerRow.nextSibling);
+                    }
+                    headerRow.remove();
+                }
+                
+                if (window.location.hash) {
+                    history.replaceState(null, "", window.location.pathname);
+                }
+            });
         });
     </script>
-</head>
-
-<body>
-    <div class="full-overlay"></div>
-    <div class="top-bar">
-        <div class="header-left">
-            <img src="src/img/4icon.png" alt="Hevilz Mods Icon">
-            <span>Hevilz Mods</span>
-        </div>
-        <div class="search-bar-container">
-            <div id="search-container">
-                <input type="text" id="search-input" placeholder="Search items...">
-                <ul id="search-results"></ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="hero">
-        <div>
-            <h1>Hevilz Mods</h1>
-            <h2>موقع هفلز</h2>
-            <br>
-            <h3>جميع محتويات و روابط و شروحات سيرفرنا<br>في مكان واحد مرتبة و منظمة ليتم الوصول اليها بسهولة<br>تم بناء و ادارة الموقع من قبل<br>@Hevilz<br>@BN_LOS (S_صقر)
-            </h3>
-        </div>
-    </div>
-
-    <div class="sections-container">
-    </div>
-    <div class="modal fade" id="data_modal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-image-container">
-                        <img id="modal-img" src="" alt="Item Image" class="img-fluid rounded-3" style="display: none;">
-                    </div>
-                    <div class="modal-desc-container">
-                        <p id="modal-desc" class="modal-desc"></p>
-                        <div id="main-buttons"></div>
-                        <div id="modal-extras-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="credits">
-            <div class="credit-item main-credit">
-                <img src="https://yt3.googleusercontent.com/wrByv6p6KNWlS7fmvvm5h74AJpYhpMokAl5pQOIWYLSc3aGqyIXKn2uIDNLljnscwZqeikqy_w=s160-c-k-c0x00ffffff-no-rj" alt="S_صقر">
-                <span>Hevilz</span>
-            </div>
-            <div class="credit-item">
-                <img src="https://yt3.googleusercontent.com/L8F5PxkFZJg9fvLC6kA3kisWVDmaCCm0nc4drudFBvhegKWMH9RecWWwxiVnU2fFzudVw9O1eto=s160-c-k-c0x00ffffff-no-rj" alt="BN_LOS">
-                <span>BN_LOS</span>
-            </div>
-        </div>
-        <div class="social-links">
-            <h6>Hevilz's Social Links</h6>
-            <div class="social-icons">
-                <a href="https://www.twitch.tv/hevillz" target="_blank"><i class="fa-brands fa-twitch"></i></a>
-                <a href="https://www.youtube.com/@Hevilz" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.instagram.com/hevillz" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://discord.gg/GE7vwg6Asq" target="_blank"><i class="fa-brands fa-discord"></i></a>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
 </body>
+
 </html>

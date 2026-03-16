@@ -13,3 +13,4 @@ src/img/oldbg (2).png
 /node_modules
 package.json
 package-lock.json
+*.exe
